@@ -52,11 +52,11 @@
 [data-md-color-scheme="default"] {
     --md-primary-fg-color: rgba(226, 229, 228, 0.9);
     --md-primary-bg-color: #333;
-    --md-typeset-a-color: #555555;
+    --md-typeset-a-color: #555;
     --md-footer-bg-color--dark: rgba(226, 229, 228, 0.9);
-    --md-footer-fg-color--light: #222222;
-    --md-footer-fg-color--lighter: #222222;
-    --md-footer-fg-color--lightest: #222222;
+    --md-footer-fg-color--light: #222;
+    --md-footer-fg-color--lighter: #222;
+    --md-footer-fg-color--lightest: #222;
     --md-code-fg-color: var(--md-typeset-color);
 }
 
