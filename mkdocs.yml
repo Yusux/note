@@ -1,0 +1,105 @@
+site_name: Yusux 的笔记本
+site_url: https://note.yusux.xyz
+site_description: 杂事杂录
+repo_name: Yusux/note
+repo_url: https://github.com/Yusux/note
+edit_uri: tree/master/docs
+copyright: Copyright &copy; 2024 Yusux
+
+theme: 
+  name: material
+  language: 'zh'
+  favicon: assets/img/favicon-32x32.png
+  icon: 
+    logo: material/notebook-outline
+  custom_dir: docs/overrides
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.top
+  font:
+    text: JetBrains Mono
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - meta
+  - def_list
+  - attr_list
+  - md_in_html
+  - sane_lists
+  - admonition
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.snippets
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.arithmatex:
+      generic: true
+
+extra:
+  social:
+    - icon: octicons/mark-github-16
+      link: https://github.com/Yusux
+    - icon: octicons/home-16
+      link: https://yusux.xyz
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+  - assets/js/katex.js
+
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.min.css
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+  - assets/css/card.css
+  - assets/css/moegirl.css
+  - assets/css/page.css
+  - assets/css/counter.css
+  - assets/css/tasklist.css
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: datetime
+      timezone: Asia/Shanghai
+      locale: zh
+      enable_creation_date: true
+      exclude:
+        - index.md
+  - statistics:
+      page_check_metadata: totalwd
+
+nav:
+  - Home:
+    - index.md
+    - friends.md
