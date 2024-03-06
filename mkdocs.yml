@@ -107,3 +107,8 @@ nav:
   - Home:
     - index.md
     - friends.md
+  - Computer Science:
+    - CS/index.md
+    - 编译原理:
+      - CS/Compilers/index.md
+      - 概述: CS/Compilers/ch1.md

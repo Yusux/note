@@ -3,7 +3,6 @@ template: friends.html
 date: true
 comment: true
 totalwd: false
-statistics: false
 ---
 
 # 朋友们
