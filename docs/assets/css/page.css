@@ -3,24 +3,6 @@
     --md-code-font: "JetBrains Mono";
 }
 
-@media screen and (min-width: 960px) {
-    html {
-        font-size: 137.5%;
-    }
-}
-
-@media screen and (min-width: 100em) {
-    html {
-        font-size: 137.5%;
-    }
-}
-
-@media screen and (min-width: 125em) {
-    html {
-        font-size: 137.5%;
-    }
-}
-
 .md-typeset h1,
 .md-typeset h2 {
     font-weight: 600;
@@ -116,18 +98,6 @@ body[data-md-prefers-color-scheme=true] .md-icon .unknown-mode {
     display: none;
 }
 
-@media screen and (max-width: 59.9375em) {
-    .md-nav__source {
-        background-color: var(--md-primary-fg-color);
-    }
-}
-
-@media screen and (max-width: 76.1875em) {
-    .md-nav--primary .md-nav__title {
-        background-color: var(--md-primary-fg-color);
-    }
-}
-
 [data-md-color-scheme="slate"] .md-annotation__index:after {
     background-color: #4c4c4c;
 }
@@ -190,7 +160,28 @@ body[data-md-prefers-color-scheme=true] .md-icon .unknown-mode {
     display: block;
 }
 
-@media screen and (min-aspect-ratio: 18/10) {
+@media screen and (max-width: 59.9375em) {
+    .md-nav__source {
+        background-color: var(--md-primary-fg-color);
+    }
+}
+
+@media screen and (max-width: 76.1875em) {
+    .md-nav--primary .md-nav__title {
+        background-color: var(--md-primary-fg-color);
+    }
+}
+
+@media screen and (min-width: 960px) {
+    html {
+        font-size: 137.5%;
+    }
+}
+
+@media screen and (min-width: 125em) {
+    html {
+        font-size: 137.5%;
+    }
     .md-grid {
         max-width: 70%;
     }
