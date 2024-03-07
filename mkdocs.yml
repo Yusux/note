@@ -20,9 +20,7 @@ theme:
     - navigation.tabs
     - navigation.indexes
     - navigation.top
-  font:
-    text: JetBrains Mono
-    code: JetBrains Mono
+  font: false
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -84,7 +82,8 @@ extra_javascript:
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.min.css
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css
+  - https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css
   - assets/css/card.css
   - assets/css/moegirl.css
   - assets/css/page.css
