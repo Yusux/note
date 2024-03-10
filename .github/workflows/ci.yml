@@ -30,8 +30,9 @@ jobs:
         run: |
           pip install mkdocs-git-revision-date-localized-plugin mkdocs-material-extensions
           git clone https://github.com/Yusux/mkdocs-mathenv-plugin.git
+          pip install -e mkdocs-mathenv-plugin
           git clone https://github.com/Yusux/mkdocs-statistics-plugin.git
-          pip install -e mkdocs-mathenv-plugin mkdocs-statistics-plugin
+          pip install -e mkdocs-statistics-plugin
       - name: Install LaTex Dependencies
         run: |
           sudo apt-get update
