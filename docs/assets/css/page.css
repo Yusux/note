@@ -160,6 +160,14 @@ body[data-md-prefers-color-scheme=true] .md-icon .unknown-mode {
     display: block;
 }
 
+.md-typeset__table td {
+    vertical-align: middle !important;
+}
+
+.tikzcd-svg svg {
+    fill: var(--md-default-fg-color);
+}
+
 @media screen and (max-width: 59.9375em) {
     .md-nav__source {
         background-color: var(--md-primary-fg-color);
@@ -172,15 +180,13 @@ body[data-md-prefers-color-scheme=true] .md-icon .unknown-mode {
     }
 }
 
-@media screen and (min-width: 960px) {
-    html {
-        font-size: 137.5%;
-    }
-}
-
 @media screen and (min-width: 125em) {
     html {
-        font-size: 137.5%;
+        font-size: 150%;
+    }
+    .tikzcd-svg {
+        margin: 2.75rem;
+        transform:scale(1.5);
     }
     .md-grid {
         max-width: 70%;

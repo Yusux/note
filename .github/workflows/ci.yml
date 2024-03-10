@@ -18,17 +18,22 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
           key: mkdocs-material-${{ env.cache_id }}
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run: pip install mkdocs-material 
-      - name: Install Dependencies
+      - run: pip install mkdocs-material
+      - name: Install MkDocs Plugins
         run: |
-          pip install mkdocs-git-revision-date-localized-plugin
-          pip install mkdocs-material-extensions
-          pip install mkdocs-statistics-plugin
+          pip install mkdocs-git-revision-date-localized-plugin mkdocs-material-extensions
+          git clone https://github.com/Yusux/mkdocs-mathenv-plugin.git
+          git clone https://github.com/Yusux/mkdocs-statistics-plugin.git
+          pip install -e mkdocs-mathenv-plugin mkdocs-statistics-plugin
+      - name: Install LaTex Dependencies
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y texlive-xetex texlive-fonts-recommended texlive-fonts-extra dvisvgm mupdf-tools
       - run: mkdocs gh-deploy --force

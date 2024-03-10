@@ -101,6 +101,10 @@ plugins:
         - index.md
   - statistics:
       page_check_metadata: totalwd
+  - mathenv:
+      tikzcd:
+        enable: true
+        cachefile: true
 
 nav:
   - Home:
@@ -111,3 +115,4 @@ nav:
     - 编译原理:
       - CS/Compilers/index.md
       - 概述: CS/Compilers/ch1.md
+      - 词法分析: CS/Compilers/ch2.md
