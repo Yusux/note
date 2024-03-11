@@ -102,7 +102,7 @@ plugins:
   - statistics:
       page_check_metadata: totalwd
   - mathenv:
-      tikzcd:
+      tikzpicture:
         enable: true
         cachefile: true
 

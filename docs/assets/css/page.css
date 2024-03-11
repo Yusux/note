@@ -1,6 +1,6 @@
 :root {
-    --md-text-font: "JetBrains Mono", "LXGW WenKai Screen"; 
-    --md-code-font: "JetBrains Mono";
+    --md-text-font: JetBrains Mono, LXGW WenKai Screen; 
+    --md-code-font: JetBrains Mono;
 }
 
 .md-typeset h1,
@@ -164,8 +164,13 @@ body[data-md-prefers-color-scheme=true] .md-icon .unknown-mode {
     vertical-align: middle !important;
 }
 
-.tikzcd-svg svg {
-    fill: var(--md-default-fg-color);
+.ps-root .ps-algorithm {
+    border-top: 2px solid var(--md-default-fg-color);
+    border-bottom: 1.5px solid var(--md-default-fg-color);
+}
+
+.ps-root .ps-algorithm.with-caption > .ps-line:first-child {
+    border-bottom: 1.5px solid var(--md-default-fg-color);
 }
 
 @media screen and (max-width: 59.9375em) {

@@ -1,4 +1,5 @@
 ---
+template: algorithm.html
 date: true
 comment: true
 totalwd: true
@@ -120,11 +121,12 @@ Program = Specification + Implementation
     - $L^+ = \bigcup_{i=1}^{\infty}L^i$
 
 ### 正则表达式的定义
+
 正则表达式（Regular Expression, RE）是用来描述、匹配文中全部匹配指定格式串的表达式，如 $a$ 匹配 $a$，$a|b$ 匹配 $a$ 或 $b$
 
 正则表达式 $r$ 定义正则语言，记为 $L(r)$，有如下性质：
 
-- $\epsilon$ 是一个 RE，$L(\epsilon) = {\epsilon}$
+- $\epsilon$ 是一个 RE，$L(\epsilon) = \{\epsilon\}$
 - 如果 $a \in \Sigma$，则 $a$ 是一个 RE，$L(a) = \{a\}$
 - 假设 $x$ 和 $y$ 都是 RE，分别表示语言 $L(x)$ 和 $L(y)$
     - $x|y$ 是一个 RE，$L(x|y) = L(x) \cup L(y)$
@@ -194,11 +196,11 @@ $$
 
 正则表达式是词法分析的规约（Specification），是字符流到 Token-lexeme 对的过程，大体上可以分为
 
-1. 选择一系列 tokens
+1. 选择一系列 Tokens
 
    - 如 Number, Identifier, Keyword, ...
 
-2. 为每个 token 的 lexemes 定义一个正则表达式
+2. 为每个 Token 的 Lexemes 定义一个正则表达式
 
    - Number: $digit^+$
    - Keyword: $'if'|'else'|\ldots$
@@ -243,33 +245,56 @@ $$
 
 在转换图中，有如下的基本元素：
 
-
-|元素|示例|
-|:-:|:-:|
-|状态|\tikzcd-automata
-    \node[state] (s) {s};|
-|初始状态（开始状态）|\tikzcd-automata
-    \node[state, initial] (s) {s};|
-|接受状态（终止状态）|\tikzcd-automata
-    \node[state, accepting] (s) {s};|
-|状态转移|\tikzcd-automata
-    \node[state] (s0) {s_0};
-    \node[state, right of=s0] (s1) {s_1};
-    \draw (s0) edge[above] node{a} (s1);|
+<table>
+    <tr>
+        <th>元素</th>
+        <th>示例</th>
+    </tr>
+    <tr>
+        <td>状态</td>
+        <td>
+        \tikzpicture-automata
+            \node[state] (s) {s};
+        </td>
+    </tr>
+    <tr>
+        <td>初始状态（开始状态）</td>
+        <td>
+        \tikzpicture-automata
+            \node[state, initial] (s) {s};
+        </td>
+    </tr>
+    <tr>
+        <td>接受状态（终止状态）</td>
+        <td>
+        \tikzpicture-automata
+            \node[state, accepting] (s) {s};
+        </td>
+    </tr>
+    <tr>
+        <td>状态转移</td>
+        <td>
+        \tikzpicture-automata
+            \node[state] (s0) {$s_0$};
+            \node[state, right of=s0] (s1) {$s_1$};
+            \draw (s0) edge[above] node{a} (s1);
+        </td>
+    </tr>
+</table>
 
 
 对于 $\epsilon$-moves，可以用如下的方式表示：
 
-\tikzcd-automata
+\tikzpicture-automata
     \node[state] (0) {0};
     \node[state, right of=0] (1) {1};
-    \draw (0) edge[above] node{\epsilon} (1);
+    \draw (0) edge[above] node{$\epsilon$} (1);
 
 #### 转换表
 
 以如下的 FA 为例：
 
-\tikzcd-automata
+\tikzpicture-automata
     \node[state, initial] (0) {0};
     \node[state, right of=0] (1) {1};
     \node[state, right of=1] (2) {2};
@@ -313,9 +338,273 @@ $$
 
 ### 分类
 
-!!! danger "TODO"
+根据状态转换方式的不同，可以分为：
+
+- 非确定性有穷自动机（Nondeterministic finite automata, NFA）
+    - $move: S \times (\Sigma \cup \{\epsilon\}) \rightarrow P(S)$
+    - $move(s, a)$ 表示从状态 $s$ 出发，沿着标记为 $a$ 的边所能到达的**状态集合**
+    - 在状态 $s$ 时读入 $a$，可能迁移到多个不同的状态
+    - 可能有 $\epsilon$-moves（不读入任何输入而迁移到其他状态）
+- 确定性有穷自动机（Deterministic finite automata, DFA）
+    - $move: S \times \Sigma \rightarrow S$
+    - $\delta(s, a)$ 表示从状态 $s$ 出发，沿着标记为 $a$ 的边所能到达的**唯一状态**
+    - 在状态 $s$ 时读入 $a$，可迁移到的状态是确定的
+    - 没有 $\epsilon$-moves
+
+### 等价性
+
+对于两个 FA，如果它们接收的语言相同，则称它们是**等价的**
+
+由计算理论的知识
+
+- 对于任何 NFA $N$，存在定义同一语言的 DFA $D$
+- 对于任何 DFA $D$，存在定义同一语言的 NFA $N$
+- 对于任何正则表达式 RE $r$，存在一个定义同一语言的 NFA $N$
+
+故我们可以得到：
+
+$$
+\text{RE} \Leftrightarrow \text{NFA} \Leftrightarrow \text{DFA}
+$$
+
+??? example "例子"
+    NFA:
+    \tikzpicture-automata
+        \node[state, initial] (0) {0};
+        \node[state, right of=0] (1) {1};
+        \node[state, right of=1] (2) {2};
+        \node[state, accepting, right of=2] (3) {3};
+        \draw (0) edge[loop above] node{a} (0)
+            (0) edge[loop below] node{b} (0)
+            (0) edge[above] node{a} (1)
+            (1) edge[above] node{b} (2)
+            (2) edge[above] node{b} (3);
+
+    DFA:
+    \tikzpicture-automata
+        \node[state, initial] (0) {0};
+        \node[state, right of=0] (1) {1};
+        \node[state, right of=1] (2) {2};
+        \node[state, accepting, right of=2] (3) {3};
+        \draw (0) edge[loop above] node{b} (0)
+            (0) edge[above] node{a} (1)
+            (1) edge[loop below] node{a} (1)
+            (1) edge[above] node{b} (2)
+            (2) edge[above, bend left] node{a} (1)
+            (2) edge[above] node{b} (3)
+            (3) edge[below, bend left] node{a} (1)
+            (3) edge[above, bend right] node{b} (0);
+
+    RE:
+    <center>$r = (a|b)^*abb$</center>
+
+
+### 识别字符串
+
+??? question "如何构造 FA，来识别用 RE 刻画的 Token？"
+    若使用 NFA，需要对多种路径进行试探和回溯，类似树的遍历，效率较低，故使用 DFA
+
+基于以下的输入、输出以及辅助函数：
+
+- 输入
+    - 以 EOF 结尾的字符串 $x$
+    - DFA $D$: 开始状态 $s_0$，接受状态 $F$，状态转移函数 $move$
+- 输出
+    - 如果 $D$ 接受 $x$，则输出 "yes"，否则输出 "no"
+- 辅助函数
+    - $move(s, x)$：从状态 $s$ 出发，读入 $x$ 后的下一个状态
+    - $nextChar()$：返回 $x$ 的下一个字符
+
+我们可以得到如下的伪代码：
+
+<pre id="quicksort" class="pseudocode">
+% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
+\begin{algorithm}
+\caption{Identify String}
+\begin{algorithmic}
+\Function{IdentifyString}{$D, s_0, F, x$}
+    \State $s \gets s_0$
+    \State $c \gets nextChar()$
+    \While{$c \neq \text{EOF}$}
+        \State $s \gets move(s, c)$
+        \State $c \gets nextChar()$
+    \EndWhile
+    \If{$s \in F$}
+        \State \Return "yes"
+    \Else
+        \State \Return "no"
+    \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+??? example "识别语言 $(a|b)^*abb$ 的DFA"
+    以[等价性](#_21)示例中的 DFA 为例，若输入为 $ababb$，可以通过如下的路径识别：  
+    $$
+    0 \xrightarrow{a} 1 \xrightarrow{b} 2 \xrightarrow{a} 1 \xrightarrow{b} 2 \xrightarrow{b} 3
+    $$
 
 ## 词法分析器自动生成
+
+??? question "给定 RE，如何自动构造其 DFA？"
+    从 RE 直接构造 DFA 有时比较困难，故可以通过 NFA 作为中间步骤
+
+### RE -> NFA
+
+!!! info "问题描述"
+    输入：正则表达式 $r$  
+    输出：定义 $r$ 的 NFA $N(r)$
+
+Thompson 算法：基于 RE 的结构做归纳
+
+- 对基本的 RE 进行直接构造：$\epsilon, a$
+- 对于复合的 RE 进行递归构造：$st, s|t, s^*$
+- 重要特点：$N(r)$ 仅有**一个接收状态**，且**没有出边**
+
+#### Thompson 直接构造
+
+- 识别正则表达式 $\epsilon$ 的 NFA
+\tikzpicture-automata
+    \node[state, initial] (0) {0};
+    \node[state, accepting, right of=0] (1) {1};
+    \draw (0) edge[above] node{$\epsilon$} (1);
+- 识别正则表达式 $a$ 的 NFA
+\tikzpicture-automata
+    \node[state, initial] (0) {0};
+    \node[state, accepting, right of=0] (1) {1};
+    \draw (0) edge[above] node{a} (1);
+
+#### Thompson 递归构造
+
+- 选择 $s|t$ 的 NFA
+\tikzpicture-automata
+    \node[state, initial] at(0, 1.5) (i) {i};
+    \node[state] at(2, 0) (q1) {$q_1$};
+    \node[state] at(4.5, 0) (f1) {$f_1$};
+    \node[state] at(2, 3) (q2) {$q_2$};
+    \node[state] at(4.5, 3) (f2) {$f_2$};
+    \node[state, accepting] at(6.5, 1.5) (f) {f};
+    \draw (i) edge[above] node{$\epsilon$} (q1)
+          (i) edge[below] node{$\epsilon$} (q2)
+          (f1) edge[above] node{$\epsilon$} (f)
+          (f2) edge[below] node{$\epsilon$} (f);
+    \draw[dashed] (3.25, 0) ellipse (2.25 and 1)
+                  (3.25, 0) node{N(s)}
+                  (3.25, 3) ellipse (2.25 and 1)
+                  (3.25, 3) node{N(t)};
+- 连接 $st$ 的 NFA
+\tikzpicture-automata
+    \node[state, initial] at(0, 0) (i) {i};
+    \node[state] at(3, 0) (f1) {$f_1$};
+    \node[state] at(5, 0) (q2) {$q_2$};
+    \node[state, accepting] at(8, 0) (f) {f};
+    \draw (f1) edge[above] node{$\epsilon$} (q2);
+    \draw[dashed] (1.5, 0) ellipse (2.25 and 1.1)
+                  (6.5, 0) ellipse (2.25 and 1.1)
+                  (1.5, 0) node{N(s)}
+                  (6.5, 0) node{N(t)};
+- 闭包 $s^*$ 的 NFA
+\tikzpicture-automata
+    \node[state, initial] at(0, 0) (i) {i};
+    \node[state] at(2, 0) (q1) {$q_1$};
+    \node[state] at(5, 0) (f1) {$f_1$};
+    \node[state, accepting] at(7, 0) (f) {f};
+    \draw (i) edge[above] node{$\epsilon$} (q1)
+          (i) edge[below, bend right] node{$\epsilon$} (f)
+          (f1) edge[above] node{$\epsilon$} (f)
+          (f1) edge[above, bend right] node{$\epsilon$} (q1);
+    \draw[dashed] (3.5, 0) ellipse (2.25 and 0.75)
+                  (3.5, 0) node{N(s)};
+
+??? example "RE -> NFA"
+    以 RE $r = a(b|c)^*$ 为例，逐步进行构造：
+
+    - $a, b, c$
+    \tikzpicture-automata
+        \node[state, initial] at(0, 0) (s00) {$s_0$};
+        \node[state, accepting] at(3, 0) (s10) {$s_1$};
+        \node[state, initial] at(0, 1.5) (s01) {$s_0$};
+        \node[state, accepting] at(3, 1.5) (s11) {$s_1$};
+        \node[state, initial] at(0, 3) (s02) {$s_0$};
+        \node[state, accepting] at(3, 3) (s12) {$s_1$};
+        \draw (s00) edge[above] node{a} (s10)
+            (s01) edge[above] node{b} (s11)
+            (s02) edge[above] node{c} (s12);
+    - $b|c$
+    \tikzpicture-automata
+        \node[state, initial] at(0, 0) (s0) {$s_0$};
+        \node[state] at(1.5, 1.5) (s1) {$s_1$};
+        \node[state] at(3.5, 1.5) (s2) {$s_2$};
+        \node[state] at(1.5, -1.5) (s3) {$s_3$};
+        \node[state] at(3.5, -1.5) (s4) {$s_4$};
+        \node[state, accepting] at(5, 0) (s5) {$s_5$};
+        \draw (s0) edge[above left] node{$\epsilon$} (s1)
+            (s0) edge[below left] node{$\epsilon$} (s3)
+            (s1) edge[below] node{b} (s2)
+            (s3) edge[above] node{c} (s4)
+            (s2) edge[above right] node{$\epsilon$} (s5)
+            (s4) edge[below right] node{$\epsilon$} (s5);
+    - $(b|c)^*$
+    \tikzpicture-automata
+        \node[state] at(3, 0) (s0) {$s_0$};
+        \node[state] at(4.5, 0) (s1) {$s_1$};
+        \node[state] at(5.5, 0.8) (s2) {$s_2$};
+        \node[state] at(7, 0.8) (s3) {$s_3$};
+        \node[state] at(5.5, -1) (s4) {$s_4$};
+        \node[state] at(7, -1) (s5) {$s_5$};
+        \node[state] at(8, 0) (s6) {$s_6$};
+        \node[state, accepting] at(9.5, 0) (s7) {$s_7$};
+        \draw (s0) edge[above] node{$\epsilon$} (s1)
+            (s1) edge[above left] node{$\epsilon$} (s2)
+            (s1) edge[below left] node{$\epsilon$} (s4)
+            (s2) edge[below] node{b} (s3)
+            (s4) edge[above] node{c} (s5)
+            (s3) edge[above right] node{$\epsilon$} (s6)
+            (s5) edge[below right] node{$\epsilon$} (s6)
+            (s6) edge[above] node{$\epsilon$} (s7)
+            (s0) edge[below, bend right] node{$\epsilon$} (s7)
+            (s6) edge[above, bend right=90] node{$\epsilon$} (s1);
+    - $a(b|c)^*$
+    \tikzpicture-automata
+        \node[state, initial] at(0, 0) (s0) {$s_0$};
+        \node[state] at(1.5, 0) (s1) {$s_1$};
+        \node[state] at(3, 0) (s2) {$s_2$};
+        \node[state] at(4.5, 0) (s3) {$s_3$};
+        \node[state] at(5.5, 0.8) (s4) {$s_4$};
+        \node[state] at(7, 0.8) (s5) {$s_5$};
+        \node[state] at(5.5, -1) (s6) {$s_6$};
+        \node[state] at(7, -1) (s7) {$s_7$};
+        \node[state] at(8, 0) (s8) {$s_8$};
+        \node[state, accepting] at(9.5, 0) (s9) {$s_9$};
+        \draw (s0) edge[above] node{a} (s1)
+            (s1) edge[above] node{$\epsilon$} (s2)
+            (s2) edge[above] node{$\epsilon$} (s3)
+            (s3) edge[above left] node{$\epsilon$} (s4)
+            (s3) edge[below left] node{$\epsilon$} (s6)
+            (s4) edge[below] node{b} (s5)
+            (s6) edge[above] node{c} (s7)
+            (s5) edge[above right] node{$\epsilon$} (s8)
+            (s7) edge[below right] node{$\epsilon$} (s8)
+            (s8) edge[above] node{$\epsilon$} (s9)
+            (s2) edge[below, bend right] node{$\epsilon$} (s9)
+            (s8) edge[above, bend right=90] node{$\epsilon$} (s3);
+
+
+
+### NFA -> DFA
+
+!!! info "问题描述"
+    输入：NFA $N$  
+    输出：等价的 DFA $D$
+
+采用的方法为子集构造法（Subset Construction）：
+
+- NFA 的初始状态的 $\epsilon$-闭包对应于 DFA 的初始状态
+- 针对 DFA 的每个状态（对应 NFA 的状态子集 $A$），以及 DFA 的每个输入符号 $a$，计算能到达的 NFA 状态的 $\epsilon$-闭包 $S = \epsilon-closure(move(A, a))$，该 $S$ 满足以下条件之一
+    - 对应于 DFA 的一个已有状态
+    - 对应于 DFA 的一个新加状态
+- 逐步构造 DFA 的状态转移表，直到**没有新的状态产生**
 
 !!! danger "TODO"
 
