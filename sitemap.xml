@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://note.yusux.xyz/</loc>
+         <lastmod>2024-03-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/friends/</loc>
+         <lastmod>2024-03-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/CS/</loc>
+         <lastmod>2024-03-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/CS/Compilers/</loc>
+         <lastmod>2024-03-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/CS/Compilers/ch1/</loc>
+         <lastmod>2024-03-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/CS/Compilers/ch2/</loc>
+         <lastmod>2024-03-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>
