@@ -246,40 +246,40 @@ $$
 在转换图中，有如下的基本元素：
 
 <table>
-    <tr>
-        <th>元素</th>
-        <th>示例</th>
-    </tr>
-    <tr>
-        <td>状态</td>
-        <td>
-        \tikzpicture-automata
-            \node[state] (s) {s};
-        </td>
-    </tr>
-    <tr>
-        <td>初始状态（开始状态）</td>
-        <td>
-        \tikzpicture-automata
-            \node[state, initial] (s) {s};
-        </td>
-    </tr>
-    <tr>
-        <td>接受状态（终止状态）</td>
-        <td>
-        \tikzpicture-automata
-            \node[state, accepting] (s) {s};
-        </td>
-    </tr>
-    <tr>
-        <td>状态转移</td>
-        <td>
-        \tikzpicture-automata
-            \node[state] (s0) {$s_0$};
-            \node[state, right of=s0] (s1) {$s_1$};
-            \draw (s0) edge[above] node{a} (s1);
-        </td>
-    </tr>
+<tr>
+<th>元素</th>
+<th>示例</th>
+</tr>
+<tr>
+<td>状态</td>
+<td>
+\tikzpicture-automata
+    \node[state] (s) {s};
+</td>
+</tr>
+<tr>
+<td>初始状态（开始状态）</td>
+<td>
+\tikzpicture-automata
+    \node[state, initial] (s) {s};
+</td>
+</tr>
+<tr>
+<td>接受状态（终止状态）</td>
+<td>
+\tikzpicture-automata
+    \node[state, accepting] (s) {s};
+</td>
+</tr>
+<tr>
+<td>状态转移</td>
+<td>
+\tikzpicture-automata
+    \node[state] (s0) {$s_0$};
+    \node[state, right of=s0] (s1) {$s_1$};
+    \draw (s0) edge[above] node{a} (s1);
+</td>
+</tr>
 </table>
 
 
@@ -318,7 +318,7 @@ $$
 
 #### 有穷自动机接收的串
 
-给定输入串 $x$，如果存在一个对应于串 $x$ 的从**初始状态**到**某个终止状态**的转换序列，则称**串 $x$ 被该 FA 接收**
+给定输入串 $x$，如果存在一个对应于串 $x$ 的从**初始状态**到**某个接受状态**的转换序列，则称**串 $x$ 被该 FA 接收**
 
 例如对于上面的 FA，串 $ababb$ 被接收，因为存在如下的转换序列：
 
@@ -375,10 +375,10 @@ $$
         \node[state, right of=1] (2) {2};
         \node[state, accepting, right of=2] (3) {3};
         \draw (0) edge[loop above] node{a} (0)
-            (0) edge[loop below] node{b} (0)
-            (0) edge[above] node{a} (1)
-            (1) edge[above] node{b} (2)
-            (2) edge[above] node{b} (3);
+              (0) edge[loop below] node{b} (0)
+              (0) edge[above] node{a} (1)
+              (1) edge[above] node{b} (2)
+              (2) edge[above] node{b} (3);
 
     DFA:
     \tikzpicture-automata
@@ -387,13 +387,13 @@ $$
         \node[state, right of=1] (2) {2};
         \node[state, accepting, right of=2] (3) {3};
         \draw (0) edge[loop above] node{b} (0)
-            (0) edge[above] node{a} (1)
-            (1) edge[loop below] node{a} (1)
-            (1) edge[above] node{b} (2)
-            (2) edge[above, bend left] node{a} (1)
-            (2) edge[above] node{b} (3)
-            (3) edge[below, bend left] node{a} (1)
-            (3) edge[above, bend right] node{b} (0);
+              (0) edge[above] node{a} (1)
+              (1) edge[loop below] node{a} (1)
+              (1) edge[above] node{b} (2)
+              (2) edge[above, bend left] node{a} (1)
+              (2) edge[above] node{b} (3)
+              (3) edge[below, bend left] node{a} (1)
+              (3) edge[above, bend right] node{b} (0);
 
     RE:
     <center>$r = (a|b)^*abb$</center>
@@ -417,8 +417,7 @@ $$
 
 我们可以得到如下的伪代码：
 
-<pre id="quicksort" class="pseudocode">
-% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
+<pre id="Identify String" class="pseudocode">
 \begin{algorithm}
 \caption{Identify String}
 \begin{algorithmic}
@@ -460,7 +459,7 @@ Thompson 算法：基于 RE 的结构做归纳
 
 - 对基本的 RE 进行直接构造：$\epsilon, a$
 - 对于复合的 RE 进行递归构造：$st, s|t, s^*$
-- 重要特点：$N(r)$ 仅有**一个接收状态**，且**没有出边**
+- 重要特点：$N(r)$ 仅有**一个接受状态**，且**没有出边**
 
 #### Thompson 直接构造
 
@@ -529,8 +528,8 @@ Thompson 算法：基于 RE 的结构做归纳
         \node[state, initial] at(0, 3) (s02) {$s_0$};
         \node[state, accepting] at(3, 3) (s12) {$s_1$};
         \draw (s00) edge[above] node{a} (s10)
-            (s01) edge[above] node{b} (s11)
-            (s02) edge[above] node{c} (s12);
+              (s01) edge[above] node{b} (s11)
+              (s02) edge[above] node{c} (s12);
     - $b|c$
     \tikzpicture-automata
         \node[state, initial] at(0, 0) (s0) {$s_0$};
@@ -540,11 +539,11 @@ Thompson 算法：基于 RE 的结构做归纳
         \node[state] at(3.5, -1.5) (s4) {$s_4$};
         \node[state, accepting] at(5, 0) (s5) {$s_5$};
         \draw (s0) edge[above left] node{$\epsilon$} (s1)
-            (s0) edge[below left] node{$\epsilon$} (s3)
-            (s1) edge[below] node{b} (s2)
-            (s3) edge[above] node{c} (s4)
-            (s2) edge[above right] node{$\epsilon$} (s5)
-            (s4) edge[below right] node{$\epsilon$} (s5);
+              (s0) edge[below left] node{$\epsilon$} (s3)
+              (s1) edge[below] node{b} (s2)
+              (s3) edge[above] node{c} (s4)
+              (s2) edge[above right] node{$\epsilon$} (s5)
+              (s4) edge[below right] node{$\epsilon$} (s5);
     - $(b|c)^*$
     \tikzpicture-automata
         \node[state] at(3, 0) (s0) {$s_0$};
@@ -556,15 +555,15 @@ Thompson 算法：基于 RE 的结构做归纳
         \node[state] at(8, 0) (s6) {$s_6$};
         \node[state, accepting] at(9.5, 0) (s7) {$s_7$};
         \draw (s0) edge[above] node{$\epsilon$} (s1)
-            (s1) edge[above left] node{$\epsilon$} (s2)
-            (s1) edge[below left] node{$\epsilon$} (s4)
-            (s2) edge[below] node{b} (s3)
-            (s4) edge[above] node{c} (s5)
-            (s3) edge[above right] node{$\epsilon$} (s6)
-            (s5) edge[below right] node{$\epsilon$} (s6)
-            (s6) edge[above] node{$\epsilon$} (s7)
-            (s0) edge[below, bend right] node{$\epsilon$} (s7)
-            (s6) edge[above, bend right=90] node{$\epsilon$} (s1);
+              (s1) edge[above left] node{$\epsilon$} (s2)
+              (s1) edge[below left] node{$\epsilon$} (s4)
+              (s2) edge[below] node{b} (s3)
+              (s4) edge[above] node{c} (s5)
+              (s3) edge[above right] node{$\epsilon$} (s6)
+              (s5) edge[below right] node{$\epsilon$} (s6)
+              (s6) edge[above] node{$\epsilon$} (s7)
+              (s0) edge[below, bend right] node{$\epsilon$} (s7)
+              (s6) edge[above, bend right=90] node{$\epsilon$} (s1);
     - $a(b|c)^*$
     \tikzpicture-automata
         \node[state, initial] at(0, 0) (s0) {$s_0$};
@@ -578,19 +577,17 @@ Thompson 算法：基于 RE 的结构做归纳
         \node[state] at(8, 0) (s8) {$s_8$};
         \node[state, accepting] at(9.5, 0) (s9) {$s_9$};
         \draw (s0) edge[above] node{a} (s1)
-            (s1) edge[above] node{$\epsilon$} (s2)
-            (s2) edge[above] node{$\epsilon$} (s3)
-            (s3) edge[above left] node{$\epsilon$} (s4)
-            (s3) edge[below left] node{$\epsilon$} (s6)
-            (s4) edge[below] node{b} (s5)
-            (s6) edge[above] node{c} (s7)
-            (s5) edge[above right] node{$\epsilon$} (s8)
-            (s7) edge[below right] node{$\epsilon$} (s8)
-            (s8) edge[above] node{$\epsilon$} (s9)
-            (s2) edge[below, bend right] node{$\epsilon$} (s9)
-            (s8) edge[above, bend right=90] node{$\epsilon$} (s3);
-
-
+              (s1) edge[above] node{$\epsilon$} (s2)
+              (s2) edge[above] node{$\epsilon$} (s3)
+              (s3) edge[above left] node{$\epsilon$} (s4)
+              (s3) edge[below left] node{$\epsilon$} (s6)
+              (s4) edge[below] node{b} (s5)
+              (s6) edge[above] node{c} (s7)
+              (s5) edge[above right] node{$\epsilon$} (s8)
+              (s7) edge[below right] node{$\epsilon$} (s8)
+              (s8) edge[above] node{$\epsilon$} (s9)
+              (s2) edge[below, bend right] node{$\epsilon$} (s9)
+              (s8) edge[above, bend right=90] node{$\epsilon$} (s3);
 
 ### NFA -> DFA
 
@@ -606,8 +603,264 @@ Thompson 算法：基于 RE 的结构做归纳
     - 对应于 DFA 的一个新加状态
 - 逐步构造 DFA 的状态转移表，直到**没有新的状态产生**
 
-!!! danger "TODO"
+??? example "NFA -> DFA"
+    以 $(a|b)^*ab$ 对应的 NFA 为例
+    \tikzpicture-automata
+        \node[state, initial] at(0, 0) (0) {0};
+        \node[state] at(2, 0) (1) {1};
+        \node[state] at(3.5, 1) (2) {2};
+        \node[state] at(5.5, 1) (3) {3};
+        \node[state] at(3.5, -1) (4) {4};
+        \node[state] at(5.5, -1) (5) {5};
+        \node[state] at(7, 0) (6) {6};
+        \node[state] at(9, 0) (7) {7};
+        \node[state] at(11, 0) (8) {8};
+        \node[state, accepting] at(13, 0) (9) {9};
+        \draw (0) edge[above] node{$\epsilon$} (1)
+              (0) edge[below, bend right=45] node{$\epsilon$} (7)
+              (1) edge[above left] node{$\epsilon$} (2)
+              (1) edge[below left] node{$\epsilon$} (4)
+              (2) edge[above] node{a} (3)
+              (4) edge[above] node{b} (5)
+              (3) edge[above] node{$\epsilon$} (6)
+              (5) edge[below] node{$\epsilon$} (6)
+              (6) edge[above, bend right=90] node{$\epsilon$} (1)
+              (6) edge[above] node{$\epsilon$} (7)
+              (7) edge[above] node{a} (8)
+              (8) edge[above] node{b} (9);
+    逐步构造 DFA 的状态转移表：
+    
+    - 首先，计算初始状态的 $\epsilon$-闭包 $A = \{0, 1, 2, 4, 7\}$ 在输入 $a$ 和 $b$ 下的转移状态
+        <table><thead><tr><th rowspan="2">状态</th><th colspan="2">输入符号</th></tr><tr><th>$a$</th><th>$b$</th></tr></thead><tbody><tr><td>$A$</td><td>$B$</td><td>$C$</td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr></tbody></table>
+        其中
+        - $\epsilon-closure(move(A, a)) = \{1,2,3,4,6,7,8\} \coloneqq B$
+        - $\epsilon-closure(move(A, b)) = \{1,2,4,5,6,7\} \coloneqq C$
+    - 接着，计算 $B$ 和 $C$ 在输入 $a$ 和 $b$ 下的转移状态
+        <table><thead><tr><th rowspan="2">状态</th><th colspan="2">输入符号</th></tr><tr><th>$a$</th><th>$b$</th></tr></thead><tbody><tr><td>$A$</td><td>$B$</td><td>$C$</td></tr><tr><td>$B$</td><td>$B$</td><td>$D$</td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr></tbody></table>
+        其中
+        - $\epsilon-closure(move(B, b)) = \{1,2,4,5,6,7,9\} \coloneqq D$
+    - 类似的，完成对 $C$ 和 $D$ 的计算，可以看到不再有新的状态产生，即完成了 DFA 状态转移表的构造
+        <table><thead><tr><th rowspan="2">状态</th><th colspan="2">输入符号</th></tr><tr><th>$a$</th><th>$b$</th></tr></thead><tbody><tr><td>$A$</td><td>$B$</td><td>$C$</td></tr><tr><td>$B$</td><td>$B$</td><td>$D$</td></tr><tr><td>$C$</td><td>$B$</td><td>$C$</td></tr><tr><td>$D$</td><td>$B$</td><td>$C$</td></tr></tbody></table>
+    
+    最终得到的 DFA 的转换图如下：
+    \tikzpicture-automata
+        \node[state, initial] (A) {A};
+        \node[state, right of=A] (B) {B};
+        \node[state, above of=B] (C) {C};
+        \node[state, accepting, right of=B] (D) {D};
+        \draw (A) edge[above] node{a} (B)
+              (A) edge[above left] node{b} (C)
+              (B) edge[loop below] node{a} (B)
+              (B) edge[above] node{b} (D)
+              (C) edge[left] node{a} (B)
+              (C) edge[loop above] node{b} (C)
+              (D) edge[below, bend left] node{a} (B)
+              (D) edge[above right] node{b} (C);
 
-## Lex 工具
+### DFA 简化
 
-!!! danger "TODO"
+!!! info "问题描述"
+    输入：DFA $D$  
+    输出：等价的最小化 DFA $D'$
+
+一个正则语言可以对应于多个识别它的 DFA。在不计同构的情况下，通过 DFA 最小化，可以得到**状态数量最少**的唯一 DFA。
+
+#### 可区分状态
+
+**状态 $s, t$ 是可区分的**，如果存在串 $x$，使得从 $s, t$ 出发，一个到达接受状态，一个到达非接受状态。也称为**串 $x$ 区分了状态 $s, t$**
+
+??? example "可区分状态"
+    以 [NFA -> DFA](#nfa-dfa) 例子中的 DFA 为例，因为对于串 $1$，从状态 $B$ 出发可以到达接受状态，而从状态 $A$ 出发不可以，故状态 $A, B$ 是可区分的状态
+
+不可区分的两个状态是**等价**的，可以合并。
+
+由此可以推出 DFA 状态 $s, t$ 等价的条件：
+
+- 一致性：$s, t$ 同为接受状态或同为非接受状态
+- 蔓延性：对于任何输入符号，$s, t$ 必须转换到**等价**的**状态集合**中，同时具有传递性
+
+#### DFA 最小化算法
+
+基于上述的等价性条件，可以得到 DFA 最小化的算法的基本步骤：
+
+- 划分：根据等价性条件，迭代地划分等价类
+- 构造：从划分的等价类中选取一个代表，构造最小化 DFA
+
+##### 划分
+
+基本的划分算法如下：
+
+<pre id="Partition" class="pseudocode">
+\begin{algorithm}
+\caption{Partition}
+\begin{algorithmic}
+\Function{Partition}{$D$}
+    \State $\Pi \gets \{F, S-F\}$
+    \Repeat
+        \State $\Pi' \gets \Pi$
+        \ForAll{$A \in \Pi$}
+            \State Divide $A$ into smaller sets $A_1, A_2, \ldots, A_k$ such that $s, t \in A$ are in the same set iff for all input $a$, $move(s, a)$ and $move(t, a)$ are in the same set $B$ in $\Pi$
+            \If{$A$ is divided}
+                \State $\Pi' \gets \Pi' \cup \{A_1, A_2, \ldots, A_k\} - \{A\}$
+            \EndIf
+        \EndFor
+    \Until{$\Pi' = \Pi$}
+    \State \Return $\Pi$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+##### 构造
+
+在划分出的每个等价类中，选取一个代表，作为最小化 DFA 中的一个状态，其中
+
+- 开始状态：划分中包含 DFA 的开始状态的等价类的代表
+- 接受状态：划分中包含 DFA 的接受状态的等价类的代表
+    - 由于初始划分中就将接受状态和非接受状态分开，故这种等价类中一定只有接受状态
+
+状态转移则根据如下的规则进行：
+
+- 假设
+    - $s$ 是 DFA 的等价类 $A$ 的代表
+    - $t$ 是 DFA 的等价类 $B$ 的代表
+    - 输入符号 $a$，等价类 $A$ 中的任意状态 $s'$ 转移到等价类 $B$ 中的状态 $t'$
+    - 则新构造 DFA 的状态 $s$ 在输入 $a$ 下转移到状态 $t$
+
+??? example "DFA 最小化"
+    同样以 [NFA -> DFA](#nfa-dfa) 例子中的 DFA 为例，进行最小化：
+
+    - 划分部分
+        - 根据是否为接受状态初始化等价类划分
+            - $\Pi = \{\{A,B,C\}, \{D\}\}$
+        - 进行第一次划分迭代
+            - 测试 $\{A,B,C\}$ 是否可划分
+                - 对于输入 $a$，$move(\{A,B,C\}, a) = \{B\}$
+                - 对于输入 $b$，$move(\{A,B,C\}, b) = \{C,D\}$
+                - 出现了不同的等价类，故划分为 $\{\{A,C\}, \{B\}\}$
+            - $\{D\}$ 只有一个状态，不可划分
+            - 得到的新划分为 $\Pi' = \{\{A,C\}, \{B\}, \{D\}\}$
+        - 由于 $\Pi' \neq \Pi$，$\Pi = \Pi'$进行第二次划分迭代
+            - 步骤类似，得到新划分为 $\Pi' = \{\{A,C\}, \{B\}, \{D\}\}$
+        - 由于 $\Pi' = \Pi$，划分完成
+    - 构造部分
+        - 选取代表
+            - $\{A,C\}$ 的代表为 $A$，为开始状态
+            - $\{B\}$ 的代表为 $B$
+            - $\{D\}$ 的代表为 $D$，为接受状态
+        - 采用构造中状态转移的规则，进行构造
+
+    最终得到的最小化 DFA 的转换图如下：
+    \tikzpicture-automata
+        \node[state, initial] (A) {A};
+        \node[state, right of=A] (B) {B};
+        \node[state, accepting, right of=B] (D) {D};
+        \draw (A) edge[above] node{a} (B)
+              (A) edge[loop above] node{b} (A)
+              (B) edge[loop below] node{a} (B)
+              (B) edge[above] node{b} (D)
+              (D) edge[below, bend left] node{a} (B)
+              (D) edge[above, bend right] node{b} (A);
+
+## Lex 词法分析工具
+
+### 常用工具组合
+
+通常使用 Lex/Flex 生成词法分析器，与 Yacc/Bison 生成语法分析器配合使用，生成编译器前端
+
+- Lex + Yacc
+    - Lex：词法分析器生成工具
+    - Yacc：语法分析器生成工具
+    - 通过 Lex 生成的词法分析器将输入串分解为 Token，然后通过 Yacc 生成的语法分析器进行语法分析
+- Flex + Bison
+- ANTLR
+
+??? example "用 Lex 创建一个词法分析器"
+    ![Lex Generate](../../assets/img/docs/CS/Compilers/ch2/image-1.png)
+
+    以下面 Lex 语法示例中的词法分析器为例：
+    ```bash
+    $ lex a.lex 
+    $ clang lex.yy.c 
+    $ ./a.out 
+    Hello123World5
+    Saw an integer: 123
+    Saw an integer: 5
+    Total characters except integer: 10
+    ```
+
+### Lex 语法
+
+Lex 语法的基本结构如下：
+
+- 声明部分
+    - 常量：表示常数的标识符
+    - 正则定义
+- 转换规则
+    - 格式为 `pattern { action }`
+    - pattern：正则表达式
+    - action：与 pattern 匹配时执行的动作
+    - 处理方式通常用 C 语言代码表示
+- 辅助函数
+    - 各个 action 中使用的函数
+
+??? example "Lex 语法示例"
+    以识别整数的词法分析器为例，其 Lex 语法如下：
+    ```lex
+    /*** Definition section ***/
+
+    %{
+    /* C code to be copied verbatim */
+    #include <stdio.h>
+    int i = 0;
+    %}
+
+    %%
+        /*** Rules section ***/
+
+        /* [0-9]+ matches a string of one or more digits */
+    [0-9]+  {
+                /* yytext is a string containing the matched text. */
+                printf("Saw an integer: %s\n", yytext);
+            }
+
+    .       {
+                i++;
+            }
+
+    \n      {
+                printf("Total characters except integer: %d\n", i);
+                i = 0;
+            }
+
+    %%
+    /*** C Code section ***/
+
+
+    int yywrap() {return 0;}
+
+    int main(void)
+    {
+        /* Call the lexer, then quit. */
+        yylex();
+        return 0;
+    }
+    ```
+
+### 工作方式与冲突
+
+Lex 生成的词法分析器的工作方式如下：
+
+- Lex 生成的词法分析器作为一个函数被调用
+- 在每次调用过程中，不断读入余下的输入符号
+- 发现最长的、与某个模式匹配的输入前缀时
+    - 调用相应的动作，该动作进行相关处理
+    - 之后词法分析器继续寻找其它词素
+
+在这种方式下，可能会出现冲突：多个输入前缀与某个模式相匹配，或者一个前缀与多个模式相匹配。常用的解决方法有：
+
+- 最长匹配（Longest match）：选择最长的匹配前缀
+    - 如 `<=` 被当作一个 Token，而不是 `<` 和 `=`
+- 优先级（Rule Priority）：最长前缀与多个模式匹配时，选择列在前面的模式
+    - 如 `R = Whitespace | 'new' | Integer | Identifier`
+    - 对于 `new foo`，`new` 会被识别为写在前面的模式 `'new'`，而不是 `Identifier`
