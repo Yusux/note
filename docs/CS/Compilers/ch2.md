@@ -597,8 +597,10 @@ Thompson 算法：基于 RE 的结构做归纳
 
 采用的方法为子集构造法（Subset Construction）：
 
-- NFA 的初始状态的 $\epsilon$-闭包对应于 DFA 的初始状态
-- 针对 DFA 的每个状态（对应 NFA 的状态子集 $A$），以及 DFA 的每个输入符号 $a$，计算能到达的 NFA 状态的 $\epsilon$-闭包 $S = \epsilon-closure(move(A, a))$，该 $S$ 满足以下条件之一
+- DFA 的每个状态都对应 NFA 的状态子集 $A$
+- DFA 的初始状态是 NFA 的初始状态的 $\epsilon$-闭包
+- DFA 的一个状态对应的 NFA 状态子集中，只要有一个 NFA 的接受状态，则该 DFA 状态是接受状态
+- 对于 DFA 的每个状态都对应 NFA 的状态子集 $A$ 以及 DFA 的每个输入符号 $a$，计算能到达的 NFA 状态的 $\epsilon$-闭包 $S = \epsilon-closure(move(A, a))$。该 $S$ 需满足以下条件之一
     - 对应于 DFA 的一个已有状态
     - 对应于 DFA 的一个新加状态
 - 逐步构造 DFA 的状态转移表，直到**没有新的状态产生**
