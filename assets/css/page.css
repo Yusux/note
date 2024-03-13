@@ -160,8 +160,15 @@ body[data-md-prefers-color-scheme=true] .md-icon .unknown-mode {
     display: block;
 }
 
-.md-typeset__table td {
+th,
+td {
+    text-align: center !important;
     vertical-align: middle !important;
+}
+
+.tikzcd-svg svg{
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .ps-root .ps-algorithm {
