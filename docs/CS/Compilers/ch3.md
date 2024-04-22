@@ -864,6 +864,8 @@ $$
 
 - $I$ 是一个项集
 - $X$ 是一个符号（终结符或非终结符）
+- $T$ 是一个项集的集合
+- $E$ 是一个边的集合
 
 我们定义两个过程：
 
@@ -1021,6 +1023,25 @@ $$
 - SLR(1) Parsing DFA 和 LR(0) 的相同
 - 构造分析表时的**归约动作**不同，每步归约都应该满足 $t \in \text{Follow}(E)$
 
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{SLR(1) - Reduce}
+\begin{algorithmic}
+\Function{Reduce}{$T$}
+    \State set $R$ to the empty set
+    \For{each state $I$ in $T$}
+        \For{each item $A \rightarrow \alpha \cdot$ in $I$}
+            \For{each token $X$ in $\text{Follow}(A)$}
+                \State $R \gets R \cup \{(I, X, A \rightarrow \alpha)\}$
+            \EndFor
+        \EndFor
+    \EndFor
+    \State \Return $R$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
 例如上述涉及 LR(0) 局限性的例子，SLR(1) 语法分析表如下：
 
 ![SLR(1) 语法分析表](../../assets/img/docs/CS/Compilers/ch3/image-27.png)
@@ -1043,3 +1064,380 @@ $$
 我们可以知道 $\text{Follow}(R) = \text{Follow}(L) = \{=, \$\}$，因此，在如下的 DFA 中，状态 3 存在 shift-reduce conflict
 
 ![SLR(1) 的局限性示例](../../assets/img/docs/CS/Compilers/ch3/image-28.png)
+
+### LR(1) 分析
+
+LR(1)
+
+- 项中包含更多信息来消除一些归约动作，实际的做法相当于“分裂”一些 LR(0) 状态，精确指明何时应该归约
+- 形式为 $A \rightarrow \alpha \cdot \beta, a$
+    - $a$ 称为向前看符号，可以是终结符号或者 $\$$
+    - $A \rightarrow \alpha \cdot \beta, a$ 表示序列 $\alpha$ 在“符号栈”的栈顶，接下来的输入串的头部是一个可以由 $\beta a$ 推导出的串
+
+#### LR(1) 的 Closure, Goto 和 Reduce Action
+
+!!! note "一些提示"
+    - 对于 Closure，处理 $\epsilon$-transations（添加 $X \rightarrow \cdot \gamma$）时，需要记录 $w \in \text{First}(\beta z)$，把 $A \rightarrow \alpha \cdot X \beta, z$ 的信息“传递”到 $X \rightarrow \cdot \gamma, w$ 中
+    - 起始状态是 LR(1) 项 $S′ \rightarrow • S \$, ?$ 的闭包，其中 $?$ 是什么无关紧要，因为 $\$$ 不会被移进
+    - 在 Reduce 中，action $\(I, z, A \rightarrow \alpha\)$ 表示在状态 $I$ 中，遇到了一个向前看符号 (lookahead symbol) $z$，可以按 $A \rightarrow \alpha$ 规则规约
+        - 这样的话，LR(1) 的向前看符号要比 SLR(1) 更加精确（因为一些在 $\text{Follow}(A)$ 中的符号可能不会触发规约）
+        - 如果要根据 $A \rightarrow \alpha \cdot, z$ 规约，下一个输入符号必须是 $z$
+
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{LR(1) Parsing DFA - Closure}
+\begin{algorithmic}
+\Function{Closure}{$I$}
+    \Repeat
+        \For{any item $A \rightarrow \alpha \cdot X \beta, z$ in $I$}
+            \For{any production $X \rightarrow \gamma$}
+                \For{any $w \in \text{First}(\beta z)$}
+                    \State $I \gets I \cup \{(X \rightarrow \cdot \gamma, w)\}$
+                \EndFor
+            \EndFor
+        \EndFor
+    \Until{no new items can be added to $I$}
+    \State \Return $I$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{LR(1) Parsing DFA - Goto}
+\begin{algorithmic}
+\Function{Goto}{$I$, $X$}
+    \State set $J$ to the empty set
+    \For{any item $(A \rightarrow \alpha \cdot X \beta, z)$ in $I$}
+        \State $J \gets J \cup \{(A \rightarrow \alpha X \cdot \beta, z)\}$
+    \EndFor
+    \State \Return \Call{Closure}{$J$}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{LR(1) - Reduce}
+\begin{algorithmic}
+\Function{Reduce}{$T$}
+    \State set $R$ to the empty set
+    \For{each state $I$ in $T$}
+        \For{each item $(A \rightarrow \alpha \cdot, z)$ in $I$}
+            \State $R \gets R \cup \{(I, z, A \rightarrow \alpha)\}$
+        \EndFor
+    \EndFor
+    \State \Return $R$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+??? example "LR(1) Parsing<i id="LR(1) Parsing"></i>"
+    以文法
+
+    $$
+    \begin{aligned}
+        0:\ &S' \rightarrow S \$ \\
+        1:\ &S \rightarrow V = E \\
+        2:\ &S \rightarrow E \\
+        3:\ &E \rightarrow V \\
+        4:\ &V \rightarrow x \\
+        5:\ &V \rightarrow * E
+    \end{aligned}
+    $$
+
+    为例，计算 $S' \rightarrow S \$$ 的闭包，结果为：
+
+    ![LR(1) 示例文法初始状态闭包](../../assets/img/docs/CS/Compilers/ch3/image-29.png)
+
+    中间过程过于复杂，省略，最终的 LR(1) Parsing Table 如下：
+
+    ![LR(1) 示例文法 Parsing Table](../../assets/img/docs/CS/Compilers/ch3/image-30.png)
+
+#### LR(1) 的问题/局限性
+
+正如上例 [LR(1) Parsing](#LR(1) Parsing) 所示，LR(1) 语法分析表的大小可能会非常大，因为每个项都有一个向前看符号，这可能导致表的大小超过实际需要
+
+### LALR(1) 分析
+
+以上例 [LR(1) Parsing](#LR(1) Parsing) 为基础，画出 LR(1) Parsing DFA
+
+![LR(1) 示例文法 Parsing DFA](../../assets/img/docs/CS/Compilers/ch3/image-31.png)
+
+被相同颜色框选出的状态只有在向前看符号不同，可以尝试将其合并
+
+#### LR(1) 项集中的 Core
+
+LR 项集的 core 是指项集中的项去掉向前看符号后的部分（即前半部分）
+
+例如 $\{(X \rightarrow \alpha \cdot \beta, b), (Y \rightarrow \gamma \cdot \delta, d)\}$ 的 core 是 $\{ X \rightarrow \alpha \cdot \beta, Y \rightarrow \gamma \cdot \delta \}$
+
+#### LALR(1) 的构造
+
+由此引出 LALR(1)：将 LR(1) Parsing DFA/Table 中 core 相同的项集（除了向前看符号不同之外，其他部分是相同的状态）合并
+
+具体的构造方法如下：
+
+- 重复以下的步骤直到所有状态都有不同的核心
+    - 选择具有相同核心的两个不同状态
+    - 通过将这两个状态的项集合并在一起，创建一个新的状态
+    - 将指向原先两个状态的边重定向到新状态，将原先两个状态指向其他状态的边重新由新状态指出，如下图  
+    ![LALR(1) 构造中合并状态](../../assets/img/docs/CS/Compilers/ch3/image-32.png)
+
+??? example "从 LR(1) 到 LALR(1)"
+    在例子 [LR(1) Parsing](#LR(1) Parsing) 的基础上，构造 LALR(1) Parsing Table 如下：
+
+    ![从 LR(1) 到 LALR(1)](../../assets/img/docs/CS/Compilers/ch3/image-33.png)
+
+    可以看到 LALR(1) Parsing Table 比 LR(1) Parsing Table 小很多，实际应用中占用的空间更小
+
+#### LALR(1) vs. LR(1)
+
+- LR(1)
+    - 把期望的向前看符号也加入项中成为 LR(1) 项
+    - 向前看符号（串）的长度即为 LR(k) 中的 k
+    - 充分利用向前看符号，但是状态很多
+- LALR(1)
+    - 介于 SLR(1) 和 LR(1) 之间，且分析表和 SLR 一样大
+    - LALR 已经可以处理大部分的程序设计语言
+
+### 错误恢复
+
+错误恢复的动机在于：分析时，应当能够报告出尽可能多的错误，而不是在遇到一个错误后就停止分析
+
+一般有如下两种错误恢复的方式：
+
+- Local error recovery
+    - 在检测到错误的地方，调整栈和输入流，使得分析可以恢复
+- Global error repair
+    - 找到使得原始输入串变得语法正确的最小的插入和删除操作集合，即使操作并不在 LL 或 LR Parser 首先报告错误的位置
+
+#### Local Error Recovery
+
+Yacc 中使用的一种 local error recovery 机制是：使用一个特殊的 `error` 符号来控制错误恢复
+
+例如，对于如下文法
+
+$$
+\begin{aligned}
+exp &\rightarrow \textbf{ID} \\
+exp &\rightarrow exp + exp \\
+exp &\rightarrow ( exps ) \\
+exps &\rightarrow exp \\
+exps &\rightarrow exps ; exp
+\end{aligned}
+$$
+
+添加额外的*错误产生式*（如 $A \rightarrow \textbf{error} \alpha$）来完成语法错误恢复
+
+$$
+\begin{aligned}
+exp &\rightarrow \textbf{error} \\
+exps &\rightarrow \textbf{error} ; exp
+\end{aligned}
+$$
+
+这样，如果遇到在表达式的中间遇到语法错误，解析器可以有某种方法跳到下一个分号或者右括号处继续解析
+
+!!! note "一些提示"
+    - 这样的分号或者右括号被称为同步记号 (synchronizing tokens)
+    - $\textbf{error}$ 被当作一个特殊的终结符号，用来表示错误
+
+当 LR Parser 遇到错误时，它会采取如下的步骤：
+
+- 不断弹出栈中状态，直到栈顶状态包含项 $A \rightarrow \alpha \cdot \textbf{error} \beta$
+- 分析器将 $\textbf{error}$ 移入
+- 如果 $\beta$ 为空，分析器直接执行归约，并调用相关的语义动作；否则跳过一些符号，找到可以归约为 $\beta$ 的串为止
+- 分析器继续分析输入
+
+??? example "Local Error Recovery 的例子"
+    以上述给出的文法
+
+    $$
+    \begin{aligned}
+    exp &\rightarrow \textbf{ID} \\
+    exp &\rightarrow exp + exp \\
+    exp &\rightarrow ( exps ) \\
+    exps &\rightarrow exp \\
+    exps &\rightarrow exps ; exp \\
+    exp &\rightarrow \textbf{error} \\
+    exps &\rightarrow \textbf{error} ; exp
+    \end{aligned}
+    $$
+
+    为例，对于输入串 $(\textbf{ID}++)$，分析过程如下（注意，这里没有刻画状态栈，仅仅使用“符号栈”来示意）：
+    ![Local Error Recovery 的例子](../../assets/img/docs/CS/Compilers/ch3/image-36.png)
+
+总结一下 Local Error Recovery：
+
+- 使用**错误产生式**来完成语法错误恢复
+    - 如 $A \rightarrow \textbf{error} \alpha$, $stmt \rightarrow \textbf{error};$
+- 定义哪些非终结符号有错误恢复动作
+    - 如表达式、语句、块、函数定义等非终结符号
+- 当语法分析器遇到错误时
+    - 执行上述的错误恢复动作
+
+#### Global Error Repair
+
+!!! warning "TODO: Add more about Burke-Fisher error repair"
+
+一种全局错误修复的方法是 Burke-Fisher error repair，思路是在 Parser 报告错误的地方之前不多于 K 个 Token 的每个点上进行单 Token 插入、删除或替换
+
+- LL(k) 或 LR(k)（或 LALR 等）语法根本没有修改（没有错误产生式）
+- 解析表也没有修改
+
+## 语法分析器的生成器
+
+在上一章中，我们介绍过 Lex/Flex，它们是用来生成词法分析器的工具。类似的，Yacc/Bison 是用来生成语法分析器的工具
+
+### 语法分析器的生成器 Yacc
+
+Yacc: yet another compiler-compiler，是基于 LALR(1) 的语法分析器生成器，需要使用 BNF (Backus-Naur Form) 形式书写文法
+
+Yacc 的 GNU 版叫做 Bison
+
+![Yacc 的流程](../../assets/img/docs/CS/Compilers/ch3/image-34.png)
+
+Yacc 与 Lex 的联系如下：
+
+![Yacc 与 Lex 的联系](../../assets/img/docs/CS/Compilers/ch3/image-35.png)
+
+### Yacc 源程序的结构
+
+Yacc 源程序分为三部分：
+
+- 声明
+    - 放置 C 声明和对词法单元的声明
+- 翻译规则
+    - 指明产生式及相关的语义动作
+    - 格式为 `lhs : rhs { action }`
+        - `lhs` 是产生式左部，`rhs` 是产生式右部，`action` 是语义动作（在规约动作发生时执行）
+        - 一个示例的语义动作是 `$$ = $1 + $3;`
+            - `$$` 表示和产生式头相关的属性值（即规约的结果）
+            - `$i` 表示产生式体中第 $i$ 个文法符号的属性值
+- 辅助性 C 语言例程
+    - 被直接拷贝到生成的 C 语言源程序中
+    - 可在语义动作中调用
+    - 包括 `yylex()`，这个函数返回词法单元，可以由 Lex 生成
+
+```
+声明部分
+%%
+翻译规则部分
+%%
+辅助性 C 语言例程
+```
+
+??? example "Yacc 的使用"
+    对于如下文法
+
+    $$
+    \begin{aligned}
+    exp &\rightarrow exp addop term | term \\
+    addop &\rightarrow + | - \\
+    term &\rightarrow term mulop factor | factor \\
+    mulop &\rightarrow * \\
+    factor &\rightarrow ( exp ) | number
+    \end{aligned}
+    $$
+
+    可以使用 Yacc 编写如下的源程序
+
+    ``` yacc
+    %{
+    #include <stdio.h>
+    #include <ctype.h>
+    int yylex(void);
+    int yyerror (char * s);
+    %}
+    %token NUMBER
+    %%
+    command: exp {printf("%d\n", $1);};
+    exp: exp '+' term {$$ = $1 + $3;}
+    | exp '-' term {$$ = $1 - $3;}
+    | term {$$ = $1}
+    ;
+    term: term '*' factor {$$ = $1 * $3;}
+    | factor {$$ = $1;}
+    ;
+    factor: NUMBER {$$ = $1;}
+    | '(' exp ')' {$$ = $2;}
+    ;
+    ```
+
+### Yacc 文件格式中的几个问题
+
+- 消除二义性：为算符指定优先级与结合律
+``` yacc
+%left '-' '+’
+%left '*' '/’
+%right UMINUS /* negation--unary minus */
+%right '^'    /* exponentiation */
+```
+- 冲突解决
+    - 归约/归约冲突：选择 Yacc 说明中先出现的产生式
+    - 移进/归约冲突：移近优先
+
+> 更通用的方法：改写文法以消除冲突。例如, 消除二义性的同时也可能减少了冲突
+
+## 语法分析小结
+
+### LR(0) SLR(1) LR(1) LALR(1) 的表达能力
+
+\tikzpicture-automata
+    \draw [rounded corners=8] (0, 0) rectangle (2, 1)
+                            (-0.3, -0.3) rectangle (4, 1.3)
+                            (-0.6, -0.6) rectangle (6, 1.6)
+                            (-0.9, -0.9) rectangle (8, 1.9)
+                            (1, 0.5) node {LR(0)}
+                            (3, 0.5) node {SLR(1)}
+                            (5, 0.5) node {LALR(1)}
+                            (7, 0.5) node {LR(1)};
+
+### SLR 和 LR(1) 分析对比
+
+<table><thead><tr><th colspan="2"></th><th>SLR(1)</th><th>LR(1)</th></tr></thead><tbody><tr><td rowspan="2">动作</td><td>移进</td><td>
+$$
+A \rightarrow \alpha \cdot a \beta \in I_i \\
+\text{Goto}(I_i, a) = I_j \\
+\text{Action}[i, a] = sj
+$$
+</td><td>
+$$
+A \rightarrow \alpha \cdot a \beta, b \in I_i \\
+\text{Goto}(I_i, a) = I_j \\
+\text{Action}[i, a] = sj
+$$
+</td></tr><tr><td>规约</td><td>
+$$
+A \rightarrow \alpha \cdot \in I_i \\
+a \in \text{Follow}(A) \\
+\text{Action}[i, a] = rj
+$$
+</td><td>
+$$
+A \rightarrow \alpha \cdot, a \in I_i \\
+\text{Action}[i, a] = rj
+$$
+</td></tr></tbody></table>
+
+### LL(1) 和 LR(1) 分析对比
+
+||LR(1) 方法|LL(1) 方法|
+|:-:|:-:|:-:|
+|建立分析树|自底而上|自顶而下|
+|归约 or 推导|规范归约（最右推导的逆）|最左推导|
+|分析表|状态×文法符号，大|非终结符×终结符，小|
+|分析栈|状态栈，信息更多|文法符号栈（非递归实现）|
+
+此外，尽管都要向前看一个符号，二者也有区别：
+
+- LR(1)：在识别出整个 rhs 后，再往前看 1 个符号，然后确定使用哪条产生式归约 $A \rightarrow \alpha, B \rightarrow \alpha$
+- LL(1)：向前看 1 个符号后根据 First, Follow（也就是预测分析表）来确定使用哪条产生式推导 $A \rightarrow \alpha_1 | \alpha_2 | \alpha_3$
+
+### LL(1), SLR和LR(1)对比
+
+![LL(1), SLR和LR(1)对比](../../assets/img/docs/CS/Compilers/ch3/image-37.png)
