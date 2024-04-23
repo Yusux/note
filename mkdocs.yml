@@ -116,4 +116,9 @@ nav:
       - CS/Compilers/index.md
       - 概述: CS/Compilers/ch1.md
       - 词法分析: CS/Compilers/ch2.md
-      - 语法分析: CS/Compilers/ch3.md
+      - 语法分析:
+        - CS/Compilers/ch3/index.md
+        - CFG 及语法分析概述: CS/Compilers/ch3/ch3-1.md
+        - 自顶向下分析: CS/Compilers/ch3/ch3-2.md
+        - 自底向上分析: CS/Compilers/ch3/ch3-3.md
+        - 语法分析器与小结: CS/Compilers/ch3/ch3-4.md
