@@ -120,13 +120,13 @@ exp : INT { $$ = $1; }
 因此，可以选择将语法（解析）问题与语义（类型检查和机器代码翻译）问题分开。为了实现这个目的，需要让解析器生成后续阶段可以遍历的解析树（Parse Tree）：
 
 - 具体解析树（Concrete Parse Tree）：代表源语言的具体语法
-  - 对于输入的每个标记恰好有一个叶子，对于在解析过程中减少的每个语法规则有一个内部节点
-  - 但是并不方便直接使用
-    - 产生很多后续阶段多余且无用的令牌，比如 memory usage
-    - 过于依赖具体的语法规则，当语法规则变化时，解析树也需要变化
+    - 对于输入的每个标记恰好有一个叶子，对于在解析过程中减少的每个语法规则有一个内部节点
+    - 但是并不方便直接使用：
+        - 产生很多后续阶段多余且无用的令牌，比如 memory usage
+        - 过于依赖具体的语法规则，当语法规则变化时，解析树也需要变化
 - 抽象语法树（Abstract Syntax Tree）：代表源语言的抽象语法
-  - 解析器使用具体语法（Concrete Syntax）为抽象语法（Abstract Syntax）构建解析树——抽象语法树
-  - 仅包含程序的结构信息，不包含具体的细节，在解析器和编译器的后续阶段之间建立一个干净的接口
+    - 解析器使用具体语法（Concrete Syntax）为抽象语法（Abstract Syntax）构建解析树——抽象语法树
+    - 仅包含程序的结构信息，不包含具体的细节，在解析器和编译器的后续阶段之间建立一个干净的接口
 
 ![抽象语法树](../../assets/img/docs/CS/Compilers/ch4/image.png)
 
@@ -189,9 +189,9 @@ e5 = A_PlusExp(e1, e4);
 %left TIMES
 
 %%
-exp : NUM {$$=A_NumExp($1);}
-    | exp PLUS exp {$$=A_PlusExp($1, $3);}
-    | exp TIMES exp {$$=A_TimesExp($1, $3);}
+exp : NUM { $$ = A_NumExp($1); }
+    | exp PLUS exp { $$ = A_PlusExp($1, $3); }
+    | exp TIMES exp { $$ = A_TimesExp($1, $3); }
 ```
 
 ### 用途
@@ -228,5 +228,5 @@ Bison 无法实现，但是 Yacc 可以，具体实现而言是定义一个非�
 %type <pos> pos
 
 pos: { $$ = EM_tokpos; }
-exp: exp PLUS pos exp {$$= A_OpExp($1, A_plus, $4, $3); }
+exp: exp PLUS pos exp { $$ = A_OpExp($1, A_plus, $4, $3); }
 ```

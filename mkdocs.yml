@@ -122,3 +122,5 @@ nav:
         - 自顶向下分析: CS/Compilers/ch3/ch3-2.md
         - 自底向上分析: CS/Compilers/ch3/ch3-3.md
         - 语法分析器与小结: CS/Compilers/ch3/ch3-4.md
+      - 抽象语法: CS/Compilers/ch4.md
+      - 语义分析: CS/Compilers/ch5.md
