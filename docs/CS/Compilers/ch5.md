@@ -17,7 +17,20 @@ totalwd: true
 
 限制的原因是，回答这些问题取决于具体的值而不是语法，这就是语义分析的任务
 
-广义上，通常我们分析程序的语义，通过遍历/分析各种程序**表示**来完成：AST, Control Flow Graph (CFG), Program Dependence Graph (PDG), Value Flow Graph (VFG), SSA (single static assignment)。具体的语法分析的**流程**如语义分析示例：类型检查（Type Checking）、代码生成（Code Generation）、死代码消除（Dead Code Elimination）、寄存器分配（Register Allocation）等
+广义上，通常我们分析程序的语义，通过遍历/分析各种程序**表示**来完成：
+
+- Abstract Syntax Tree (AST)
+- Control Flow Graph (CFG)
+- Program Dependence Graph (PDG)
+- Value Flow Graph (VFG)
+- SSA (single static assignment)
+
+具体的语法分析的**流程**如语义分析示例：
+
+- 类型检查（Type Checking）
+- 代码生成（Code Generation）
+- 死代码消除（Dead Code Elimination）
+- 寄存器分配（Register Allocation）
 
 狭义上，也就是我们课程中的定义，是
 
@@ -64,6 +77,7 @@ totalwd: true
 
 ??? example "多个符号表"
     在某些语言中，可以同时存在多个活动环境：程序中的每个 module、class 或 record 都有自己的符号表，例如如下的 Java 代码：
+
     ```java
     package M;
     class E {
@@ -77,6 +91,7 @@ totalwd: true
         static int d = E.a + N.a;
     }
     ```
+
     及其对应的符号表示例：
 
     $$
