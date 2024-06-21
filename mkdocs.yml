@@ -124,3 +124,5 @@ nav:
         - 语法分析器与小结: CS/Compilers/ch3/ch3-4.md
       - 抽象语法: CS/Compilers/ch4.md
       - 语义分析: CS/Compilers/ch5.md
+      - 活动记录: CS/Compilers/ch6.md
+      - 中间代码生成: CS/Compilers/ch7.md
