@@ -126,3 +126,4 @@ nav:
       - 语义分析: CS/Compilers/ch5.md
       - 活动记录: CS/Compilers/ch6.md
       - 中间代码生成: CS/Compilers/ch7.md
+      - 基本块和 Traces: CS/Compilers/ch8.md
