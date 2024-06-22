@@ -177,7 +177,7 @@ totalwd: true
 ??? example "Basic Blocks"
     ![Basic Blocks Example](../../assets/img/docs/CS/Compilers/ch8/image-3.png)
 
-此外，引入控制流图（Control Flow Graph，CFG）：节点是基本块，边是它们之间的跳转关系。在某些情况下，CFG 的节点是一条语句（将在寄存器分配部分中讨论）
+此外，引入控制流图（Control Flow Graph，CFG）：节点是基本块，边是它们之间的跳转关系。在某些情况下，CFG 的节点是一条语句（如活跃变量分析和寄存器分配部分）
 
 ??? example "Control Flow Graph"
     ![CFG Example](../../assets/img/docs/CS/Compilers/ch8/image-4.png)
@@ -208,7 +208,7 @@ A covering set of traces: 每条 trace 都是无循环的，且每个块必须�
 - 当到达某个 basic block，其后继节点均已标记，这个 trace 就算完了
 - 选择一个未标记的 basic block 作为下一个 trace 的起点，不断迭代，直到所有的 basic blocks 都被标记
 
-<pre id="Generating a Covering Set of Traces" class="pseudocode">
+<pre id="Generating-a-Covering-Set-of-Traces" class="pseudocode">
 \begin{algorithm}
 \caption{Generating a Covering Set of Traces}
 \begin{algorithmic}

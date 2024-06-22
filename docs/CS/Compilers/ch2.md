@@ -417,7 +417,7 @@ $$
 
 我们可以得到如下的伪代码：
 
-<pre id="Identify String" class="pseudocode">
+<pre id="Identify-String" class="pseudocode">
 \begin{algorithm}
 \caption{Identify String}
 \begin{algorithmic}

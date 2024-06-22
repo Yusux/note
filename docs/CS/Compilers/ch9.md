@@ -204,7 +204,7 @@ Maximal Munch：找到 optimal tiling
 
 一旦找到根节点（以及整个树）的成本，指令发射（instruction emission）阶段就开始。算法如下：
 
-<pre id="Instruction Emission" class="pseudocode">
+<pre id="Instruction-Emission" class="pseudocode">
 \begin{algorithm}
 \caption{Instruction Emission}
 \begin{algorithmic}

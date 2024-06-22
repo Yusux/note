@@ -128,3 +128,4 @@ nav:
       - 中间代码生成: CS/Compilers/ch7.md
       - 基本块和 Traces: CS/Compilers/ch8.md
       - 指令选择: CS/Compilers/ch9.md
+      - 活跃变量分析: CS/Compilers/ch10.md
