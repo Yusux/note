@@ -1,4 +1,5 @@
 ---
+template: algorithm.html
 date: true
 comment: true
 totalwd: true
@@ -32,19 +33,19 @@ totalwd: true
 
 这就引入了规范形式的概念：
 
-- 所有 SEQ 节点都沿着右链
+- 所有 `SEQ` 节点都沿着右链
 - 所有语句都带到树的顶层
 - 可以直接生成程序集
 
 ![规范形式](../../assets/img/docs/CS/Compilers/ch8/image.png)
 
-一个函数只是一个包含所有内容的大 SEQ 语句，从而可以更加方便地转换为汇编代码
+一个函数只是一个包含所有内容的大 `SEQ` 语句，从而可以更加方便地转换为汇编代码
 
 为了实现转换为规范形式的目标，可以分三个阶段改造 IR 树：
 
-- 将一棵树重写为不带 SEQ 或 ESEQ 节点的一系列规范树（canonical trees）
+- 将一棵树重写为不带 `SEQ` 或 `ESEQ` 节点的一系列规范树（canonical trees）
 - 该列表被分组为一组基本块（basic blocks），其中不包含内部跳转或标签
-- 基本块被排序为一组 traces，其中每个 CJUMP 后面紧跟着其错误分支的标签
+- 基本块被排序为一组 traces，其中每个 `CJUMP` 后面紧跟着其错误分支的标签
 
 ## 规范树（线性化）的过程
 
@@ -145,3 +146,129 @@ totalwd: true
 其中每个 `si` 均不包含 `SEQ`/`ESEQ` 节点
 
 ## 处理条件分支
+
+`CJUMP` 的问题：在大多数机器上没有双向分支的对应项
+
+目标：重新排列树，使得 `CJUMP(cond, l_t, l_f)` 被 `LABEL(l_f)` 紧跟着
+
+![处理条件分支目的](../../assets/img/docs/CS/Compilers/ch8/image-2.png)
+
+解决方案：
+
+- 将规范树列表形成基本块（basic block）
+- 将基本块排序为 traces
+
+### Basic Blocks
+
+基本块（basic block）是始终在开头输入并在结尾退出的语句序列，即：
+
+- 第一个语句是一个 `LABEL`
+- 最后一条语句是 `JUMP` 或 `CJUMP`
+- 该块中没有其他 `LABEL`、`JUMP` 或 `CJUMP`
+
+构建算法为：
+
+- 从头到尾扫描
+- 当找到标签（包括跳转的目的地址）时，结束前一个块并开始一个新块并
+- 每当找到 `CJUMP`/`JUMP` 时，当前块就会结束并开始下一个块
+- 如果留下了一个没有 `CJUMP`/`JUMP` 结尾的块，则附加一个到下一个块的跳转
+- 如果一个块在开始时没有标签，添加一个标签
+
+??? example "Basic Blocks"
+    ![Basic Blocks Example](../../assets/img/docs/CS/Compilers/ch8/image-3.png)
+
+此外，引入控制流图（Control Flow Graph，CFG）：节点是基本块，边是它们之间的跳转关系。在某些情况下，CFG 的节点是一条语句（将在寄存器分配部分中讨论）
+
+??? example "Control Flow Graph"
+    ![CFG Example](../../assets/img/docs/CS/Compilers/ch8/image-4.png)
+
+### Traces
+
+基本块可以按任意顺序排列，执行程序的结果将是相同的。基于这个属性，我们可以优化跳转的性质和次数：
+
+- 选择块的顺序，使得每个 `CJUMP` 都被它的错误分支跟着
+- 安排许多无条件 `JUMP` 后紧跟着其目标标签
+    - 这样可以允许删除无条件跳转，使得编译后的程序运行得更快一些
+- *其他方面：可能还可以优化指令缓存等
+
+??? example "Basic Block Reordering"
+    ![Basic Block Reordering](../../assets/img/docs/CS/Compilers/ch8/image-5.png)
+
+    99% 和 1% 代表执行频率。可以看到，Code Layout 1 减少了指令预取的中断，提高了 I-cache 的命中率
+
+找到基本块的良好排序的常用技术是构造 trace
+
+Trace: 执行过程中可以连续执行的语句序列（或者说一系列基本块）
+
+A covering set of traces: 每条 trace 都是无循环的，且每个块必须恰好位于一个 trace 中
+
+生成 covering set of traces 的基本算法是对 CFG 的深度优先遍历：
+
+- 从某个 basic block 开始，往后继节点遍历，标记每个被访问的 basic block 并将其附加到当前 trace 中
+- 当到达某个 basic block，其后继节点均已标记，这个 trace 就算完了
+- 选择一个未标记的 basic block 作为下一个 trace 的起点，不断迭代，直到所有的 basic blocks 都被标记
+
+<pre id="Generating a Covering Set of Traces" class="pseudocode">
+\begin{algorithm}
+\caption{Generating a Covering Set of Traces}
+\begin{algorithmic}
+\State Put all the blocks of the program into a list $Q$
+\While{$Q$ is not empty}
+    \State start a new (empty) trace, call it $T$
+    \State remove the head element $b$ from $Q$
+    \While{$b$ is not marked}
+        \State mark $b$; append $b$ to the end of the current trace $T$;
+        \State examine the successors of $b$
+        \If{there is any unmarked successor $c$}
+            \State $b \gets c$
+        \EndIf
+    \EndWhile
+    \State end the current trace $T$
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+??? example "Generating a Covering Set of Traces"
+    ![Generating a Covering Set of Traces](../../assets/img/docs/CS/Compilers/ch8/image-6.png)
+
+    Covering set of traces:
+
+    - {a, b, c, d}
+    - {d, f, h}
+    - {g}
+
+### 考虑跳转
+
+我们更喜欢 `CJUMP` 后跟其错误标签，因为这可以转换为机器代码中的条件跳转，因此：
+
+- 对于任何 `CJUMP` 后跟其真实标签分支的情况
+    - 交换真假标签并反转条件
+- 对于任何 `CJUMP` 后跟其错误标签分支的情况
+    - 这是我们想要的情况，不需要做任何事情
+- 对于任何后面没有标签的 `CJUMP(cond, a, b, lt, lf)`
+    - 替换为
+        ```
+        CJUMP(cond, a, b, lt, lfʹ)
+        LABEL lfʹ
+        JUMP(NAME lf )
+        ```
+
+对于无条件跳转 `JUMP`，若一个 `JUMP` 被其目标标签紧跟着，则可以删除这个 `JUMP`
+
+### 最优 Traces
+
+“最优”需要标准，例如，任何频繁执行的指令序列（例如循环体）应该具有自己的 trace：
+
+- 这有助于减少无条件跳转的数量
+- 这有助于其他类型的优化
+    - 寄存器分配
+    - 指令调度
+    - ...
+
+??? example "Optimal Traces"
+    ![Optimal Traces](../../assets/img/docs/CS/Compilers/ch8/image-7.png)
+
+    (a): While循环的每个迭代有一个 `CJUMP` 和一个 `JUMP`  
+    (b): 使用了不同 traces, 但每个迭代仍有一个 `CJUMP` 和一个 `JUMP`  
+    (c): 每个迭代都没有 `JUMP`
