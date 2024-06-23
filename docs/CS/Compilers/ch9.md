@@ -75,13 +75,13 @@ Tree pattern：每个机器指令都可以指定为一个 IR 树片段，这一�
 ??? example "Tree Patterns"
     ![Tree Patterns](../../assets/img/docs/CS/Compilers/ch9/image-3.png)
 
-    Tree 语言在每个树节点中只表达一种操作（如获取、存储、加法等），而真实的机器指令通常可以执行多个原始操作
+    Tree 语言在每个树结点中只表达一种操作（如获取、存储、加法等），而真实的机器指令通常可以执行多个原始操作
 
     因此，基本想法是每条机器指令对 IR 树的一部分执行计算（一个 tile），并通过新的保存 tile 结果的临时寄存器来连接图块
 
     ![Tiling](../../assets/img/docs/CS/Compilers/ch9/image-4.png)
 
-因此，我们可以总结出 Jouette 的 Tree Patterns（`CONST` 和 `TEMP` 节点的实际值在下图中被忽略；有些指令对应多个树模式）
+因此，我们可以总结出 Jouette 的 Tree Patterns（`CONST` 和 `TEMP` 结点的实际值在下图中被忽略；有些指令对应多个树模式）
 
 ![Tree Patterns of Jouette](../../assets/img/docs/CS/Compilers/ch9/image-5.png)
 
@@ -92,7 +92,7 @@ Tree pattern：每个机器指令都可以指定为一个 IR 树片段，这一�
 
     其中块 1、3 和 7 不对应于任何机器指令，因为它们只是（虚拟）寄存器（`TEMP`）
 
-    此外，不必担心铺不满的问题，因为总是可以用小块来平铺树，每个块只覆盖一个节点
+    此外，不必担心铺不满的问题，因为总是可以用小块来平铺树，每个块只覆盖一个结点
 
     ![tile the tree with tiny tiles](../../assets/img/docs/CS/Compilers/ch9/image-7.png)
 
@@ -134,14 +134,14 @@ Tree pattern：每个机器指令都可以指定为一个 IR 树片段，这一�
 Maximal Munch：找到 optimal tiling
 
 - 自顶向下策略
-- 用最大平铺覆盖当前节点
+- 用最大平铺覆盖当前结点
 - 在子树上重复
 - 平铺放置后以相反顺序生成指令
 
 总体过程：
 
 - 从树的根部开始，找到适合的最大 tile（如果多个 tiles 大小相等，随机选择一个）
-- 使用该 tile 覆盖根节点，可能还有根附近的其他几个节点没被覆盖，留下几个子树
+- 使用该 tile 覆盖根结点，可能还有根附近的其他几个结点没被覆盖，留下几个子树
 - 对每个子树重复相同的算法
 
 ??? example "Maximal Munch"
@@ -164,22 +164,22 @@ Maximal Munch：找到 optimal tiling
 动态规划（Dynamic Programming）：找到 optimum tiling，使得树的 tiles 总成本最小
 
 - 自下而上的策略
-- 为每个节点分配成本
+- 为每个结点分配成本
 - 成本 = 所选 tiles 的成本 + 子树的成本
 - 选择成本最小的 tiles 并向上递归
 
 动态规划的大体方法为：
 
-- 维护一个表：节点 $x$ -> 节点 $x$ 的 optimum tiling covering 及其成本
-- 对于节点 $x$，令 $f(x)$ 为以 $x$ 为根的整个表达式树的 optimum tiling 的成本
+- 维护一个表：结点 $x$ -> 结点 $x$ 的 optimum tiling covering 及其成本
+- 对于结点 $x$，令 $f(x)$ 为以 $x$ 为根的整个表达式树的 optimum tiling 的成本
     - $f(x)=\min _{\forall \text { tile } T \text { covering } x}\left(\operatorname{cost}(T)+\sum_{\forall \text { child } y \text { of tile } T} f(y)\right)$
 
-给定根节点为 $n$ 的 IR 树，**具体**来说过程为：
+给定根结点为 $n$ 的 IR 树，**具体**来说过程为：
 
-- 首先，递归地找到节点 $n$ 的所有子节点（和孙子节点等）的成本
-- 然后，每个 tree-pattern（tile kind）与节点 $n$ 进行匹配
+- 首先，递归地找到结点 $n$ 的所有子结点（和孙子结点等）的成本
+- 然后，每个 tree-pattern（tile kind）与结点 $n$ 进行匹配
 - 每个 tile 都有零个或多个叶子，这些叶子需要被看作子树并计算成本
-- 对于在节点 $n$ 处匹配的具有成本 $c_t$ 的每个 tile $t$，总的成本为（$c_i$ 已计算） $c_{t}+\sum_{\text {all leaves } i \text { of } t} c_{i}$
+- 对于在结点 $n$ 处匹配的具有成本 $c_t$ 的每个 tile $t$，总的成本为（$c_i$ 已计算） $c_{t}+\sum_{\text {all leaves } i \text { of } t} c_{i}$
 - 选择具有最小成本的 tree pattern
 
 ??? example "Dynamic Programming"
@@ -187,22 +187,22 @@ Maximal Munch：找到 optimal tiling
 
     ![Dynamic Programming 1](../../assets/img/docs/CS/Compilers/ch9/image-10.png)
 
-    先考虑叶子里的 `CONST` 节点，唯一匹配的 tile 是 `ADDI`，成本为 1
+    先考虑叶子里的 `CONST` 结点，唯一匹配的 tile 是 `ADDI`，成本为 1
 
     ![Dynamic Programming 2](../../assets/img/docs/CS/Compilers/ch9/image-11.png)
     ![Dynamic Programming 3](../../assets/img/docs/CS/Compilers/ch9/image-12.png)
 
-    继续考虑 `+` 节点
+    继续考虑 `+` 结点
 
     ![Dynamic Programming 4](../../assets/img/docs/CS/Compilers/ch9/image-13.png)
     ![Dynamic Programming 5](../../assets/img/docs/CS/Compilers/ch9/image-14.png)
 
-    最后考虑 `MEM` 节点
+    最后考虑 `MEM` 结点
 
     ![Dynamic Programming 6](../../assets/img/docs/CS/Compilers/ch9/image-15.png)
     ![Dynamic Programming 7](../../assets/img/docs/CS/Compilers/ch9/image-16.png)
 
-一旦找到根节点（以及整个树）的成本，指令发射（instruction emission）阶段就开始。算法如下：
+一旦找到根结点（以及整个树）的成本，指令发射（instruction emission）阶段就开始。算法如下：
 
 <pre id="Instruction-Emission" class="pseudocode">
 \begin{algorithm}
@@ -258,10 +258,10 @@ Maximal Munch：找到 optimal tiling
 假设：
 
 - $T$：不同 tiles 的数量
-- $K$：平均匹配 tiles 包含 K 个非叶节点
-- $K'$：为了查看哪些 tile 在给定子树上匹配，需要检查的最大节点数
-- $T'$：每个树节点上匹配的不同 patterns（tiles）的平均数量
-- $N$：数量输入树中的节点数
+- $K$：平均匹配 tiles 包含 K 个非叶结点
+- $K'$：为了查看哪些 tile 在给定子树上匹配，需要检查的最大结点数
+- $T'$：每个树结点上匹配的不同 patterns（tiles）的平均数量
+- $N$：数量输入树中的结点数
 
 Maximal munch: proportional to $\frac{(K' + T')N}{K}$
 
@@ -284,7 +284,7 @@ CISC 很难通过 tree pattern-based tilings 进行建模
 ### CISC 存在的问题及解决方案
 
 - 寄存器很少
-    - 解决方案：自由生成 `TEMP` 节点，并假设寄存器分配会做得很好
+    - 解决方案：自由生成 `TEMP` 结点，并假设寄存器分配会做得很好
 - 多种寄存器类别
     - 例如，Pentium 的乘法指令要求将左操作数放入寄存器 `eax`，结果的高位放入 `rdx`
     - 解决方案：显式移动操作数和结果
@@ -303,7 +303,7 @@ CISC 很难通过 tree pattern-based tilings 进行建模
         ```
     - 实际上，我们还希望寄存器分配器能够将 `t1` 和 `t2` 分配到同一个寄存器，这样 `mov` 指令就会被删除
 - 算术运算可以寻址内存
-    - 指令选择阶段将每个 TEMP 节点变成“寄存器”的引用，这些“寄存器”的引用实际上都是内存位置
+    - 指令选择阶段将每个 TEMP 结点变成“寄存器”的引用，这些“寄存器”的引用实际上都是内存位置
     - 解决方案：在操作前将所有操作数取出到寄存器中，然后将它们存储回内存
     - 示例：实现 `add [ebp - 8], ecx`
         ```asm

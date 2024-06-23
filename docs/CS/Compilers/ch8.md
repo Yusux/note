@@ -19,10 +19,10 @@ totalwd: true
 - `CJUMP` 会在两个分支之间选择一个跳转
     - 真正的汇编指令里有 conditional jump，在条件成立会跳转，条件不成立的情况下就执行自己的后一条指令
     - 而在 IR tree 里无论成立还是不成立，都需要跳转
-- 表达式内的 `ESEQ` 节点不方便
+- 表达式内的 `ESEQ` 结点不方便
     - 评估子树的不同顺序会产生不同的结果（因为执行 `s` 时的副作用）
     - 但是能够以任意顺序计算表达式的子表达式是很有用的
-- 表达式中的 `CALL` 节点也依赖于顺序（有副作用）
+- 表达式中的 `CALL` 结点也依赖于顺序（有副作用）
     - 当尝试将参数放入一组固定的形式参数寄存器时
     - 例如，`CALL(f, [e1, CALL(g, [e2, ...])])`
 - 中间代码具有通用树形形式
@@ -33,7 +33,7 @@ totalwd: true
 
 这就引入了规范形式的概念：
 
-- 所有 `SEQ` 节点都沿着右链
+- 所有 `SEQ` 结点都沿着右链
 - 所有语句都带到树的顶层
 - 可以直接生成程序集
 
@@ -43,7 +43,7 @@ totalwd: true
 
 为了实现转换为规范形式的目标，可以分三个阶段改造 IR 树：
 
-- 将一棵树重写为不带 `SEQ` 或 `ESEQ` 节点的一系列规范树（canonical trees）
+- 将一棵树重写为不带 `SEQ` 或 `ESEQ` 结点的一系列规范树（canonical trees）
 - 该列表被分组为一组基本块（basic blocks），其中不包含内部跳转或标签
 - 基本块被排序为一组 traces，其中每个 `CJUMP` 后面紧跟着其错误分支的标签
 
@@ -56,14 +56,14 @@ totalwd: true
 
 因此：
 
-- 每棵规范树只包含一个语句节点，即根节点，其他节点均为表达节点
-- `CALL` 节点的父节点必须是一颗规范树的根节点，且必须是 `EXP(...)` 或 `MOVE(TEMP t, ...)`
-- 一棵规范树中只能有一个 `CALL` 节点，因为 `EXP(...)` 和 `MOVE(TEMP t, ...)` 只能包含一个 `CALL`
+- 每棵规范树只包含一个语句结点，即根结点，其他结点均为表达结点
+- `CALL` 结点的父结点必须是一颗规范树的根结点，且必须是 `EXP(...)` 或 `MOVE(TEMP t, ...)`
+- 一棵规范树中只能有一个 `CALL` 结点，因为 `EXP(...)` 和 `MOVE(TEMP t, ...)` 只能包含一个 `CALL`
 
 ### 消除 ESEQ（ESEQ 的线性化规则）
 
-!!! question "如何消除 ESEQ 节点"
-    将它们在树中提升得越来越高，直到它们成为 `SEQ` 节点
+!!! question "如何消除 ESEQ 结点"
+    将它们在树中提升得越来越高，直到它们成为 `SEQ` 结点
 
 具体的规则包括：
 
@@ -143,7 +143,7 @@ totalwd: true
 
 `s1, s2, ..., sn, ...`
 
-其中每个 `si` 均不包含 `SEQ`/`ESEQ` 节点
+其中每个 `si` 均不包含 `SEQ`/`ESEQ` 结点
 
 ## 处理条件分支
 
@@ -177,7 +177,7 @@ totalwd: true
 ??? example "Basic Blocks"
     ![Basic Blocks Example](../../assets/img/docs/CS/Compilers/ch8/image-3.png)
 
-此外，引入控制流图（Control Flow Graph，CFG）：节点是基本块，边是它们之间的跳转关系。在某些情况下，CFG 的节点是一条语句（如活跃变量分析和寄存器分配部分）
+此外，引入控制流图（Control Flow Graph，CFG）：结点是基本块，边是它们之间的跳转关系。在某些情况下，CFG 的结点是一条语句（如活跃变量分析和寄存器分配部分）
 
 ??? example "Control Flow Graph"
     ![CFG Example](../../assets/img/docs/CS/Compilers/ch8/image-4.png)
@@ -204,8 +204,8 @@ A covering set of traces: 每条 trace 都是无循环的，且每个块必须�
 
 生成 covering set of traces 的基本算法是对 CFG 的深度优先遍历：
 
-- 从某个 basic block 开始，往后继节点遍历，标记每个被访问的 basic block 并将其附加到当前 trace 中
-- 当到达某个 basic block，其后继节点均已标记，这个 trace 就算完了
+- 从某个 basic block 开始，往后继结点遍历，标记每个被访问的 basic block 并将其附加到当前 trace 中
+- 当到达某个 basic block，其后继结点均已标记，这个 trace 就算完了
 - 选择一个未标记的 basic block 作为下一个 trace 的起点，不断迭代，直到所有的 basic blocks 都被标记
 
 <pre id="Generating-a-Covering-Set-of-Traces" class="pseudocode">

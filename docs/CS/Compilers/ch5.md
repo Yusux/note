@@ -248,22 +248,22 @@ void pop(string key) {
 
 基于函数式编程中的“不可变数据结构”思想，可以使用二叉查找树（binary search tree, BST）来实现：
 
-- 每个节点包含从 identifier (key) 到 binding 的映射
+- 每个结点包含从 identifier (key) 到 binding 的映射
 - 使用字符串间的比较做 less than 排序
-    - 对于某一中间节点 $l$，其左子树为 $L$，右子树为 $R$
+    - 对于某一中间结点 $l$，其左子树为 $L$，右子树为 $R$
     - 对于 $\forall x \in L, key(x) < key(l)$
     - 对于 $\forall x \in R, key(x) > key(l)$
 
 ##### 查找
 
-使用二叉查找树的查找过程，对于 $n$ 个节点的树，最坏情况下的时间复杂度为 $O(\log n)$
+使用二叉查找树的查找过程，对于 $n$ 个结点的树，最坏情况下的时间复杂度为 $O(\log n)$
 
 ??? example "查找示例"
     ![Lookup Example](../../assets/img/docs/CS/Compilers/ch5/image-5.png)
 
 ##### 插入
 
-将从根节点到插入节点的父节点路劲间的所有节点复制一份，然后插入新节点，以避免完整复制所有旧版本
+将从根结点到插入结点的父结点路劲间的所有结点复制一份，然后插入新结点，以避免完整复制所有旧版本
 
 ??? example "插入示例"
     ![Insert Example](../../assets/img/docs/CS/Compilers/ch5/image-6.png)

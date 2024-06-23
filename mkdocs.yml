@@ -131,3 +131,5 @@ nav:
       - 活跃变量分析: CS/Compilers/ch10.md
       - 寄存器分配: CS/Compilers/ch11.md
       - 垃圾回收: CS/Compilers/ch13.md
+      - 面向对象语言: CS/Compilers/ch14.md
+      - 循环优化: CS/Compilers/ch18.md
