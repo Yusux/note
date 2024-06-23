@@ -508,6 +508,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -1142,6 +1146,48 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    面向对象语言
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    循环优化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1446,18 +1492,18 @@
 <details class="example">
 <summary>Tree Patterns</summary>
 <p><img alt="Tree Patterns" src="../../../assets/img/docs/CS/Compilers/ch9/image-3.png" /></p>
-<p>Tree 语言在每个树节点中只表达一种操作（如获取、存储、加法等），而真实的机器指令通常可以执行多个原始操作</p>
+<p>Tree 语言在每个树结点中只表达一种操作（如获取、存储、加法等），而真实的机器指令通常可以执行多个原始操作</p>
 <p>因此，基本想法是每条机器指令对 IR 树的一部分执行计算（一个 tile），并通过新的保存 tile 结果的临时寄存器来连接图块</p>
 <p><img alt="Tiling" src="../../../assets/img/docs/CS/Compilers/ch9/image-4.png" /></p>
 </details>
-<p>因此，我们可以总结出 Jouette 的 Tree Patterns（<code>CONST</code> 和 <code>TEMP</code> 节点的实际值在下图中被忽略；有些指令对应多个树模式）</p>
+<p>因此，我们可以总结出 Jouette 的 Tree Patterns（<code>CONST</code> 和 <code>TEMP</code> 结点的实际值在下图中被忽略；有些指令对应多个树模式）</p>
 <p><img alt="Tree Patterns of Jouette" src="../../../assets/img/docs/CS/Compilers/ch9/image-5.png" /></p>
 <details class="example">
 <summary>Generate Instructions from Tilings</summary>
 <p>对于 <code>a[i] := x</code>，假设 <code>i</code> 在寄存器中，<code>a</code> 和 <code>x</code> 在栈帧中</p>
 <p><img alt="Generate Instructions from Tilings" src="../../../assets/img/docs/CS/Compilers/ch9/image-6.png" /></p>
 <p>其中块 1、3 和 7 不对应于任何机器指令，因为它们只是（虚拟）寄存器（<code>TEMP</code>）</p>
-<p>此外，不必担心铺不满的问题，因为总是可以用小块来平铺树，每个块只覆盖一个节点</p>
+<p>此外，不必担心铺不满的问题，因为总是可以用小块来平铺树，每个块只覆盖一个结点</p>
 <p><img alt="tile the tree with tiny tiles" src="../../../assets/img/docs/CS/Compilers/ch9/image-7.png" /></p>
 </details>
 <h3 id="optimal-and-optimum-tilings">Optimal and Optimum Tilings<a class="headerlink" href="#optimal-and-optimum-tilings" title="Permanent link">&para;</a></h3>
@@ -1505,14 +1551,14 @@
 <p>Maximal Munch：找到 optimal tiling</p>
 <ul>
 <li>自顶向下策略</li>
-<li>用最大平铺覆盖当前节点</li>
+<li>用最大平铺覆盖当前结点</li>
 <li>在子树上重复</li>
 <li>平铺放置后以相反顺序生成指令</li>
 </ul>
 <p>总体过程：</p>
 <ul>
 <li>从树的根部开始，找到适合的最大 tile（如果多个 tiles 大小相等，随机选择一个）</li>
-<li>使用该 tile 覆盖根节点，可能还有根附近的其他几个节点没被覆盖，留下几个子树</li>
+<li>使用该 tile 覆盖根结点，可能还有根附近的其他几个结点没被覆盖，留下几个子树</li>
 <li>对每个子树重复相同的算法</li>
 </ul>
 <details class="example">
@@ -1534,41 +1580,41 @@
 <p>动态规划（Dynamic Programming）：找到 optimum tiling，使得树的 tiles 总成本最小</p>
 <ul>
 <li>自下而上的策略</li>
-<li>为每个节点分配成本</li>
+<li>为每个结点分配成本</li>
 <li>成本 = 所选 tiles 的成本 + 子树的成本</li>
 <li>选择成本最小的 tiles 并向上递归</li>
 </ul>
 <p>动态规划的大体方法为：</p>
 <ul>
-<li>维护一个表：节点 <span class="arithmatex">\(x\)</span> -&gt; 节点 <span class="arithmatex">\(x\)</span> 的 optimum tiling covering 及其成本</li>
-<li>对于节点 <span class="arithmatex">\(x\)</span>，令 <span class="arithmatex">\(f(x)\)</span> 为以 <span class="arithmatex">\(x\)</span> 为根的整个表达式树的 optimum tiling 的成本<ul>
+<li>维护一个表：结点 <span class="arithmatex">\(x\)</span> -&gt; 结点 <span class="arithmatex">\(x\)</span> 的 optimum tiling covering 及其成本</li>
+<li>对于结点 <span class="arithmatex">\(x\)</span>，令 <span class="arithmatex">\(f(x)\)</span> 为以 <span class="arithmatex">\(x\)</span> 为根的整个表达式树的 optimum tiling 的成本<ul>
 <li><span class="arithmatex">\(f(x)=\min _{\forall \text { tile } T \text { covering } x}\left(\operatorname{cost}(T)+\sum_{\forall \text { child } y \text { of tile } T} f(y)\right)\)</span></li>
 </ul>
 </li>
 </ul>
-<p>给定根节点为 <span class="arithmatex">\(n\)</span> 的 IR 树，<strong>具体</strong>来说过程为：</p>
+<p>给定根结点为 <span class="arithmatex">\(n\)</span> 的 IR 树，<strong>具体</strong>来说过程为：</p>
 <ul>
-<li>首先，递归地找到节点 <span class="arithmatex">\(n\)</span> 的所有子节点（和孙子节点等）的成本</li>
-<li>然后，每个 tree-pattern（tile kind）与节点 <span class="arithmatex">\(n\)</span> 进行匹配</li>
+<li>首先，递归地找到结点 <span class="arithmatex">\(n\)</span> 的所有子结点（和孙子结点等）的成本</li>
+<li>然后，每个 tree-pattern（tile kind）与结点 <span class="arithmatex">\(n\)</span> 进行匹配</li>
 <li>每个 tile 都有零个或多个叶子，这些叶子需要被看作子树并计算成本</li>
-<li>对于在节点 <span class="arithmatex">\(n\)</span> 处匹配的具有成本 <span class="arithmatex">\(c_t\)</span> 的每个 tile <span class="arithmatex">\(t\)</span>，总的成本为（<span class="arithmatex">\(c_i\)</span> 已计算） <span class="arithmatex">\(c_{t}+\sum_{\text {all leaves } i \text { of } t} c_{i}\)</span></li>
+<li>对于在结点 <span class="arithmatex">\(n\)</span> 处匹配的具有成本 <span class="arithmatex">\(c_t\)</span> 的每个 tile <span class="arithmatex">\(t\)</span>，总的成本为（<span class="arithmatex">\(c_i\)</span> 已计算） <span class="arithmatex">\(c_{t}+\sum_{\text {all leaves } i \text { of } t} c_{i}\)</span></li>
 <li>选择具有最小成本的 tree pattern</li>
 </ul>
 <details class="example">
 <summary>Dynamic Programming</summary>
 <p>对于 <code>MEM(PLUS(CONST(1), CONST(2)))</code></p>
 <p><img alt="Dynamic Programming 1" src="../../../assets/img/docs/CS/Compilers/ch9/image-10.png" /></p>
-<p>先考虑叶子里的 <code>CONST</code> 节点，唯一匹配的 tile 是 <code>ADDI</code>，成本为 1</p>
+<p>先考虑叶子里的 <code>CONST</code> 结点，唯一匹配的 tile 是 <code>ADDI</code>，成本为 1</p>
 <p><img alt="Dynamic Programming 2" src="../../../assets/img/docs/CS/Compilers/ch9/image-11.png" />
 <img alt="Dynamic Programming 3" src="../../../assets/img/docs/CS/Compilers/ch9/image-12.png" /></p>
-<p>继续考虑 <code>+</code> 节点</p>
+<p>继续考虑 <code>+</code> 结点</p>
 <p><img alt="Dynamic Programming 4" src="../../../assets/img/docs/CS/Compilers/ch9/image-13.png" />
 <img alt="Dynamic Programming 5" src="../../../assets/img/docs/CS/Compilers/ch9/image-14.png" /></p>
-<p>最后考虑 <code>MEM</code> 节点</p>
+<p>最后考虑 <code>MEM</code> 结点</p>
 <p><img alt="Dynamic Programming 6" src="../../../assets/img/docs/CS/Compilers/ch9/image-15.png" />
 <img alt="Dynamic Programming 7" src="../../../assets/img/docs/CS/Compilers/ch9/image-16.png" /></p>
 </details>
-<p>一旦找到根节点（以及整个树）的成本，指令发射（instruction emission）阶段就开始。算法如下：</p>
+<p>一旦找到根结点（以及整个树）的成本，指令发射（instruction emission）阶段就开始。算法如下：</p>
 <pre id="Instruction-Emission" class="pseudocode">
 \begin{algorithm}
 \caption{Instruction Emission}
@@ -1618,10 +1664,10 @@
 <p>假设：</p>
 <ul>
 <li><span class="arithmatex">\(T\)</span>：不同 tiles 的数量</li>
-<li><span class="arithmatex">\(K\)</span>：平均匹配 tiles 包含 K 个非叶节点</li>
-<li><span class="arithmatex">\(K'\)</span>：为了查看哪些 tile 在给定子树上匹配，需要检查的最大节点数</li>
-<li><span class="arithmatex">\(T'\)</span>：每个树节点上匹配的不同 patterns（tiles）的平均数量</li>
-<li><span class="arithmatex">\(N\)</span>：数量输入树中的节点数</li>
+<li><span class="arithmatex">\(K\)</span>：平均匹配 tiles 包含 K 个非叶结点</li>
+<li><span class="arithmatex">\(K'\)</span>：为了查看哪些 tile 在给定子树上匹配，需要检查的最大结点数</li>
+<li><span class="arithmatex">\(T'\)</span>：每个树结点上匹配的不同 patterns（tiles）的平均数量</li>
+<li><span class="arithmatex">\(N\)</span>：数量输入树中的结点数</li>
 </ul>
 <p>Maximal munch: proportional to <span class="arithmatex">\(\frac{(K' + T')N}{K}\)</span></p>
 <p>Dynamic programming: proportional to <span class="arithmatex">\((K' + T')N\)</span></p>
@@ -1635,7 +1681,7 @@
 <h3 id="cisc">CISC 存在的问题及解决方案<a class="headerlink" href="#cisc" title="Permanent link">&para;</a></h3>
 <ul>
 <li>寄存器很少<ul>
-<li>解决方案：自由生成 <code>TEMP</code> 节点，并假设寄存器分配会做得很好</li>
+<li>解决方案：自由生成 <code>TEMP</code> 结点，并假设寄存器分配会做得很好</li>
 </ul>
 </li>
 <li>多种寄存器类别<ul>
@@ -1658,7 +1704,7 @@
 </ul>
 </li>
 <li>算术运算可以寻址内存<ul>
-<li>指令选择阶段将每个 TEMP 节点变成“寄存器”的引用，这些“寄存器”的引用实际上都是内存位置</li>
+<li>指令选择阶段将每个 TEMP 结点变成“寄存器”的引用，这些“寄存器”的引用实际上都是内存位置</li>
 <li>解决方案：在操作前将所有操作数取出到寄存器中，然后将它们存储回内存</li>
 <li>示例：实现 <code>add [ebp - 8], ecx</code>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nf">mov</span><span class="w"> </span><span class="no">eax</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">ebp</span><span class="w"> </span><span class="p">-</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span>
@@ -1727,7 +1773,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 13:13:17</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 17:44:10</span>
     
         <br />
         创建日期:

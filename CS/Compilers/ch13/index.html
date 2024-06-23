@@ -16,6 +16,8 @@
         <link rel="prev" href="../ch11/">
       
       
+        <link rel="next" href="../ch14/">
+      
       
       <link rel="icon" href="../../../assets/img/favicon-32x32.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
@@ -480,6 +482,10 @@
       
         
           
+        
+      
+        
+      
         
       
         
@@ -1281,6 +1287,48 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    面向对象语言
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    循环优化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1739,7 +1787,7 @@
 <h3 id="_6">基础数据结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>有向图</p>
 <ul>
-<li>节点：程序变量和堆分配记录</li>
+<li>结点：程序变量和堆分配记录</li>
 <li>边：指针<ul>
 <li>p 指向记录 y（令 y 为记录的名称/标识符），一般意味着 p 的值是 y 的地址</li>
 <li>在虎书中，p 可以指代<strong>指针</strong>或其<strong>指向的记录</strong>，要根据上下文来判断</li>
@@ -1752,13 +1800,13 @@
 <p>Mark-and-Sweep 算法的基本思想是</p>
 <ul>
 <li>Mark<ul>
-<li>从根节点（程序变量）开始搜索图表</li>
-<li>标记所有搜索到的节点</li>
+<li>从根结点（程序变量）开始搜索图表</li>
+<li>标记所有搜索到的结点</li>
 </ul>
 </li>
 <li>Sweep<ul>
-<li>通过线性扫描扫描整个堆，将未标记的节点放入空闲列表（freelist）</li>
-<li>取消标记已标记的节点</li>
+<li>通过线性扫描扫描整个堆，将未标记的结点放入空闲列表（freelist）</li>
+<li>取消标记已标记的结点</li>
 </ul>
 </li>
 </ul>
@@ -2031,10 +2079,10 @@
 </ul>
 <p>垃圾回收的过程为</p>
 <ul>
-<li>当 from-space 耗尽时，遍历 from-space，将所有<strong>可达节点</strong>复制到 to-space<ul>
+<li>当 from-space 耗尽时，遍历 from-space，将所有<strong>可达结点</strong>复制到 to-space<ul>
 <li>这样就抛开了垃圾</li>
 <li>在 to-space 中分配新记录很容易（开始时 next 在 to-space 开头）：p = next, next = next + n</li>
-<li>所有可达节点都在to-space的开头附近，因此不存在碎片问题</li>
+<li>所有可达结点都在to-space的开头附近，因此不存在碎片问题</li>
 </ul>
 </li>
 <li>当下一次到达 limit 时，调换两个空间的角色，重新进行垃圾回收</li>
@@ -2315,7 +2363,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 13:13:17</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 17:44:10</span>
     
         <br />
         创建日期:

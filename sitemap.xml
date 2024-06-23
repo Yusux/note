@@ -41,6 +41,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://note.yusux.xyz/CS/Compilers/ch14/</loc>
+         <lastmod>2024-06-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/CS/Compilers/ch18/</loc>
+         <lastmod>2024-06-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch2/</loc>
          <lastmod>2024-06-23</lastmod>
          <changefreq>daily</changefreq>

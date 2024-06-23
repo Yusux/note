@@ -505,6 +505,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -1130,6 +1134,48 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    面向对象语言
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    循环优化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1607,22 +1653,22 @@
 <h4 id="efficient-functional-symbol-tables">Efficient Functional Symbol Tables<a class="headerlink" href="#efficient-functional-symbol-tables" title="Permanent link">&para;</a></h4>
 <p>基于函数式编程中的“不可变数据结构”思想，可以使用二叉查找树（binary search tree, BST）来实现：</p>
 <ul>
-<li>每个节点包含从 identifier (key) 到 binding 的映射</li>
+<li>每个结点包含从 identifier (key) 到 binding 的映射</li>
 <li>使用字符串间的比较做 less than 排序<ul>
-<li>对于某一中间节点 <span class="arithmatex">\(l\)</span>，其左子树为 <span class="arithmatex">\(L\)</span>，右子树为 <span class="arithmatex">\(R\)</span></li>
+<li>对于某一中间结点 <span class="arithmatex">\(l\)</span>，其左子树为 <span class="arithmatex">\(L\)</span>，右子树为 <span class="arithmatex">\(R\)</span></li>
 <li>对于 <span class="arithmatex">\(\forall x \in L, key(x) &lt; key(l)\)</span></li>
 <li>对于 <span class="arithmatex">\(\forall x \in R, key(x) &gt; key(l)\)</span></li>
 </ul>
 </li>
 </ul>
 <h5 id="_10">查找<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h5>
-<p>使用二叉查找树的查找过程，对于 <span class="arithmatex">\(n\)</span> 个节点的树，最坏情况下的时间复杂度为 <span class="arithmatex">\(O(\log n)\)</span></p>
+<p>使用二叉查找树的查找过程，对于 <span class="arithmatex">\(n\)</span> 个结点的树，最坏情况下的时间复杂度为 <span class="arithmatex">\(O(\log n)\)</span></p>
 <details class="example">
 <summary>查找示例</summary>
 <p><img alt="Lookup Example" src="../../../assets/img/docs/CS/Compilers/ch5/image-5.png" /></p>
 </details>
 <h5 id="_11">插入<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h5>
-<p>将从根节点到插入节点的父节点路劲间的所有节点复制一份，然后插入新节点，以避免完整复制所有旧版本</p>
+<p>将从根结点到插入结点的父结点路劲间的所有结点复制一份，然后插入新结点，以避免完整复制所有旧版本</p>
 <details class="example">
 <summary>插入示例</summary>
 <p><img alt="Insert Example" src="../../../assets/img/docs/CS/Compilers/ch5/image-6.png" /></p>
@@ -1737,7 +1783,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 13:13:17</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 17:44:10</span>
     
         <br />
         创建日期:

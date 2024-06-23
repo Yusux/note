@@ -505,6 +505,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -1054,9 +1058,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#coalesc" class="md-nav__link">
+  <a href="#coalesce" class="md-nav__link">
     <span class="md-ellipsis">
-      Coalesc
+      Coalesce
     </span>
   </a>
   
@@ -1083,11 +1087,11 @@
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      预着色节点
+      预着色结点
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="预着色节点">
+    <nav class="md-nav" aria-label="预着色结点">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1148,6 +1152,48 @@
   
   <span class="md-ellipsis">
     垃圾回收
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    面向对象语言
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    循环优化
   </span>
   
 
@@ -1311,9 +1357,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#coalesc" class="md-nav__link">
+  <a href="#coalesce" class="md-nav__link">
     <span class="md-ellipsis">
-      Coalesc
+      Coalesce
     </span>
   </a>
   
@@ -1340,11 +1386,11 @@
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      预着色节点
+      预着色结点
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="预着色节点">
+    <nav class="md-nav" aria-label="预着色结点">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1455,7 +1501,7 @@
 <li>生命周期重叠</li>
 <li>当 a 必须由无法访问寄存器 r1 的指令生成时，a 和 r1 会发生干扰</li>
 </ul>
-<p>干扰图：将干扰关系表示为图，图中的节点是临时寄存器，边表示临时寄存器之间的干扰关系</p>
+<p>干扰图：将干扰关系表示为图，图中的结点是临时寄存器，边表示临时寄存器之间的干扰关系</p>
 <p><img alt="干扰矩阵和干扰图" src="../../../assets/img/docs/CS/Compilers/ch11/image-1.png" /></p>
 <details class="example">
 <summary>干扰图的一个例子<i id="interference-graph-example"></i></summary>
@@ -1516,35 +1562,35 @@
 <h3 id="build">Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h3>
 <p>构建干扰图（Build）：使用活跃分析构建干扰图</p>
 <ul>
-<li>每个节点代表一个临时值</li>
+<li>每个结点代表一个临时值</li>
 <li>边 (t1，t2) 表示一对不能分配给同一寄存器的临时值</li>
 <li>分析所有程序点</li>
 </ul>
 <h3 id="simplify">Simplify<a class="headerlink" href="#simplify" title="Permanent link">&para;</a></h3>
 <p>简化（Simplify）：使用简单的启发式为图表着色</p>
 <ul>
-<li>假设图 G 包含一个节点 m，其邻居少于 K 个（K：机器寄存器的数量）</li>
+<li>假设图 G 包含一个结点 m，其邻居少于 K 个（K：机器寄存器的数量）</li>
 <li>令 G' 为去除 m 得到的图（即 G' = G – {m}）</li>
 <li>如果 G' 可以着色，那么 G 也可以（因为 m 的邻居取的颜色少于 K 个，所以 m 可以另取一个颜色）</li>
 <li>这就会产生基于栈的着色算法<ul>
-<li>重复删除（并压入栈）度数小于 K 的节点</li>
-<li>每次这样的简化都会降低其他节点的度数，从而带来更多的简化机会</li>
+<li>重复删除（并压入栈）度数小于 K 的结点</li>
+<li>每次这样的简化都会降低其他结点的度数，从而带来更多的简化机会</li>
 </ul>
 </li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">significant degree &amp; insignificant degree</p>
-<p>一个节点的<strong>显著度数</strong>（significant degree）是指其邻居的数量不小于 K，而<strong>不显著度数</strong>（insignificant degree）是指其邻居的数量小于 K</p>
+<p>一个结点的<strong>显著度数</strong>（significant degree）是指其邻居的数量不小于 K，而<strong>不显著度数</strong>（insignificant degree）是指其邻居的数量小于 K</p>
 </div>
 <details class="example">
 <summary>Simplify 算法压栈</summary>
 <p><img alt="Simplify 算法" src="../../../assets/img/docs/CS/Compilers/ch11/image-4.png" /></p>
 </details>
 <h3 id="select">Select<a class="headerlink" href="#select" title="Permanent link">&para;</a></h3>
-<p>选择（Select）：假设简化有效，即在每一步中，我们可以选择一个节点来删除，直到图为空，那么我们可以开始为图中的节点分配颜色</p>
+<p>选择（Select）：假设简化有效，即在每一步中，我们可以选择一个结点来删除，直到图为空，那么我们可以开始为图中的结点分配颜色</p>
 <ul>
-<li>从空图开始，通过重复从栈顶部弹出节点来重建原始图</li>
-<li>添加节点时，为其指定颜色</li>
+<li>从空图开始，通过重复从栈顶部弹出结点来重建原始图</li>
+<li>添加结点时，为其指定颜色</li>
 </ul>
 <details class="example">
 <summary>Select 算法着色</summary>
@@ -1555,18 +1601,18 @@
 <p>这样的算法快速（线性时间）的启发式算法，当失败时，并不意味着该图不可 K 着色，而是该算法无法找到 K 着色的解，此时需要溢出（Spilling）</p>
 <h3 id="spill">Spill<a class="headerlink" href="#spill" title="Permanent link">&para;</a></h3>
 <h4 id="possiblepotential-spill">Possible/Potential Spill<a class="headerlink" href="#possiblepotential-spill" title="Permanent link">&para;</a></h4>
-<p>假设在在简化过程中的某个时刻，图 G 仅具有显著度数的节点（即度数 ≥ K 的节点），此时之前的算法会失效</p>
+<p>假设在在简化过程中的某个时刻，图 G 仅具有显著度数的结点（即度数 ≥ K 的结点），此时之前的算法会失效</p>
 <p><img alt="溢出场景图" src="../../../assets/img/docs/CS/Compilers/ch11/image-7.png" /></p>
-<p>潜在溢出（Possible/Potential Spill）：我们可能需要选择图中的某个节点并决定将其表示在内存中，而不是寄存器中，这个过程称为溢出</p>
+<p>潜在溢出（Possible/Potential Spill）：我们可能需要选择图中的某个结点并决定将其表示在内存中，而不是寄存器中，这个过程称为溢出</p>
 <p>这时，我们可以采用一种乐观的方式来解决这个问题，即 <strong>Optimistic Coloring</strong> [Chaitin-Briggs Algorithm]</p>
 <ul>
-<li>对溢出影响的乐观近似：溢出的节点不会干扰图中剩余的任何其他节点</li>
+<li>对溢出影响的乐观近似：溢出的结点不会干扰图中剩余的任何其他结点</li>
 <li>因此可以将其删除并压入栈中，并继续简化过程</li>
 </ul>
 <details class="example">
 <summary>Optimistic Coloring 算法</summary>
-<p>例如在上图中，我们可以选择 b 作为溢出的候选节点，压入栈中，继续简化过程</p>
-<p><img alt="选择 b 作为溢出候选节点" src="../../../assets/img/docs/CS/Compilers/ch11/image-8.png" /></p>
+<p>例如在上图中，我们可以选择 b 作为溢出的候选结点，压入栈中，继续简化过程</p>
+<p><img alt="选择 b 作为溢出候选结点" src="../../../assets/img/docs/CS/Compilers/ch11/image-8.png" /></p>
 <p>直到所有压入栈中</p>
 <p><img alt="溢出后全部压入栈" src="../../../assets/img/docs/CS/Compilers/ch11/image-9.png" /></p>
 <p>假设我们很乐观，不考虑失败的情况，继续使用上述算法，最终很幸运可以得到一个着色方案</p>
@@ -1575,7 +1621,7 @@
 <h4 id="actual-spill">Actual Spill<a class="headerlink" href="#actual-spill" title="Permanent link">&para;</a></h4>
 <p>然而，乐观着色的启发式方法可能会失败，例如下图</p>
 <p><img alt="乐观着色的启发式方法失败" src="../../../assets/img/docs/CS/Compilers/ch11/image-11.png" /></p>
-<p>实际溢出（Actual Spill）：因此，在 Select 的基础上，如果 Select 失败，即弹出的潜在溢出节点 n 的邻居被已经涂上了 K 种不同的颜色，此时需要进行实际溢出</p>
+<p>实际溢出（Actual Spill）：因此，在 Select 的基础上，如果 Select 失败，即弹出的潜在溢出结点 n 的邻居被已经涂上了 K 种不同的颜色，此时需要进行实际溢出</p>
 <ul>
 <li>将程序改写，即对于 n 对应的虚拟寄存器，将其存入内存中，在每次使用之前从内存中读取它，并且在每次定义之后将它存入内存<ul>
 <li>以必须溢出变量 f 为例，通常将其储存在当前栈帧中（将此地址称为 fa）</li>
@@ -1609,13 +1655,13 @@
 <p>中间过程省略，最终</p>
 <p><img alt="Actual Spill 加入后算法示例结果" src="../../../assets/img/docs/CS/Compilers/ch11/image-14.png" /></p>
 </details>
-<h3 id="coalesc">Coalesc<a class="headerlink" href="#coalesc" title="Permanent link">&para;</a></h3>
-<p>合并（Coalesce）：如果 MOVE 的源和目标之间的干扰图中没有边，那么移动指令可以被消除，并且源节点和目标节点合并为一个新节点，其边是被替换节点的边的并集</p>
+<h3 id="coalesce">Coalesce<a class="headerlink" href="#coalesce" title="Permanent link">&para;</a></h3>
+<p>合并（Coalesce）：如果 MOVE 的源和目标之间的干扰图中没有边，那么移动指令可以被消除，并且源结点和目标结点合并为一个新结点，其边是被替换结点的边的并集</p>
 <p><img alt="合并示意图" src="../../../assets/img/docs/CS/Compilers/ch11/image-15.png" /></p>
 <p>但随之带来一个问题：合并可能会增加干扰边的数量并使图形无法着色。因此，合并应保守些，加入如下两个启发性条件之一（看个人喜好）</p>
 <ul>
-<li>Briggs：ab 邻居中具有显著度数的节点的数量小于 K<ul>
-<li>保证不会将 K 可着色图变得不可 K 着色，因为简化阶段已从图中删除了所有不显著节点</li>
+<li>Briggs：ab 邻居中具有显著度数的结点的数量小于 K<ul>
+<li>保证不会将 K 可着色图变得不可 K 着色，因为简化阶段已从图中删除了所有不显著结点</li>
 </ul>
 </li>
 <li>George：a 的每个邻居要么是 b 的邻居，要么度数小于 K（即不显著）<ul>
@@ -1623,12 +1669,12 @@
 </ul>
 </li>
 </ul>
-<p>加入合并之后，构建干涉图的过程中 MOVE 相关的节点之间用虚线连接，且简化过程中不会再去简化和 MOVE 有关的节点</p>
+<p>加入合并之后，构建干涉图的过程中 MOVE 相关的结点之间用虚线连接，且简化过程中不会再去简化和 MOVE 有关的结点</p>
 <h3 id="freeze">Freeze<a class="headerlink" href="#freeze" title="Permanent link">&para;</a></h3>
-<p>冻结（Freeze）：如果简化和合并都不适用，我们会寻找低度数的 MOVE 相关节点，冻结该节点所涉及的 MOVE 关系</p>
+<p>冻结（Freeze）：如果简化和合并都不适用，我们会寻找低度数的 MOVE 相关结点，冻结该结点所涉及的 MOVE 关系</p>
 <ul>
 <li>我们放弃了合并这些举措的希望</li>
-<li>这些节点被认为与移动无关</li>
+<li>这些结点被认为与移动无关</li>
 </ul>
 <p>最后恢复简化和合并</p>
 <h3 id="_6">最终算法<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -1639,33 +1685,33 @@
 <ul>
 <li>构建 Build<ul>
 <li>构建干涉图</li>
-<li>将每个节点分类为移动相关（用虚线连接）或非移动相关<ul>
-<li>与移动相关的节点是移动指令的源或目标节点</li>
+<li>将每个结点分类为移动相关（用虚线连接）或非移动相关<ul>
+<li>与移动相关的结点是移动指令的源或目标结点</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>简化 Simplify<ul>
-<li>一次一个，从图中删除与移动无关的低度（&lt; K）节点</li>
+<li>一次一个，从图中删除与移动无关的低度（&lt; K）结点</li>
 </ul>
 </li>
 <li>合并 Coalesce<ul>
 <li>对简化图执行保守合并</li>
-<li>生成的节点不再与移动相关，并将可用于下一轮简化</li>
-<li>重复简化和合并，直到只剩下显着度或移动相关的节点</li>
+<li>生成的结点不再与移动相关，并将可用于下一轮简化</li>
+<li>重复简化和合并，直到只剩下显着度或移动相关的结点</li>
 </ul>
 </li>
 <li>冻结 Freeze<ul>
-<li>如果简化和合并都不适用，我们会寻找低度的移动相关节点，冻结该节点所涉及的动作<ul>
+<li>如果简化和合并都不适用，我们会寻找低度的移动相关结点，冻结该结点所涉及的动作<ul>
 <li>我们放弃了合并这些举措的希望</li>
-<li>这些节点被认为与移动无关</li>
+<li>这些结点被认为与移动无关</li>
 </ul>
 </li>
 <li>恢复简化和合并</li>
 </ul>
 </li>
 <li>溢出 Spill<ul>
-<li>如果没有低度节点，我们选择一个潜在溢出的显着度节点并将其压入栈</li>
+<li>如果没有低度结点，我们选择一个潜在溢出的显着度结点并将其压入栈</li>
 </ul>
 </li>
 <li>选择 Select<ul>
@@ -1682,7 +1728,7 @@
 <p>以如下片段为例，K = 4</p>
 <p><img alt="最终算法的一个例子" src="../../../assets/img/docs/CS/Compilers/ch11/image-18.png" /></p>
 </details>
-<h3 id="_7">预着色节点<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_7">预着色结点<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>一些实际寄存器用于特殊目的，如</p>
 <ul>
 <li>栈指针、帧指针</li>
@@ -1693,28 +1739,28 @@
 <p>对于每个这样的寄存器，需要将特定临时值永久绑定到该寄存器</p>
 <p>预着色（precolored）：此类临时材料是预着色的</p>
 <ul>
-<li>每种颜色只有一个预着色节点</li>
-<li>预着色节点都互相干扰</li>
+<li>每种颜色只有一个预着色结点</li>
+<li>预着色结点都互相干扰</li>
 </ul>
-<p>对于这些预着色节点，有如下特性：</p>
+<p>对于这些预着色结点，有如下特性：</p>
 <ul>
-<li>可以给普通的临时值分配和预着色节点相同的颜色，只要二者不干扰即可<ul>
+<li>可以给普通的临时值分配和预着色结点相同的颜色，只要二者不干扰即可<ul>
 <li>也可以看作标准调用约定寄存器可以在过程中作为临时变量重用</li>
 </ul>
 </li>
-<li>无法简化预着色节点<ul>
+<li>无法简化预着色结点<ul>
 <li>否则影响其正常功能</li>
 </ul>
 </li>
-<li>不可将预着色的节点溢出到内存中<ul>
+<li>不可将预着色的结点溢出到内存中<ul>
 <li>机器寄存器根据定义是寄存器，不能溢出到内存中</li>
 </ul>
 </li>
 </ul>
-<p>着色算法通过调用简化、合并和溢出，直到只剩下预着色的节点</p>
+<p>着色算法通过调用简化、合并和溢出，直到只剩下预着色的结点</p>
 <h4 id="_8">机器寄存器的临时副本<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
-<p>由于预着色节点不会溢出，前端必须小心保持其生命范围较短，可以使用的方式是通过生成 MOVE 指令将值移入和移出预着色节点，例如假设 r7 是 callee-save 寄存器</p>
-<p><img alt="使用 MOVE 指令将值移入和移出预着色节点" src="../../../assets/img/docs/CS/Compilers/ch11/image-19.png" /></p>
+<p>由于预着色结点不会溢出，前端必须小心保持其生命范围较短，可以使用的方式是通过生成 MOVE 指令将值移入和移出预着色结点，例如假设 r7 是 callee-save 寄存器</p>
+<p><img alt="使用 MOVE 指令将值移入和移出预着色结点" src="../../../assets/img/docs/CS/Compilers/ch11/image-19.png" /></p>
 <p>如果该功能中有寄存器压力（对寄存器要求较高），则 t231 溢出；否则 t231 将与 r7 合并并且 MOVE 指令将被消除</p>
 <h4 id="caller-save-callee-save">Caller-Save 和 Callee-Save 寄存器<a class="headerlink" href="#caller-save-callee-save" title="Permanent link">&para;</a></h4>
 <p><img alt="Caller-Save 和 Callee-Save 寄存器" src="../../../assets/img/docs/CS/Compilers/ch11/image-20.png" /></p>
@@ -1768,12 +1814,12 @@
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        return (r1, r3 live out)
 </code></pre></div>
 <p>假定机器有 3 个寄存器，其中 r1 r2 是 caller-save，r3 是 callee-save</p>
-<p>没有机会进行简化或冻结（所有非预着色节点的度数 &gt;= K），我们必须溢出一些节点，选择度数最多但是使用最少的节点</p>
-<p><img alt="选择度数最多但是使用最少的节点" src="../../../assets/img/docs/CS/Compilers/ch11/image-21.png" /></p>
+<p>没有机会进行简化或冻结（所有非预着色结点的度数 &gt;= K），我们必须溢出一些结点，选择度数最多但是使用最少的结点</p>
+<p><img alt="选择度数最多但是使用最少的结点" src="../../../assets/img/docs/CS/Compilers/ch11/image-21.png" /></p>
 <ul>
-<li>溢出节点 c</li>
+<li>溢出结点 c</li>
 <li>不可能进行简化<ul>
-<li>所有非预着色节点都与移动相关</li>
+<li>所有非预着色结点都与移动相关</li>
 </ul>
 </li>
 <li>执行合并</li>
@@ -1789,13 +1835,13 @@
 </ul>
 <p><img alt="步骤 4" src="../../../assets/img/docs/CS/Compilers/ch11/image-23.png" /></p>
 <ul>
-<li>简化 d，只留下预着色节点</li>
+<li>简化 d，只留下预着色结点</li>
 </ul>
 <p><img alt="步骤 5" src="../../../assets/img/docs/CS/Compilers/ch11/image-24.png" /></p>
 <ul>
-<li>进行选择，从栈中弹出节点并为其指定颜色<ul>
+<li>进行选择，从栈中弹出结点并为其指定颜色<ul>
 <li>选择 d，指定颜色 r3</li>
-<li>节点 a、b、e 已通过合并指定颜色</li>
+<li>结点 a、b、e 已通过合并指定颜色</li>
 <li>弹出 c：c 变成实际溢出</li>
 </ul>
 </li>
@@ -1828,7 +1874,7 @@
 <ul>
 <li>选择<ul>
 <li>从栈中弹出并为 d 选择颜色 r3</li>
-<li>所有其他节点均已合并或预着色</li>
+<li>所有其他结点均已合并或预着色</li>
 </ul>
 </li>
 </ul>
@@ -1855,7 +1901,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 13:13:17</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 17:44:10</span>
     
         <br />
         创建日期:

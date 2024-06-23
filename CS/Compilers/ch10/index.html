@@ -508,6 +508,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -1199,6 +1203,48 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    面向对象语言
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    循环优化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1606,18 +1652,18 @@
 <h3 id="_2">控制流图<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>控制流图（Control Flow Graph, CFG）是一个有向图，在此处和 <a href="../ch8/#basic-blocks">基本块和 Traces</a> 处不同</p>
 <ul>
-<li>每个节点代表<strong>一条语句</strong>，且每个节点有<ul>
-<li>out-edges: 通向后继节点的边</li>
-<li>in-edges: 来自前驱节点的边</li>
-<li>pred[n]: 节点 n 的前驱</li>
-<li>succ[n]: 节点 n 的后继</li>
+<li>每个结点代表<strong>一条语句</strong>，且每个结点有<ul>
+<li>out-edges: 通向后继结点的边</li>
+<li>in-edges: 来自前驱结点的边</li>
+<li>pred[n]: 结点 n 的前驱</li>
+<li>succ[n]: 结点 n 的后继</li>
 </ul>
 </li>
 <li>边代表控制流</li>
 </ul>
 <details class="exmaple">
-<summary>Control Flow Graph 节点属性</summary>
-<p><img alt="Control Flow Graph 节点属性" src="../../../assets/img/docs/CS/Compilers/ch10/image-6.png" /></p>
+<summary>Control Flow Graph 结点属性</summary>
+<p><img alt="Control Flow Graph 结点属性" src="../../../assets/img/docs/CS/Compilers/ch10/image-6.png" /></p>
 <ul>
 <li>out-edges of node 5: 5-&gt;6, 5-&gt;2</li>
 <li>succ[5] = {2, 6}</li>
@@ -1654,13 +1700,13 @@
 <p><img alt="Dataflow Analysis in Compiling" src="../../../assets/img/docs/CS/Compilers/ch10/image-3.png" /></p>
 <p>为了计算 Dataflow facts (e.g. liveness)</p>
 <ul>
-<li>在每个 CFG 节点处建立局部方程（local equations）<ul>
-<li>对于 CFG 节点 n，我们写<ul>
-<li>in[n]：在节点的所有入边上都为真的事实</li>
+<li>在每个 CFG 结点处建立局部方程（local equations）<ul>
+<li>对于 CFG 结点 n，我们写<ul>
+<li>in[n]：在结点的所有入边上都为真的事实</li>
 <li>out[n]：所有出边上的事实均为真</li>
 </ul>
 </li>
-<li>定义将信息从一个节点传输到另一个节点的传输函数（transfer functions）</li>
+<li>定义将信息从一个结点传输到另一个结点的传输函数（transfer functions）</li>
 </ul>
 </li>
 <li>求解方程以计算所需信息<ul>
@@ -1683,13 +1729,13 @@
 <p>其中</p>
 <ul>
 <li>定义（def）指对变量或临时变量的赋值<ul>
-<li>一个变量的 def 指定义它的图节点集合</li>
-<li>一个图节点的 def 指它定义的变量集合</li>
+<li>一个变量的 def 指定义它的图结点集合</li>
+<li>一个图结点的 def 指它定义的变量集合</li>
 </ul>
 </li>
 <li>使用（use）指赋值右侧（或其他表达式中）出现了该变量<ul>
-<li>一个变量的 use 指使用它的图节点集合</li>
-<li>一个图节点的 use 指它使用的变量集合</li>
+<li>一个变量的 use 指使用它的图结点集合</li>
+<li>一个图结点的 use 指它使用的变量集合</li>
 </ul>
 </li>
 </ul>
@@ -1733,17 +1779,17 @@
 <li>该变量在使用前不会被重新定义</li>
 </ul>
 </li>
-<li>Live-in: 如果变量在该节点的任何入边上 live，则该变量在该节点上 live-in</li>
-<li>Live-out: 如果变量在该节点的任何出边上 live，则该变量在该节点上 live-out</li>
-<li>in[n]: 在节点 n 的 live-in 的集合</li>
-<li>out[n]: 在节点 n 的 live-out 的集合</li>
+<li>Live-in: 如果变量在该结点的任何入边上 live，则该变量在该结点上 live-in</li>
+<li>Live-out: 如果变量在该结点的任何出边上 live，则该变量在该结点上 live-out</li>
+<li>in[n]: 在结点 n 的 live-in 的集合</li>
+<li>out[n]: 在结点 n 的 live-out 的集合</li>
 </ul>
 <p>此外，在这些定义的基础上定义活跃（liveness）分析的数据流方程</p>
 <ul>
 <li>
 <p>规则 1：如果 <span class="arithmatex">\(a \in in[n]\)</span>，则对于 <span class="arithmatex">\(\forall m \in pred[n]\)</span>，<span class="arithmatex">\(a \in out[m]\)</span></p>
 <ul>
-<li>如果一个变量是节点 n 的 live-in，则它在 n 的所有前驱节点上都是 live-out</li>
+<li>如果一个变量是结点 n 的 live-in，则它在 n 的所有前驱结点上都是 live-out</li>
 </ul>
 <p><img alt="liveness 的数据流方程规则 1" src="../../../assets/img/docs/CS/Compilers/ch10/image-7.png" /></p>
 </li>
@@ -1805,9 +1851,9 @@ out[n] &amp;= \bigcup_{s \in succ[n]} in[s]
 <p>继续迭代，直到收敛</p>
 <p><img alt="求解数据流方程迭代至收敛" src="../../../assets/img/docs/CS/Compilers/ch10/image-12.png" /></p>
 </details>
-<p>在上述的例子中，我们可以感觉到迭代速度较慢，这是因为信息从一个节点传播到另一个节点的唯一方式是使用 <span class="arithmatex">\(out[n] = \bigcup_{s \in succ[n]} in[s]\)</span>，在这种<strong>向后传播</strong>的特性下，如果使用顺控制流的方向，迭代速度会较慢，因此可以</p>
+<p>在上述的例子中，我们可以感觉到迭代速度较慢，这是因为信息从一个结点传播到另一个结点的唯一方式是使用 <span class="arithmatex">\(out[n] = \bigcup_{s \in succ[n]} in[s]\)</span>，在这种<strong>向后传播</strong>的特性下，如果使用顺控制流的方向，迭代速度会较慢，因此可以</p>
 <ul>
-<li>跟踪哪个节点的后继者发生了变化</li>
+<li>跟踪哪个结点的后继者发生了变化</li>
 <li>以与控制流相反的顺序进行计算，并先算 out 再算 in</li>
 </ul>
 <details class="example">
@@ -1831,10 +1877,10 @@ out[n] &amp;= \bigcup_{s \in succ[n]} in[s]
 <li>...</li>
 </ul>
 <h4 id="use-different-cfgs">Use different CFGs<a class="headerlink" href="#use-different-cfgs" title="Permanent link">&para;</a></h4>
-<p>基本块：只有一个前驱和一个后继的流图节点不是很有趣</p>
+<p>基本块：只有一个前驱和一个后继的流图结点不是很有趣</p>
 <ul>
 <li>可以将它们与它们的前任和后继合并</li>
-<li>获得具有较少节点的图，其中每个节点代表一个基本块</li>
+<li>获得具有较少结点的图，其中每个结点代表一个基本块</li>
 </ul>
 <p><img alt="Use different CFGs" src="../../../assets/img/docs/CS/Compilers/ch10/image-14.png" /></p>
 <h4 id="variants-of-the-calculation">Variants of the Calculation<a class="headerlink" href="#variants-of-the-calculation" title="Permanent link">&para;</a></h4>
@@ -1869,10 +1915,10 @@ out[n] &amp;= \bigcup_{s \in succ[n]} in[s]
 </div>
 <p>该定理并不意味着我们永远无法判断是否达到给定标号，只是没有一种<strong>通用</strong>算法可以<strong>始终</strong>（准确地）判断，所以我们必须采用保守的近似方法</p>
 <h4 id="time-complexity">Time Complexity<a class="headerlink" href="#time-complexity" title="Permanent link">&para;</a></h4>
-<p>大小为 <span class="arithmatex">\(N\)</span> 的程序：最多 <span class="arithmatex">\(N\)</span> 个节点和最多 <span class="arithmatex">\(N\)</span> 个变量</p>
+<p>大小为 <span class="arithmatex">\(N\)</span> 的程序：最多 <span class="arithmatex">\(N\)</span> 个结点和最多 <span class="arithmatex">\(N\)</span> 个变量</p>
 <ul>
 <li>每个集合并集操作都需要 <span class="arithmatex">\(O(N)\)</span> 时间</li>
-<li>For 循环：计算每个节点具有恒定数量的集合操作，即有 <span class="arithmatex">\(O(N)\)</span> 个节点 =&gt; <span class="arithmatex">\(O(N^2)\)</span> 时间</li>
+<li>For 循环：计算每个结点具有恒定数量的集合操作，即有 <span class="arithmatex">\(O(N)\)</span> 个结点 =&gt; <span class="arithmatex">\(O(N^2)\)</span> 时间</li>
 <li>Repeat 循环：所有输入和输出集的大小之和为 <span class="arithmatex">\(2N^2\)</span>，这是重复循环可以迭代的最大数量<ul>
 <li>因为输入和输出集是单调的，为了不停止每次必须增长一个且不能无限增长</li>
 </ul>
@@ -1885,7 +1931,7 @@ out[n] &amp;= \bigcup_{s \in succ[n]} in[s]
 <p>该片段中还有另一个程序变量 d 未使用，但是不影响 Y 也是一个解</p>
 <p>数据流方程的任何解都是守恒近似的</p>
 <ul>
-<li>如果在某些执行中节点 n 之后需要 a，我们可以确保在方程的任何解中都有 <span class="arithmatex">\(a \in out[n]\)</span></li>
+<li>如果在某些执行中结点 n 之后需要 a，我们可以确保在方程的任何解中都有 <span class="arithmatex">\(a \in out[n]\)</span></li>
 <li>但反之则不然，<span class="arithmatex">\(a \in out[n]\)</span> 并不意味着它的值会真正被使用</li>
 </ul>
 <div class="admonition theorem">
@@ -1896,11 +1942,11 @@ out[n] &amp;= \bigcup_{s \in succ[n]} in[s]
 <h3 id="_9">静态与动态活跃度<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Static liveness (over-approximation，保守，一定包含所有活跃变量)<ul>
-<li>如果存在从 n 到 a 的 use 的某个节点，且不经过 a 的 def 的某条控制流边路径，则变量 a 在节点 n 处 staticall live</li>
+<li>如果存在从 n 到 a 的 use 的某个结点，且不经过 a 的 def 的某条控制流边路径，则变量 a 在结点 n 处 staticall live</li>
 </ul>
 </li>
 <li>Dynamic liveness (under-approximation，不一定包含所有活跃变量)<ul>
-<li>如果程序的某些执行从 n 转到 a 的 use 而不经过 a 的任何 def，则变量 a 在节点 n 处 dynamic live</li>
+<li>如果程序的某些执行从 n 转到 a 的 use 而不经过 a 的任何 def，则变量 a 在结点 n 处 dynamic live</li>
 </ul>
 </li>
 </ul>
@@ -1918,7 +1964,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月22日 18:50:34</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 17:44:10</span>
     
         <br />
         创建日期:

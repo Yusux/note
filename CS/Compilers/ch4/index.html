@@ -505,6 +505,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -1097,6 +1101,48 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    面向对象语言
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    循环优化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1412,7 +1458,7 @@
 <p>因此，可以选择将语法（解析）问题与语义（类型检查和机器代码翻译）问题分开。为了实现这个目的，需要让解析器生成后续阶段可以遍历的解析树（Parse Tree）：</p>
 <ul>
 <li>具体解析树（Concrete Parse Tree）：代表源语言的具体语法<ul>
-<li>对于输入的每个标记恰好有一个叶子，对于在解析过程中减少的每个语法规则有一个内部节点</li>
+<li>对于输入的每个标记恰好有一个叶子，对于在解析过程中减少的每个语法规则有一个内部结点</li>
 <li>但是并不方便直接使用：<ul>
 <li>产生很多后续阶段多余且无用的令牌，比如 memory usage</li>
 <li>过于依赖具体的语法规则，当语法规则变化时，解析树也需要变化</li>
@@ -1495,7 +1541,7 @@
 </div>
 <h3 id="_12">位置信息<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>在一次性编译器中，词法分析、语法分析和语义分析都是同时完成的，如果存在必须向用户报告的类型错误，则词法分析器的当前位置是错误源位置的合理近似值。因此，在单遍编译器中，词法分析器保留一个“当前位置”全局变量。</p>
-<p>而对于使用抽象语法树数据结构的编译器，它不需要一次性完成所有解析和语义分析，词法分析器甚至在语义分析开始之前就到达了文件末尾，所以必须记住抽象语法树的每个节点的源文件位置：</p>
+<p>而对于使用抽象语法树数据结构的编译器，它不需要一次性完成所有解析和语义分析，词法分析器甚至在语义分析开始之前就到达了文件末尾，所以必须记住抽象语法树的每个结点的源文件位置：</p>
 <ul>
 <li>抽象语法数据结构必须有 pos 字段，这些字段指示派生这些抽象语法结构的字符在原始源文件中的位置</li>
 <li>词法分析器必须将每个标记的开头和结尾的位置传递给解析器</li>
@@ -1522,7 +1568,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 13:13:17</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 17:44:10</span>
     
         <br />
         创建日期:
