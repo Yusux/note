@@ -130,3 +130,4 @@ nav:
       - 指令选择: CS/Compilers/ch9.md
       - 活跃变量分析: CS/Compilers/ch10.md
       - 寄存器分配: CS/Compilers/ch11.md
+      - 垃圾回收: CS/Compilers/ch13.md

@@ -47,7 +47,7 @@ totalwd: true
 ??? example "一些语义分析报错的示例"
     ```bash
     ex.c:4:5: warning: assignment makes integer from pointer without a cast
-    ex.c:3:11: error: ‘i’ undeclared (first use in this function)
+    ex.c:3:11: error: 'i' undeclared (first use in this function)
     ```
 
 ## 符号表
@@ -228,7 +228,7 @@ void insert(string key, void *binding) {
 
 在上述插入场景下，考虑到达 `a` 的 scope 末尾：
 
-- 从 `table[0]` 的头部使用 `pop(a)` 删除 `<a, τ2>`（插入和弹出以类似堆栈的方式工作）
+- 从 `table[0]` 的头部使用 `pop(a)` 删除 `<a, τ2>`（插入和弹出以类似栈的方式工作）
 - 也就是变成 `hash(a) -> <a, τ1> -> ...`
 
 ```c

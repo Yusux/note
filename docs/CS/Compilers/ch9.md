@@ -86,7 +86,7 @@ Tree pattern：每个机器指令都可以指定为一个 IR 树片段，这一�
 ![Tree Patterns of Jouette](../../assets/img/docs/CS/Compilers/ch9/image-5.png)
 
 ??? example "Generate Instructions from Tilings"
-    对于 `a[i] := x`，假设 `i` 在寄存器中，`a` 和 `x` 在堆栈帧中
+    对于 `a[i] := x`，假设 `i` 在寄存器中，`a` 和 `x` 在栈帧中
 
     ![Generate Instructions from Tilings](../../assets/img/docs/CS/Compilers/ch9/image-6.png)
 

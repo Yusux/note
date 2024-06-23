@@ -500,7 +500,7 @@ done:
 其中
 
 - `l_f` 是 `f` 的标签
-- `sl` 是 static link，是指向 `f` 父级的指针（a pointer to `f`’s parent level）
+- `sl` 是 static link，是指向 `f` 父级的指针（a pointer to `f`'s parent level）
 
 !!! note "*还不清楚的点*"
     Both the level of `f` and the level of the function calling `f` are required to calculate `sl`
@@ -541,4 +541,4 @@ done:
     - 10 返回指令（JUMP到返回地址）
     - 11 根据需要使用伪指令来宣布函数结束
 
-其中步骤 1、3、9、11 取决于堆栈帧的确切大小，且这些是较晚生成的（在寄存器分配之后）
+其中步骤 1、3、9、11 取决于栈帧的确切大小，且这些是较晚生成的（在寄存器分配之后）
