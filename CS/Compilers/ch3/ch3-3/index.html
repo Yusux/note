@@ -1551,7 +1551,7 @@
 
 <h1 id="_1">自底向上分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3948 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 11 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 13 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3940 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 11 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 13 分钟</p>
 </div>
 <p>在自顶向下分析中，我们了解了 LL(1) 文法的概念，我们可以看到 LL(1) 文法的特点有</p>
 <ul>
@@ -1699,7 +1699,7 @@ E \rightarrow E + (E) | \textbf{int}
 \begin{aligned}
 S' &amp;\rightarrow S \$ \\
 S &amp;\rightarrow ( S ) \\
-S &amp;\rightarrow \epsilon
+S &amp;\rightarrow a
 \end{aligned}
 \]</div>
 <p>为例，LR(0) Parsing NFA 如下：</p>
@@ -1806,7 +1806,7 @@ S &amp;\rightarrow \epsilon
 <ul>
 <li>Action 表项的参数：状态 <span class="arithmatex">\(i\)</span>，终结符号 <span class="arithmatex">\(t\)</span><ul>
 <li>移入 (Shift)：若从状态 <span class="arithmatex">\(i\)</span> 到状态 <span class="arithmatex">\(j\)</span> 有一条边标记为 <span class="arithmatex">\(t\)</span>，则在 Action 表中 <span class="arithmatex">\([i, t] = sj\)</span> (shift j)；涉及栈分析时，向前移动一个 Token，把新状态 <span class="arithmatex">\(j\)</span> 压入栈</li>
-<li>规约 (Reduce)：在状态 <span class="arithmatex">\(i\)</span> 中有一个项 <span class="arithmatex">\(A \rightarrow \beta \cdot\)</span>，则在且 <span class="arithmatex">\(A \rightarrow \beta涉及栈分析时，\)</span> 是第 <span class="arithmatex">\(k\)</span> 条产生式，则在 Action 表中 <span class="arithmatex">\([i, \text{each terminal symbol}] = rk\)</span> (reduce k)；涉及栈分析时，弹出 <span class="arithmatex">\(|\beta|\)</span> 个状态，然后根据 GOTO 表将其中 <span class="arithmatex">\(\text{GOTO}[\text{top(stack)}, A]\)</span> 压入栈</li>
+<li>规约 (Reduce)：在状态 <span class="arithmatex">\(i\)</span> 中有一个项 <span class="arithmatex">\(A \rightarrow \beta \cdot\)</span>，且 <span class="arithmatex">\(A \rightarrow \beta\)</span> 是第 <span class="arithmatex">\(k\)</span> 条产生式，则在 Action 表中 <span class="arithmatex">\([i, \text{each terminal symbol}] = rk\)</span> (reduce k)；涉及栈分析时，弹出 <span class="arithmatex">\(|\beta|\)</span> 个状态，然后根据 GOTO 表将其中 <span class="arithmatex">\(\text{GOTO}[\text{top(stack)}, A]\)</span> 压入栈</li>
 <li>接受 (Accept)：对于每个包含 <span class="arithmatex">\(S' \rightarrow S \cdot \$\)</span> 的状态 <span class="arithmatex">\(i\)</span>，在 Action 表中 <span class="arithmatex">\([i, \$] = \text{accept}\)</span>；涉及栈分析时，结束分析，接受输入返回成功</li>
 <li>报错：在输入中发现语法错误，停止分析并报错</li>
 </ul>
@@ -1920,7 +1920,7 @@ R &amp;\rightarrow L
 <ul>
 <li>对于 Closure，处理 <span class="arithmatex">\(\epsilon\)</span>-transations（添加 <span class="arithmatex">\(X \rightarrow \cdot \gamma\)</span>）时，需要记录 <span class="arithmatex">\(w \in \text{First}(\beta z)\)</span>，把 <span class="arithmatex">\(A \rightarrow \alpha \cdot X \beta, z\)</span> 的信息“传递”到 <span class="arithmatex">\(X \rightarrow \cdot \gamma, w\)</span> 中</li>
 <li>起始状态是 LR(1) 项 <span class="arithmatex">\(S′ \rightarrow • S \$, ?\)</span> 的闭包，其中 <span class="arithmatex">\(?\)</span> 是什么无关紧要，因为 <span class="arithmatex">\(\$\)</span> 不会被移进</li>
-<li>在 Reduce 中，action <span class="arithmatex">\(\(I, z, A \rightarrow \alpha\)\)</span> 表示在状态 <span class="arithmatex">\(I\)</span> 中，遇到了一个向前看符号 (lookahead symbol) <span class="arithmatex">\(z\)</span>，可以按 <span class="arithmatex">\(A \rightarrow \alpha\)</span> 规则规约<ul>
+<li>在 Reduce 中，action <span class="arithmatex">\((I, z, A \rightarrow \alpha)\)</span> 表示在状态 <span class="arithmatex">\(I\)</span> 中，遇到了一个向前看符号 (lookahead symbol) <span class="arithmatex">\(z\)</span>，可以按 <span class="arithmatex">\(A \rightarrow \alpha\)</span> 规则规约<ul>
 <li>这样的话，LR(1) 的向前看符号要比 SLR(1) 更加精确（因为一些在 <span class="arithmatex">\(\text{Follow}(A)\)</span> 中的符号可能不会触发规约）</li>
 <li>如果要根据 <span class="arithmatex">\(A \rightarrow \alpha \cdot, z\)</span> 规约，下一个输入符号必须是 <span class="arithmatex">\(z\)</span></li>
 </ul>
@@ -2141,7 +2141,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年4月23日 16:17:02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月24日 13:12:23</span>
     
         <br />
         创建日期:

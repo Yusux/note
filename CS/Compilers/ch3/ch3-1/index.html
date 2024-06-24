@@ -1440,7 +1440,7 @@
 
 <h1 id="cfg">CFG 及语法分析概述<a class="headerlink" href="#cfg" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3121 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 3 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 10 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3122 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> 3 行代码 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 10 分钟</p>
 </div>
 <h2 id="_1">上下文无关文法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="cfg_1">CFG 简介<a class="headerlink" href="#cfg_1" title="Permanent link">&para;</a></h3>
@@ -1651,7 +1651,7 @@ $$
 </details>
 <h2 id="_7">语法分析概述<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="cfg-parse-tree">CFG 的 Parse Tree<a class="headerlink" href="#cfg-parse-tree" title="Permanent link">&para;</a></h3>
-<p>分析树 (ParseTree) 是推导的图形化表示，具有下面性质：</p>
+<p>分析树 (Parse Tree) 是推导的图形化表示，具有下面性质：</p>
 <ul>
 <li><strong>根结点</strong>为文法的<strong>初始符号</strong></li>
 <li>每个<strong>叶子结点</strong>是一个<strong>终结符</strong></li>
@@ -1702,11 +1702,13 @@ $$
 <li>二义性：可以为一个句子生成多颗不同的分析树</li>
 </ul>
 </li>
-<li>消除左递归 (Elimination of left recursions) - 通常限于自顶向下分析<ul>
+<li>消除左递归 (Elimination of left recursions)<ul>
+<li>通常限于自顶向下分析</li>
 <li>避免自顶向下分析的无限循环</li>
 </ul>
 </li>
-<li>提左公因子 (Left-factoring) - 通常限于自顶向下分析<ul>
+<li>提左公因子 (Left-factoring)<ul>
+<li>通常限于自顶向下分析</li>
 <li>避免自顶向下分析的回溯</li>
 </ul>
 </li>
@@ -1747,9 +1749,9 @@ E &amp;\Rightarrow E * E &amp; E &amp;\Rightarrow E + E \\
 <p>以下原始文法为例：</p>
 <div class="arithmatex">\[
 \begin{aligned}
-E &amp;\rightarrow E + E
-&amp; | E * E
-&amp; | (E) | \textbf{id}
+E &amp;\rightarrow &amp;E + E \\
+&amp; | &amp;E * E \\
+&amp; | &amp;(E) | \textbf{id}
 \end{aligned}
 \]</div>
 <p>通过引入优先级和结合性，可以消除二义性：</p>
@@ -1821,7 +1823,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月23日 17:44:10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月24日 13:12:23</span>
     
         <br />
         创建日期:
