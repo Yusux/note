@@ -261,7 +261,7 @@ Maximal Munch：找到 optimal tiling
 - $K$：平均匹配 tiles 包含 K 个非叶结点
 - $K'$：为了查看哪些 tile 在给定子树上匹配，需要检查的最大结点数
 - $T'$：每个树结点上匹配的不同 patterns（tiles）的平均数量
-- $N$：数量输入树中的结点数
+- $N$：输入树中的结点数
 
 Maximal munch: proportional to $\frac{(K' + T')N}{K}$
 
@@ -324,7 +324,7 @@ CISC 很难通过 tree pattern-based tilings 进行建模
     - 使用 tree patterns 很难建模，因为它会产生两个结果
     - 共有三种解决方案：
         - 忽略自动增量指令，不使用它
-        - 尝试在 tree pattern-matching code generator 的上下文中以临时方式匹配特殊习惯用法
+        - 尝试在 tree pattern-matching code generator 的上下文中以特殊方式匹配特殊习惯用法
         - 使用完全不同的指令算法，一种基于 DAG patterns 而不是 tree pattern 的算法
 
 ### 指令选择算法

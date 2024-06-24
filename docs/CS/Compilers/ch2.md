@@ -701,7 +701,7 @@ Thompson 算法：基于 RE 的结构做归纳
     \Repeat
         \State $\Pi' \gets \Pi$
         \ForAll{$A \in \Pi$}
-            \State Divide $A$ into smaller sets $A_1, A_2, \ldots, A_k$ such that $s, t \in A$ are in the same set iff for all input $a$, $move(s, a)$ and $move(t, a)$ are in the same set $B$ in $\Pi$
+            \State Try to divide $A$ into smaller sets $A_1, A_2, \ldots, A_k$ such that $s, t \in A_i$ are in the same set iff for all input $a$, $move(s, a)$ and $move(t, a)$ are in the same set $B$ in $\Pi$
             \If{$A$ is divided}
                 \State $\Pi' \gets \Pi' \cup \{A_1, A_2, \ldots, A_k\} - \{A\}$
             \EndIf
