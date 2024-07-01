@@ -133,3 +133,8 @@ nav:
       - 垃圾回收: CS/Compilers/ch13.md
       - 面向对象语言: CS/Compilers/ch14.md
       - 循环优化: CS/Compilers/ch18.md
+  - Paper Reading:
+    - PR/index.md
+    - Robotics:
+      - PR/Robotics/index.md
+      - RoboCasa: PR/Robotics/RoboCasa.md

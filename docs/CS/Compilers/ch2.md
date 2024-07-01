@@ -18,11 +18,11 @@ totalwd: true
 基于此，有两个基本概念：
 
 - Token
-  - 类似于英语中的 noun, verb, adjective, ...
-  - 在编程语言中 keyword, identifier, operator, ...
+    - 类似于英语中的 noun, verb, adjective, ...
+    - 在编程语言中 keyword, identifier, operator, ...
 - Lexeme
-  - 是 Token 集合中的一个元素，类似于 `if` `else`
-  - 可以称为 Token 的一个实例
+    - 是 Token 集合中的一个元素，类似于 `if` `else`
+    - 可以称为 Token 的一个实例
 
 ??? example "示例：Token 与 Lexeme"
     对于如下的程序：
