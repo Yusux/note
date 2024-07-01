@@ -121,6 +121,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://note.yusux.xyz/PR/Robotics/Open-X-Embodiment/</loc>
+         <lastmod>2024-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://note.yusux.xyz/PR/Robotics/RoboCasa/</loc>
          <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>

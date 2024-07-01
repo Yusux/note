@@ -10,13 +10,11 @@
       
       
       
-        <link rel="canonical" href="https://note.yusux.xyz/PR/Robotics/RoboCasa/">
+        <link rel="canonical" href="https://note.yusux.xyz/PR/Robotics/Open-X-Embodiment/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../RoboCasa/">
       
-      
-        <link rel="next" href="../Open-X-Embodiment/">
       
       
       <link rel="icon" href="../../../assets/img/favicon-32x32.png">
@@ -24,7 +22,7 @@
     
     
       
-        <title>RoboCasa - Yusux 的笔记本</title>
+        <title>Open X-Embodiment - Yusux 的笔记本</title>
       
     
     
@@ -88,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#robocasa" class="md-skip">
+        <a href="#open-x-embodiment" class="md-skip">
           跳转至
         </a>
       
@@ -122,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              RoboCasa
+              Open X-Embodiment
             
           </span>
         </div>
@@ -1130,6 +1128,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../RoboCasa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RoboCasa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1146,7 +1165,7 @@
           
   
   <span class="md-ellipsis">
-    RoboCasa
+    Open X-Embodiment
   </span>
   
 
@@ -1157,7 +1176,7 @@
         
   
   <span class="md-ellipsis">
-    RoboCasa
+    Open X-Embodiment
   </span>
   
 
@@ -1198,18 +1217,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#embodiment" class="md-nav__link">
     <span class="md-ellipsis">
-      流行仿真框架
+      跨 embodiment 迁移
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#robotics" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      Robotics 数据集
+      大规模机器人学习数据集
     </span>
   </a>
   
@@ -1218,7 +1237,7 @@
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      从大型离线数据集中学习
+      语言条件下的机器人学习
     </span>
   </a>
   
@@ -1230,19 +1249,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#robocasa_1" class="md-nav__link">
+  <a href="#open-x-embodiment_1" class="md-nav__link">
     <span class="md-ellipsis">
-      RoboCasa 模拟
+      Open X-Embodiment 仓库
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="RoboCasa 模拟">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rt-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      RT-X 设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RT-X 设计">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      核心模拟平台
+      数据格式整合
     </span>
   </a>
   
@@ -1251,7 +1279,7 @@
           <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      厨房场景
+      策略架构
     </span>
   </a>
   
@@ -1260,7 +1288,7 @@
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      资产库
+      训练和推理细节
     </span>
   </a>
   
@@ -1272,73 +1300,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#robocasa_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      RoboCasa 活动数据集
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="RoboCasa 活动数据集">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      原子任务
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      使用大型语言模型创建复合任务
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#robocasa_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      RoboCasa 数据集
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="RoboCasa 数据集">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      通过人类远程操作收集一组基本演示
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#automated-trajectory-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      利用 automated trajectory generation 来综合演示
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       实验
     </span>
@@ -1348,27 +1310,75 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#embodiment-in-distribution" class="md-nav__link">
     <span class="md-ellipsis">
-      原子任务的模仿学习
+      不同 embodiment 的 in-distribution 性能
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="不同 embodiment 的 in-distribution 性能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      小规模数据集域
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      大规模数据集域
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#out-of-distribution-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      提高 out-of-distribution settings 的泛化能力
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="提高 out-of-distribution settings 的泛化能力">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      未学习的物体、背景和环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      新型技能评估
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
-      复合任务的模仿学习
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      转移到现实世界环境
+      模型设计决策的影响
     </span>
   </a>
   
@@ -1380,7 +1390,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       未解决的问题和未来工作
     </span>
@@ -1390,7 +1400,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       作者提出
     </span>
@@ -1399,7 +1409,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       个人感受
     </span>
@@ -1416,27 +1426,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Open-X-Embodiment/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Open X-Embodiment
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1503,18 +1492,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#embodiment" class="md-nav__link">
     <span class="md-ellipsis">
-      流行仿真框架
+      跨 embodiment 迁移
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#robotics" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      Robotics 数据集
+      大规模机器人学习数据集
     </span>
   </a>
   
@@ -1523,7 +1512,7 @@
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      从大型离线数据集中学习
+      语言条件下的机器人学习
     </span>
   </a>
   
@@ -1535,19 +1524,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#robocasa_1" class="md-nav__link">
+  <a href="#open-x-embodiment_1" class="md-nav__link">
     <span class="md-ellipsis">
-      RoboCasa 模拟
+      Open X-Embodiment 仓库
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="RoboCasa 模拟">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rt-x" class="md-nav__link">
+    <span class="md-ellipsis">
+      RT-X 设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RT-X 设计">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      核心模拟平台
+      数据格式整合
     </span>
   </a>
   
@@ -1556,7 +1554,7 @@
           <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
-      厨房场景
+      策略架构
     </span>
   </a>
   
@@ -1565,7 +1563,7 @@
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      资产库
+      训练和推理细节
     </span>
   </a>
   
@@ -1577,73 +1575,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#robocasa_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      RoboCasa 活动数据集
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="RoboCasa 活动数据集">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      原子任务
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      使用大型语言模型创建复合任务
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#robocasa_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      RoboCasa 数据集
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="RoboCasa 数据集">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      通过人类远程操作收集一组基本演示
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#automated-trajectory-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      利用 automated trajectory generation 来综合演示
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       实验
     </span>
@@ -1653,27 +1585,75 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#embodiment-in-distribution" class="md-nav__link">
     <span class="md-ellipsis">
-      原子任务的模仿学习
+      不同 embodiment 的 in-distribution 性能
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="不同 embodiment 的 in-distribution 性能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      小规模数据集域
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      大规模数据集域
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#out-of-distribution-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      提高 out-of-distribution settings 的泛化能力
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="提高 out-of-distribution settings 的泛化能力">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      未学习的物体、背景和环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      新型技能评估
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
-      复合任务的模仿学习
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      转移到现实世界环境
+      模型设计决策的影响
     </span>
   </a>
   
@@ -1685,7 +1665,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       未解决的问题和未来工作
     </span>
@@ -1695,7 +1675,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       作者提出
     </span>
@@ -1704,7 +1684,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       个人感受
     </span>
@@ -1735,475 +1715,354 @@
   
 
 
-<h1 id="robocasa">RoboCasa<a class="headerlink" href="#robocasa" title="Permanent link">&para;</a></h1>
+<h1 id="open-x-embodiment">Open X-Embodiment<a class="headerlink" href="#open-x-embodiment" title="Permanent link">&para;</a></h1>
 <div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3752 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 13 分钟</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8V2m6.78 1a.69.69 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38-2.5-2.5Z"/></svg></span> 约 3944 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3L12.5 13Z"/></svg></span> 预计阅读时间 13 分钟</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">文章简介</p>
-<p>RoboCasa: Large-Scale Simulation of Everyday Tasks for Generalist Robots</p>
-<p>AI 的最新进展很大程度上是由规模化推动的，但是在 Robotics 中，由于不存在现实生活中大量的标注数据，难以进行规模化。因此本文提出以厨房环境为中心的逼真且多样化的场景以生成的机器人数据进行大规模模仿学习。</p>
+<p>Open X-Embodiment: Robotic Learning Datasets and RT-X Models</p>
+<p>本文以 NLP/CV 等领域的大规模数据和预训练模型为 motivation，想要在 Robotics 领域实现类似的效果，即结合多 embodiment 的数据进行训练，以提高机器人的泛化能力</p>
 </div>
 <h2 id="_1">简介<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Robotics 的一个关键问题是如何获取体现现实世界的巨大多样性和复杂性的机器人训练数据，如</p>
+<p>在 ML/AI 领域中，通常在大型且多样化的数据集上训练的大规模通用模型通常可以胜过在较小但更特定于任务的数据上训练的目标狭窄的模型。但是这些经验很难应用到机器人领域</p>
 <ul>
-<li>RT-1: Robotics transformer for real-world control at scale</li>
-<li>Bridge data: Boosting generalization of robotic skills with cross-domain datasets</li>
-<li>Open X-Embodiment: Robotic learning datasets and RT-X models</li>
-<li>Droid: A large-scale in-the-wild robot manipulation dataset</li>
+<li>任何单一的机器人领域都可能过于狭窄</li>
+<li>很难获得用于机器人交互的相对大型和广泛的数据集<ul>
+<li>即使是最大的数据收集工作，最终得到的数据集的大小和多样性仍然只是 vison (5-18M) 和 NLP (1.5B-4.5B) 中基准数据集的一小部分</li>
+<li>也许更重要的是，此类数据集通常在某些变化轴上仍然很窄，要么专注于单一环境、一组对象，要么专注于狭窄的任务范围</li>
 </ul>
-<p>虽然这些数据集可以在狭窄领域提高机器人的泛化能力，但是就通用而言，机器人学习规​​模化的可行路径是什么？这是本文研究的动机</p>
-<p>而从方案而言，由于在现实世界中收集越来越大的数据集需要不切实际的大量资本和劳动力，因此可以使用模拟作为生成大量用于模型训练的合成数据的替代方案</p>
+</li>
+</ul>
+<p>受 NLP/CV 的启发，作者认为训练可泛化机器人策略的目标需要 X-embodiment training，即使用来自多个机器人平台的数据（虽然每个单独的机器人学习数据集可能太窄，但所有此类数据集的联合可以更好地覆盖环境和机器人的变化），那么也就需要开发可以利用 X-embodiment 数据的方法。因此，作者在这篇工作中有两个主要目标</p>
 <ul>
-<li>一旦创建了功能丰富的高保真模拟器，我们就可以以低成本生成大量机器人数据</li>
-<li>生成式人工智能的快速发展促进了真实模拟的创建</li>
-<li>这可以加速 robot learning 的进程，让新 idea 可以快速实现原型并可复用</li>
+<li>证明根据来自许多不同机器人和环境的数据训练的策略享有正迁移的好处，即比仅根据每个评估设置的数据训练的策略获得更好的性能</li>
+<li>为机器人社区提供数据集、数据格式和模型，以实现未来 X-embodiment 模型的研究</li>
 </ul>
-<p>而要实现高质量模拟，模拟器必须满足三个核心标准</p>
+<p>针对这两个目标，作者有如下贡献</p>
 <ul>
-<li>必须保证物理、渲染和底层模型的真实性，以便能够转移到现实世界</li>
-<li>必须满足其提供的场景、资产和任务的多样性</li>
-<li>必须伴随大型机器人数据集，以捕获其所提供的场景和行为的多样性</li>
+<li>证明最近的几种机器人学习方法，只需进行最小的修改，就可以利用 X-embodiment 数据并实现正迁移，并表现出更好的泛化能力和新功能</li>
+<li>提供了 Open X-Embodiment (OXE) 仓库，其中包括一个数据集，包含来自 21 不同机构的 22 不同机器人 embodiment，提供模型、数据和工具</li>
 </ul>
-<p>综上，本文提出以家庭环境为中心的、在 Robosuite: A modular simulation framework and benchmark for robot learning 之上、基于 MuJoCo 的大型模拟框架 RoboCasa，以训练 generalist robots。支持单臂移动平台、人形机器人和带手臂的四足机器人等实体。其中包含 100 项系统评估任务（前 25 项是具有基本机器人技能的原子任务，例如拾取和放置、打开和关闭门以及扭转旋钮，另外 75 项是涉及一系列机器人技能的复合任务），使用从 LLMs 获取活动列表的方法来生成任务。另外，也通过扩展 MimicGen 来为原子任务生成 100K 个额外的 trajectories</p>
 <h2 id="_2">相关工作<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="_3">流行仿真框架<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Feature</th>
-<th style="text-align: center;">RoboCasa</th>
-<th style="text-align: center;">AI2-THOR</th>
-<th style="text-align: center;">Habitat 2.0</th>
-<th style="text-align: center;">iGibson 2.0</th>
-<th style="text-align: center;">RLBench</th>
-<th style="text-align: center;">Behavior-1K</th>
-<th style="text-align: center;">robomimic</th>
-<th style="text-align: center;">ManiSkill 2</th>
-<th style="text-align: center;">OPTIMUS</th>
-<th style="text-align: center;">LIBERO</th>
-<th style="text-align: center;">MimicGen</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">Mobile Manipulation</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td style="text-align: center;">Room-Scale Scenes</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-</tr>
-<tr>
-<td style="text-align: center;">Realistic Object Physics</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td style="text-align: center;">AI-generated Tasks</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-</tr>
-<tr>
-<td style="text-align: center;">AI-generated Assets</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-</tr>
-<tr>
-<td style="text-align: center;">Photorealism</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-</tr>
-<tr>
-<td style="text-align: center;">Cross-Embodiment</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td style="text-align: center;">Num Tasks</td>
-<td style="text-align: center;">100</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">100</td>
-<td style="text-align: center;">1000</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">20</td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">130</td>
-<td style="text-align: center;">12</td>
-</tr>
-<tr>
-<td style="text-align: center;">Num Scenes</td>
-<td style="text-align: center;">120</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">15</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">50</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">20</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr>
-<td style="text-align: center;">Num Object Categories</td>
-<td style="text-align: center;">153</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">46</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">28</td>
-<td style="text-align: center;">1265</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">x</td>
-<td style="text-align: center;">-</td>
-</tr>
-<tr>
-<td style="text-align: center;">Num Objects</td>
-<td style="text-align: center;">2509</td>
-<td style="text-align: center;">3578</td>
-<td style="text-align: center;">169</td>
-<td style="text-align: center;">1217</td>
-<td style="text-align: center;">28</td>
-<td style="text-align: center;">5215</td>
-<td style="text-align: center;">15</td>
-<td style="text-align: center;">2144</td>
-<td style="text-align: center;">72</td>
-<td style="text-align: center;">x</td>
-<td style="text-align: center;">40</td>
-</tr>
-<tr>
-<td style="text-align: center;">Human Data</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td style="text-align: center;">Machine-Generated Data</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td style="text-align: center;">Num Trajectories</td>
-<td style="text-align: center;">100K+</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">6K</td>
-<td style="text-align: center;">30K</td>
-<td style="text-align: center;">245K</td>
-<td style="text-align: center;">5K</td>
-<td style="text-align: center;">50K</td>
-</tr>
-</tbody>
-</table>
-<h3 id="robotics">Robotics 数据集<a class="headerlink" href="#robotics" title="Permanent link">&para;</a></h3>
-<p>论文发表前，有几项机器人方面大规模数据收集工作</p>
+<h3 id="embodiment">跨 embodiment 迁移<a class="headerlink" href="#embodiment" title="Permanent link">&para;</a></h3>
+<p>许多先前的工作已经研究了在模拟中和真实机器人上跨机器人 embodiment 迁移的方法，这些方法通常引入专门设计的机制来解决不同机器人之间的 embodiment 差距，例如</p>
 <ul>
-<li>自监督学习，通过试错来收集抓取和推动等任务的数据<ul>
-<li>由于试错过程，可能需要花费大量时间才能生成高质量数据</li>
+<li>共享动作表示（shared action representations）</li>
+<li>结合表示学习目标（incorporating representation learning objectives）</li>
+<li>根据 embodiment 信息调整学习策略（adapting the learned policy on embodiment information）</li>
+<li>解耦机器人和环境表示（decoupling robot and environment representations）</li>
+<li>X-embodiment 训练和使用 Transformer 模型进行迁移的初步演示</li>
 </ul>
-</li>
-<li>通过人类远程操作，控制机器人引导其完成不同的任务来收集数据</li>
-<li>在模拟中利用 algorithmic trajectory generators<ul>
-<li>通常利用特权信息和手工设计的启发式方法，需要大量人工参与</li>
+<p>类似地，跨人类和机器人实施例的迁移方法也经常采用减少 embodiment 差距的技术，包括</p>
+<ul>
+<li>通过在域之间进行迁移或学习可迁移的表示</li>
+<li>通过问题的子方面解决<ul>
+<li>例如学习可迁移的奖励函数、目标、动态模型或来自人类视频数据的视觉表示</li>
 </ul>
 </li>
 </ul>
-<h3 id="_4">从大型离线数据集中学习<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Behavioral Cloning<ul>
-<li>训练策略来模仿数据集中的操作</li>
-</ul>
-</li>
-<li>Offline Reinforcement Learning<ul>
-<li>尝试使用奖励函数来优先选择某些数据集操作而不是其他操作</li>
-</ul>
-</li>
-</ul>
-<h2 id="robocasa_1">RoboCasa 模拟<a class="headerlink" href="#robocasa_1" title="Permanent link">&para;</a></h2>
-<h3 id="_5">核心模拟平台<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>因为 RoboSuite 注重物理真实性、高速和模块化设计，方便扩展到大型场景。此外，为了支持房间规模的环境，作者扩展了 RoboSuite 以适应各类形态</p>
-<p>另外，也使用 NVIDIA Omniverse 进行高质量渲染以捕捉逼真的图像</p>
-<h3 id="_6">厨房场景<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>在 RoboCasa 当前版本中，专注于以厨房活动为中心的家务任务，包含各类布局设计、可交互器具与纹理（MidJourney 生成）</p>
-<p><img alt="厨房布局设计" src="../../../assets/img/docs/PR/Robotics/RoboCasa/image.png" /></p>
-<p><img alt="可交互设备" src="../../../assets/img/docs/PR/Robotics/RoboCasa/image-1.png" /></p>
-<h3 id="_7">资产库<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>作者使用从 Objaverse 数据集和 Luma.ai（文本转 3D）获取到包括橱柜、抽屉和各种厨房用具（水果和蔬菜、乳制品、家禽、饮料、容器、工具等）的资产，进行存储并在使用时转换为 MuJoCo MJCF 模型格式</p>
-<p><img alt="资产" src="../../../assets/img/docs/PR/Robotics/RoboCasa/image-2.png" /></p>
-<h2 id="robocasa_2">RoboCasa 活动数据集<a class="headerlink" href="#robocasa_2" title="Permanent link">&para;</a></h2>
-<h3 id="_8">原子任务<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>执行复杂任务的机器人必须掌握如下基本技能，包括</p>
-<ul>
-<li>拾取和放置</li>
-<li>打开和关闭门</li>
-<li>打开和关闭抽屉</li>
-<li>扭转旋钮</li>
-<li>转动杠杆</li>
-<li>按下按钮</li>
-<li>插入</li>
-<li>导航</li>
-</ul>
-<p>为此，作者提出 25 项任务，每项任务都涉及这八项技能中的一项，称为原子任务</p>
-<h3 id="_9">使用大型语言模型创建复合任务<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>复合任务涉及按一定顺序使用技能来解决语义上有意义的活动，例如烹饪和清洁。作者使用大语言模型来定义任务：先提示 ChatGPT (GPT-4) 列出常见的高级厨房活动，再提示 GPT-4 和 Gemini 1.5 为每个活动标签提出代表性任务，最后过滤或修改它们的一些输出，最终从中获得了 75 个任务并对其进行了代码实现</p>
-<p><img alt="LLM 生成任务" src="../../../assets/img/docs/PR/Robotics/RoboCasa/image-3.png" /></p>
-<h3 id="robocasa_3">RoboCasa 数据集<a class="headerlink" href="#robocasa_3" title="Permanent link">&para;</a></h3>
-<h4 id="_10">通过人类远程操作收集一组基本演示<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
-<p>四名操作员组成的团队使用 3D SpaceMouse 为每个原子任务收集 50 个高质量演示，每个任务演示都是在随机厨房场景中收集的</p>
-<h4 id="automated-trajectory-generation">利用 automated trajectory generation 来综合演示<a class="headerlink" href="#automated-trajectory-generation" title="Permanent link">&para;</a></h4>
-<p>使用 MimicGen 来让人类演示的种子集适应新的设置，自动合成丰富的数据集，具体过程为：将每个人类演示分解为一系列以对象为中心的操作片段，然后对于一个新的场景，根据相关对象的当前姿态变换每个以对象为中心的片段，将这些片段缝合在一起，并使机器人遵循新的轨迹（trajectory）来收集新的任务演示</p>
-<p>MimicGen 数据生成有可能失败，且其只保留可以让任务成功的生成轨迹。作者在多个模拟过程中并行化 MimicGen 数据生成，以加快数据生成过程</p>
-<h2 id="_11">实验<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
-<p>作者在实验中探索以下问题</p>
-<ul>
-<li>与人类演示相比，MimicGen 机器生成的轨迹在学习多任务策略方面的效果如何</li>
-<li>随着训练数据集大小的增加，模仿学习策略的泛化性能将如何变化</li>
-<li>大规模模拟数据集能否促进知识向模拟中下游任务的转移，并促进面向现实世界任务的策略学习（policy learning）</li>
-</ul>
-<h3 id="_12">原子任务的模仿学习<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>作者对原子任务进行了系统的研究，以探究在人类数据与机器生成的数据上进行训练时，模仿学习策略的性能如何比较，以及这些数据的规模如何在性能中发挥作用。为此，作者比较以下四种多任务数据设置（训练设置略）</p>
-<ul>
-<li>Human-50：涵盖所有 25 个原子任务的 1250 个人类演示的数据集，每个任务有 50 个人类演示</li>
-<li>generated-3000：MimicGen 在 24 个原子任务中合成的 72,000 个演示的数据集<ul>
-<li><em>因为 MinicGen 无法生成移动操作轨迹，删除导航原子任务</em></li>
-<li>我们将 50 个人类演示作为每个任务的输入，并使用它们自主生成 3,000 条轨迹</li>
-</ul>
-</li>
-<li>generated-300：完整生成数据集的随机 1/10 子集，其中每个任务生成 300 个演示</li>
-<li>generated-100：完整生成数据集的随机 1/30 子集，其中每个任务生成 100 个演示</li>
-</ul>
-<p>训练结束后，对于每项任务通过五个固定评估场景的 50 次试验来评估模型性能，其中每个场景都有不同的平面图和风格。为了测试泛化能力，仅在未见过的对象实例上评估策略。此外，五个场景中的两个包含训练数据中从未遇到过的未见过的风格</p>
-<p><img alt="原子任务的模仿学习" src="../../../assets/img/docs/PR/Robotics/RoboCasa/image-4.png" /></p>
-<p>可以总结的结论</p>
-<ul>
-<li>随着生成数据数量的增加，模型性能稳步提高</li>
-<li>有些技能非常容易学习（如打开和关闭门和抽屉），而其他技能则相当具有挑战性（如拾取和放置）<ul>
-<li>假设 1：具有高度多样性的任务学习起来更具挑战性<ul>
-<li>One example is the pick and place tasks involving dozens of different object categories with a wide range of affordances. In comparison, opening and closing doors involves six different instances of doors and is thus significantly easier to learn.</li>
-</ul>
-</li>
-<li>假设 2：涉及高水平灵活性的任务（如插入）很难学习</li>
-</ul>
-</li>
-</ul>
-<h3 id="_13">复合任务的模仿学习<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Single-task Policy</p>
-<p>作者提及这些复合任务更加复杂，所以使用 single-task policy，一次处理一个任务</p>
-</div>
-<p>涉及的复合任务包括</p>
-<ul>
-<li>ArrangeVegetables：机器人必须将水槽中的两种蔬菜放到柜台上的切菜板上</li>
-<li>MicrowaveThawing：机器人必须将柜台上的冷冻食品放入微波炉中并打开微波炉</li>
-<li>RestockPantry：柜子里已经有许多罐子和其他物品，机器人必须找到柜子中现有的罐子（无论是在右侧还是左侧），并将新罐子放在它们旁边</li>
-<li>PreSoakPan：机器人必须拿起一个平底锅和一块海绵放入水槽中，然后打开水龙头准备清洗平底锅</li>
-<li>PrepareCoffee：机器人必须从柜子里取出一个杯子，将其放在咖啡机下方，然后按下咖啡机按钮，将其倒入杯子中</li>
-</ul>
-<p>对于每种复合任务，作者收集了 50 次人类演示，对比如下两种策略</p>
-<ul>
-<li>Scratch (Baseline)：通过这 50 个演示从零开始学习</li>
-<li>Fine-tuning：在原子任务使用完整的 MimicGen 生成的数据集上学到的预训练策略的基础上，使用这 50 个演示进行微调</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Activity</th>
-<th style="text-align: center;">Scratch</th>
-<th style="text-align: center;">Fine-tuning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">ArrangeVegetables</td>
-<td style="text-align: center;">2.0%</td>
-<td style="text-align: center;"><strong>12.0%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;">MicrowaveThawing</td>
-<td style="text-align: center;">0%</td>
-<td style="text-align: center;"><strong>2.0%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;">RestockPantry</td>
-<td style="text-align: center;">0%</td>
-<td style="text-align: center;"><strong>6.0%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;">PreSoakPan</td>
-<td style="text-align: center;">0%</td>
-<td style="text-align: center;"><strong>4.0%</strong></td>
-</tr>
-<tr>
-<td style="text-align: center;">PrepareCoffee</td>
-<td style="text-align: center;">0%</td>
-<td style="text-align: center;">0%</td>
-</tr>
-</tbody>
-</table>
-<p>可以总结的结论</p>
-<ul>
-<li>Fine-tuning 策略在所有复合任务上都表现出更好的性能，且在更多的任务上具有非零成功率的性能<ul>
-<li>一些常见的失败原因包括难以进行细粒度的操作以及难以有效地过渡到任务的下一阶段</li>
-</ul>
-</li>
-<li>实际观察到经过微调的模型在质量上表现更好，尤其是具有更稳健的拾取和放置策略<ul>
-<li>作者将此归因于原子行为的大型预训练数据集，这使得模型能够更好地理解如何执行这些任务</li>
-</ul>
-</li>
-</ul>
-<h3 id="_14">转移到现实世界环境<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>而作者研究互补架构（complementary architectures）并提供互补分析（complementary analyses），特别是研究 X-embodiment 迁移和 web-scale pretraining 之间的相互作用，并直接在 X-embodiment 数据上训练策略，没有任何机制来减少 embodiment 差距，并通过利用该数据观察正迁移现象</p>
 <div class="admonition question">
 <p class="admonition-title">没读懂的地方</p>
-<p>While both the real world and simulated Franka robot are controlled via <strong>workspace end effector control</strong>, our simulated robot uses <strong>Operational Space Control</strong> while the DROID-based real robot does not.</p>
+<p>Complementary architectures/analyses 和 web-scale pretraining 是什么</p>
 </div>
-<p>作者使用在 DROID 硬件基础设施上运行的 Franka Emika Panda 机器人在现实厨房环境中进行实验，其中和模拟的机器人有如下区别</p>
+<h3 id="_3">大规模机器人学习数据集<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>机器人学习社区创建了开源机器人学习数据集，涵盖</p>
 <ul>
-<li>模拟机器人使用操作空间控制（Operational Space Control），而基于 DROID 的真实机器人则不使用</li>
-<li>模拟机器人控制器以 20 Hz 频率运行，而真正的机器人控制器以 15 Hz 运行</li>
+<li>抓取</li>
+<li>推动交互</li>
+<li>对象和模型集</li>
+<li>遥控演示</li>
 </ul>
-<p>此外，相机校准、照明条件以及机器人底座相对于场景的放置也存在差异</p>
-<p>实验涉及的任务包括</p>
+<p>除了 RoboNet 之外，这些数据集包含相同类型机器人的数据，而 OXE 专注于跨越多个 embodiment 的数据，将大量先前的数据集处理并聚合到一个单一的标准化仓库中</p>
+<h3 id="_4">语言条件下的机器人学习<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>先前的工作旨在赋予机器人和其他智能体理解和遵循语言指令的能力，通常是通过学习语言条件策略。像许多先前的工作一样，这篇工作通过模仿学习来训练语言条件策略，但使用大规模多 embodiment 演示数据。在实验中，作者研究了两种形式的预训练，特别是遵循 RT-1 和 RT-2 的方法</p>
+<h2 id="open-x-embodiment_1">Open X-Embodiment 仓库<a class="headerlink" href="#open-x-embodiment_1" title="Permanent link">&para;</a></h2>
+<p><a href="robotics-transformer-x.github.io">Open X-Embodiment 仓库</a> 向社区提供并维护以下开源资源</p>
 <ul>
-<li>Counter to sink：从柜台拾取物体并将其放置到水槽</li>
-<li>Sink to counter：从水槽拾取物体并将其放置到柜台</li>
-<li>Counter to cabinet：从柜台拾取物体并将其放置到储藏柜</li>
+<li>Open X-Embodiment 数据集：机器人学习数据集<ul>
+<li>包含 100 万多个真实机器人轨迹，涵盖 22 个机器人 embodiment，包括单、双臂机器人和四足机器人</li>
+<li>该数据集是通过汇集来自世界各地 34 机器人研究实验室的 60 个现有机器人数据集，并将其转换为一致的数据格式而构建的</li>
+<li>我们使用 RLDS 数据格式，它将数据保存在序列化的 tfrecord 文件中，并适应不同机器人设置的各种动作空间和输入模式，例如不同数量的 RGB 相机、深度相机和点云</li>
+<li>它还支持所有主要深度学习框架中高效、并行的数据加载</li>
 </ul>
-<p>对于每种任务，作者收集了 50 次人类演示，每个演示都涉及五个不同类别的对象，对比如下两种策略</p>
-<ul>
-<li>Real only：仅针对目标任务进行真实世界演示的训练</li>
-<li>Real + Sim：针对目标任务的真实世界演示以及所有单阶段任务的所有模拟 MimicGen 演示进行联合训练</li>
+</li>
+<li>预训练检查点：精选的 RT-X 模型检查点，可供推理和微调。</li>
 </ul>
-<p>对于每种任务，通过 5 个已知的对象类别和 3 个未知（<strong>相对于现实世界的演示</strong>来说是未见的）的对象类别进行测试</p>
-<table><thead><tr><th>Setting</th><th>Task</th><th>Real only</th><th>Real + Sim</th></tr></thead><tbody><tr><td rowspan="4">Seen Obj</td><td>Counter to sink</td><td>12.7 ± 2.5</td><td><b>22.0 ± 2.8</b></td></tr><tr><td>Sink to counter</td><td>20.0 ± 5.9</td><td><b>29.3 ± 4.1</b></td></tr><tr><td>Counter to cabinet</td><td>8.0 ± 1.6</td><td><b>22.0 ± 5.8</b></td></tr><tr><td>Task average</td><td>13.6</td><td><b>24.4</b></td></tr><tr><td rowspan="4">Unseen Obj</td><td>Counter to sink</td><td>3.3 ± 4.7</td><td><b>8.9 ± 7.9</b></td></tr><tr><td>Sink to counter</td><td>1.1 ± 1.6</td><td><b>7.8 ± 4.2</b></td></tr><tr><td>Counter to cabinet</td><td>3.3 ± 4.7</td><td><b>11.1 ± 11.0</b></td></tr><tr><td>Task average</td><td>2.6</td><td><b>9.3</b></td></tr></tbody></table>
-
-<p>可以总结的结论</p>
+<p><img alt="Open X-Embodiment 数据集" src="../../../assets/img/docs/PR/Robotics/Open-X-Embodiment/image.png" /></p>
+<h2 id="rt-x">RT-X 设计<a class="headerlink" href="#rt-x" title="Permanent link">&para;</a></h2>
+<p>为了评估 X-embodiment 训练可以在多大程度上提高单个机器人的学习策略的性能，需要具有足够能力的模型来有效地利用如此庞大的异构数据集。为此，本篇工作的实验将建立在最近提出的两个基于 Transformer 的机器人策略之上</p>
 <ul>
-<li>使用模拟数据进行协同训练的平均成功率为 24.4%，而仅使用真实数据的平均成功率为 13.6%，相对提高了 79%</li>
-<li>虽然在看不见的物体上性能受到影响，但我们仍然看到 Real + Sim 方式下数据的显着改进<ul>
-<li><em>作者将此归因于模拟器的丰富多样性以及视觉和物理真实性</em></li>
+<li>RT-1 (RT-1: Robotics transformer for real-world control at scale)<ul>
+<li>一种专为机器人控制而设计的高效的基于 Transformer 的架构</li>
+</ul>
+</li>
+<li>RT-2 (RT-2: Vision-language-action models transfer web knowledge to robotic control)<ul>
+<li>一种 co-fine-tuned 大型视觉语言模型，使用自然语言 token 来输出将机器人动作</li>
 </ul>
 </li>
 </ul>
-<h2 id="_15">未解决的问题和未来工作<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
-<h3 id="_16">作者提出<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<div class="admonition question">
+<p class="admonition-title">待了解内容</p>
+<p>RT-1 和 RT-2 的具体设计是什么，co-fine-tuned 是怎么微调的</p>
+</div>
+<h3 id="_5">数据格式整合<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>不同机器人的观察和动作空间存在显著差异，因此在数据集中使用粗略对齐的动作和观察空间，接收最近图像和语言指令的历史记录作为观察结果，并预测控制末端执行器的 7 维动作向量（x、y、z、翻滚、俯仰、偏摆和夹具张开度，或者这些量的速率）</p>
 <ul>
-<li>复合任务进行微调会产生相对较低的性能<ul>
-<li>将研究更强大的策略架构和学习算法，并提高机器生成数据集的质量</li>
-<li>虽然生成的轨迹在技术上被认为是成功的，但许多轨迹表现出不良效果，例如急速运动和碰撞</li>
-<li>许多这些行为可以通过检查模拟状态来自动检测，并且表现出此类行为的轨迹可以被丢弃</li>
+<li>从每个数据集中选择一个规范相机视图作为输入图像，将其大小调整为通用分辨率，并将原始动作集转换为 7 DoF 末端执行器动作</li>
+<li>在离散化之前对每个数据集的行为进行标准化<ul>
+<li>模型的输出可以根据所使用的实施例被不同地解释（去标准化）</li>
 </ul>
 </li>
-<li>使用 LLM 创建任务的过程仍然需要人工指导来编写这些任务的实现<ul>
-<li>使用 LLM 提出数千个新场景和任务，并编写代码以最少的人工来实现这些场景和任务</li>
-<li>随着 LLM 变得更加高效，这将成为可能</li>
 </ul>
-</li>
-<li>仅限于厨房，希望在未来的版本中将范围扩展到厨房环境和任务之外</li>
-<li>数据集包含关键的粗略操作行为，但不包含高度灵巧的技能、可变形操作任务或需要双手操作的任务</li>
-<li>结合本文和其他模拟器以及互联网视频和真实机器人数据集等不同来源的数据来探索训练</li>
-</ul>
-<h3 id="_17">个人感受<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>尽管有这种粗略的对齐，但相机观察结果在数据集中仍然存在很大差异，例如由于相对于机器人的相机姿势不同或相机属性不同，参见下图</p>
+<p><img alt="RT-1-X 和 RT-2-X" src="../../../assets/img/docs/PR/Robotics/Open-X-Embodiment/image-1.png" /></p>
+<p>此外对于动作空间，不会跨控制末端执行器的数据集对齐坐标系，并根据为原始控制方案使用表示绝对或相对的位置或速度的动作值。因此，相同的动作向量可能对不同的机器人产生非常不同的运动方式</p>
+<h3 id="_6">策略架构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>RT-1 和 RT-2 都接受描述任务的视觉输入和自然语言指令，并输出 tokenized 动作—— for each model, the action is tokenized into 256 bins uniformly distributed along each of eight dimensions (one dimension for terminating the episode and seven dimensions for end-effector movement)</p>
+<div class="admonition question">
+<p class="admonition-title">没读懂的地方</p>
+<p>tokenized action 是什么，是怎么把 7 DOF 的动作向量转换成 token 的</p>
+<p>以及下文的 discrete buckets for RT-1 and all possible language tokens for RT-2 是什么</p>
+</div>
+<h3 id="_7">训练和推理细节<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>两个模型都在各自的输出空间上都使用标准分类交叉熵作为优化目标（discrete buckets for RT-1 and all possible language tokens for RT-2）</p>
+<p>在实验中，使用来自 9 个 embodiment 的混合数据（因为在实验时仅有这些数据可用，后续才扩充到当前版本论文的 22 个 embodiment 规模）</p>
+<p>RT-1-X 仅根据该混合数据进行训练；RT-2-X 以大约 1:1 的比例分割原始 VLM 数据和该混合数据，通过 co-fine-tuned 进行训练</p>
+<p>在推理时，每个模型都以机器人所需的速率（3-10 Hz）运行；RT-1 在本地运行，RT-2 托管在云服务上运行并通过网络查询</p>
+<h2 id="_8">实验<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>作者对 6 个不同的机器人进行了总计 3600 次评估试验，以研究</p>
 <ul>
-<li>感觉就提出一个框架，基于提出的基础任务和套用 LLM 产生的复合任务结合别人的成果跑了模拟，测了测成果，就发出来了</li>
-<li>很多地方框架还不完善<ul>
-<li>虽然提出 25 个原子任务，但是基于 MimicGen 生成时 Navigation 任务因为不支持而被删除了</li>
+<li>在 X-embodiment 数据集上训练的策略能否有效地实现正迁移，从而使利用多个机器人上收集的数据进行联合训练的方式可以提高训练任务的性能</li>
+<li>来自多个平台和任务的数据的协同训练模型是否可以提高对新的、未见过的任务的泛化能力</li>
+<li>不同的设计维度，例如模型大小、模型架构或数据集组成，对最终策略的性能和泛化能力有何影响</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">In-/Out-of- distribution</p>
+<blockquote>
+<p>From <a href="https://fangkaipeng.com/?p=2119">Out-of-distribution Detection调研</a></p>
+</blockquote>
+<p>Distribution shift 主要分为两种</p>
+<ul>
+<li>semantic shift</li>
+<li>covariant shift</li>
+</ul>
+<p>前者表示训练集和测试集的 label space 不同，后者表示训练集和测试集数据本身的分布不同。而 OOD (out-of-distribution) 主要关注的是 semantic shift，因为 OOD 提出的背景是在 open-set 的场景下，模型可能会遇到很多在训练阶段没见过的类别，而模型依然会给这些样本预测一个很高的置信度（认为其属于某一类训练集中的类别），这也称为 over-confidence。理想情况是，当模型遇到没见过的样本，会学会拒绝，不进行分类，只对见过的样本进行分类，因此提出了 OOD detection 任务。</p>
+</div>
+<h3 id="embodiment-in-distribution">不同 embodiment 的 in-distribution 性能<a class="headerlink" href="#embodiment-in-distribution" title="Permanent link">&para;</a></h3>
+<p>为了评估 RT-X 模型变体从 X-embodiment 数据中学习的能力，作者评估了它们在 in-distribution 任务中的表现，具体根据两种类型的用例进行评估</p>
+<ul>
+<li>对仅具有小规模数据集的域进行评估<ul>
+<li>期望从较大数据集进行迁移以显着提高性能</li>
 </ul>
 </li>
-<li>实验对比有些地方不太眼睛<ul>
-<li>在 <a href="#_12">迁移到现实世界环境</a> 中，Real + Sim 对于<strong>现实演示中未知类别</strong>的成果率更高，也没有可能是在“基于单阶段任务的所有模拟 MimicGen 演示”里学习到了那个类别的操作</li>
-<li>如果这样那是不是可以额外设置实验去做这个对比</li>
+<li>对具有大规模数据集的域进行评估</li>
+</ul>
+<p>对于小规模数据集实验，使用与相应文章中相同的评估方法和 embodiment，比较 RT-1-X 模型的性能；对于大规模数据集实验，考虑使用 Bridge 和 RT-1 数据集，并使用各自对应的 WidowX 和 Google Robot，同时考虑 RT-1-X 和 RT-2-X 模型的性能。模型都在完整的 X-embodiment 数据集上进行联合训练</p>
+<p>在整个评估过程中，与两个 baseline 模型进行比较</p>
+<ul>
+<li>由数据集创建者开发的模型，仅在相应数据集上进行训练（<em>Original Method</em> model）<ul>
+<li>因为可以预期模型已经过优化，可以与相关数据很好地配合，所以是合理的</li>
+</ul>
+</li>
+<li>在相应数据集上单独训练的 RT-1 模型<ul>
+<li>用以评估 RT-X 模型架构是否有足够的能力来同时表示多个不同机器人平台的策略，以及多实施数据的协同训练是否会带来更高的性能</li>
 </ul>
 </li>
 </ul>
+<h4 id="_9">小规模数据集域<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<p><img alt="小规模数据集域结果" src="../../../assets/img/docs/PR/Robotics/Open-X-Embodiment/image-2.png" /></p>
+<p>在 5 个数据集中，有 4 个数据集 RT-1-X 的表现优于原始方法</p>
+<h4 id="_10">大规模数据集域<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Evaluation Setting</th>
+<th style="text-align: center;">Bridge</th>
+<th style="text-align: center;">Bridge</th>
+<th style="text-align: center;">RT-1 paper 6 skills</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Evaluation Location</td>
+<td style="text-align: center;">IRIS (Stanford)</td>
+<td style="text-align: center;">RAIL Lab (UCB)</td>
+<td style="text-align: center;">Google Robotic Lab</td>
+</tr>
+<tr>
+<td style="text-align: center;">Robot Embodiment</td>
+<td style="text-align: center;">WidowX</td>
+<td style="text-align: center;">WidowX</td>
+<td style="text-align: center;">Google Robot</td>
+</tr>
+<tr>
+<td style="text-align: center;">Original Method</td>
+<td style="text-align: center;">LCBC</td>
+<td style="text-align: center;">LCBC</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">Original Method</td>
+<td style="text-align: center;">13%</td>
+<td style="text-align: center;">13%</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">RT-1</td>
+<td style="text-align: center;">40%</td>
+<td style="text-align: center;">30%</td>
+<td style="text-align: center;"><strong>92%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">RT-1-X</td>
+<td style="text-align: center;">27%</td>
+<td style="text-align: center;">27%</td>
+<td style="text-align: center;">73%</td>
+</tr>
+<tr>
+<td style="text-align: center;">RT-2-X (55B)</td>
+<td style="text-align: center;"><strong>50%</strong></td>
+<td style="text-align: center;"><strong>30%</strong></td>
+<td style="text-align: center;"><strong>91%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>在大数据集中，RT-1-X 模型的性能并不优于仅在特定实施例的数据集上训练的 RT-1 baseline，这表明 RT-1-X 模型有欠拟合的现象。参数量较大的 RT-2-X 模型优于原始方法和 RT-1，这表明 X-embodiment 训练可以提高 data-rich 领域的性能，但前提是利用具有足够规模的架构</p>
+<h3 id="out-of-distribution-settings">提高 out-of-distribution settings 的泛化能力<a class="headerlink" href="#out-of-distribution-settings" title="Permanent link">&para;</a></h3>
+<div class="admonition question">
+<p class="admonition-title">待了解内容</p>
+<p>什么是 high-data</p>
+</div>
+<p>针对 X-embodiment 训练如何能够更好地泛化到 out-of-distribution settings 以及更复杂和新颖的指令的问题，作者侧重于高数据领域，并使用 RT-2-X 模型进行评估</p>
+<p><i id="impact-of-design-decisions-on-generalization-and-emergent skills"></i></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Row</th>
+<th style="text-align: center;">Model</th>
+<th style="text-align: center;">Size</th>
+<th style="text-align: center;">History Length</th>
+<th style="text-align: center;">Dataset</th>
+<th style="text-align: center;">Co-Trained w/ Web</th>
+<th style="text-align: center;">Initial Checkpoint</th>
+<th style="text-align: center;">Emergent Skills Evaluation</th>
+<th style="text-align: center;">RT-2 Generalization Evaluation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">(1)</td>
+<td style="text-align: center;">RT-2</td>
+<td style="text-align: center;">55B</td>
+<td style="text-align: center;">none</td>
+<td style="text-align: center;">Google Robot action</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Web-pretrained</td>
+<td style="text-align: center;">27.3%</td>
+<td style="text-align: center;"><strong>62%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">(2)</td>
+<td style="text-align: center;">RT-2-X</td>
+<td style="text-align: center;">55B</td>
+<td style="text-align: center;">none</td>
+<td style="text-align: center;">Robotics data</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Web-pretrained</td>
+<td style="text-align: center;"><strong>75.8%</strong></td>
+<td style="text-align: center;"><strong>61%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">(3)</td>
+<td style="text-align: center;">RT-2-X</td>
+<td style="text-align: center;">55B</td>
+<td style="text-align: center;">none</td>
+<td style="text-align: center;">Robotics data except Bridge</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Web-pretrained</td>
+<td style="text-align: center;">42.8%</td>
+<td style="text-align: center;">54%</td>
+</tr>
+<tr>
+<td style="text-align: center;">(4)</td>
+<td style="text-align: center;">RT-2-X</td>
+<td style="text-align: center;">5B</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">Robotics data</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Web-pretrained</td>
+<td style="text-align: center;">44.4%</td>
+<td style="text-align: center;">52%</td>
+</tr>
+<tr>
+<td style="text-align: center;">(5)</td>
+<td style="text-align: center;">RT-2-X</td>
+<td style="text-align: center;">5B</td>
+<td style="text-align: center;">none</td>
+<td style="text-align: center;">Robotics data</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Web-pretrained</td>
+<td style="text-align: center;">14.5%</td>
+<td style="text-align: center;">30%</td>
+</tr>
+<tr>
+<td style="text-align: center;">(6)</td>
+<td style="text-align: center;">RT-2-X</td>
+<td style="text-align: center;">5B</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">Robotics data</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">From scratch</td>
+<td style="text-align: center;">0%</td>
+<td style="text-align: center;">1%</td>
+</tr>
+<tr>
+<td style="text-align: center;">(7)</td>
+<td style="text-align: center;">RT-2-X</td>
+<td style="text-align: center;">5B</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">Robotics data</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Web-pretrained</td>
+<td style="text-align: center;">48.7%</td>
+<td style="text-align: center;">47%</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_11">未学习的物体、背景和环境<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<p>RT-2 和 RT-2-X 的性能大致相当（<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a>行 (1) 和 (2)，最后一列）。这并不意外，因为 RT-2 的 VLM 主干已经在这些维度上很好地泛化了</p>
+<h4 id="_12">新型技能评估<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<p>为了研究机器人之间的知识转移，作者使用 Google Robot 进行了实验，评估 RT-2 数据集中不存在，但出现在另一个机器人（WidowX）的 Bridge 数据集中的对象和技能（新型技能，emergent skills，如下图所示）</p>
+<p><img alt="out-of-distribution 技能" src="../../../assets/img/docs/PR/Robotics/Open-X-Embodiment/image-3.png" /></p>
+<p>结果显示在<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a> Emergent Skills Evaluation 栏中。比较<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a>第 (1) 行和第 (2) 行，可以发现 RT-2-X 的性能优于 RT-2 大约三倍，这表明将其他不同类别的机器人的数据纳入训练中，也可以改善可以执行的任务范围（即使是已经拥有大量可用数据的机器人）。这表明与其他平台的数据进行联合训练可以为 RT-2-X 赋予该平台原始数据集中不存在的额外技能</p>
+<p>继续从 RT-2-X 训练中删除 Bridge 数据集进行消融（见<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a>行 (3)），可见 Emergent Skills 的性能显著降低，这表明从 WidowX 数据的传输可能确实是 RT-2-X 与 Google 机器人组合可以执行的额外技能的原因</p>
+<h3 id="_13">模型设计决策的影响<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>进行消融来衡量不同设计决策对我们性能最佳的 RT-2-X 模型泛化能力的影响。可以注意到<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a>中</p>
+<ul>
+<li>包含图像的简短历史记录可以显着提高泛化性能（行 (4) 与行 (5)）</li>
+<li>Web-based pre-training 对于实现大型模型的高性能至关重要（行 (4) 与行 (6)）</li>
+<li>与 5​B 模型相比，55​B 模型在新型技能方面的成功率显着更高（行 (2)与行 (4)）<ul>
+<li>表明模型规模更高可以实现机器人数据集之间更高程度的迁移</li>
+</ul>
+</li>
+<li>与之前的 RT-2 研究结果相反，协同微调和微调在新兴技能和泛化评估（行 (4)与行 (7)）中具有相似的表现<ul>
+<li>作者将其归因于机器人数据 RT-2-X 中使用的数据集比以前使用的机器人数据集更加多样化</li>
+</ul>
+</li>
+</ul>
+<h2 id="_14">未解决的问题和未来工作<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h3 id="_15">作者提出<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>虽然 RT-X 向 X-embodied 的机器人通用化迈出了一步，但要使这一未来成为现实，还需要采取更多步骤</p>
+<ul>
+<li>没有考虑具有非常不同的传感和驱动方式的机器人</li>
+<li>没有研究对新机器人的泛化</li>
+<li>没有提供何时发生或不发生正迁移的决策标准</li>
+</ul>
+<h3 id="_16">个人感受<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>感觉确实挺好，涉及挺多先前工作并结合自己提出的数据集和模型进行实验，感觉挺充分的</p>
+<p>还是自己读论文数目还是太少，很多都没理解，还需要多去递归学习引用的论文</p>
 
 
 
@@ -2221,7 +2080,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     
         <br />
         创建日期:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年7月1日 10:38:03</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年7月1日 21:45:15</span>
     
 
     <!-- mkdocs-git-revision-date-plugin -->
