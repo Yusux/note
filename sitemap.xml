@@ -2,112 +2,127 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://note.yusux.xyz/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/friends/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch1/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch10/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch11/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch13/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch14/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch18/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch2/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch4/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch5/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch6/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch7/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch8/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch9/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch3/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch3/ch3-1/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch3/ch3-2/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch3/ch3-3/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://note.yusux.xyz/CS/Compilers/ch3/ch3-4/</loc>
-         <lastmod>2024-06-24</lastmod>
+         <lastmod>2024-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/PR/</loc>
+         <lastmod>2024-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/PR/Robotics/</loc>
+         <lastmod>2024-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/PR/Robotics/RoboCasa/</loc>
+         <lastmod>2024-07-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -279,6 +279,26 @@
   
 
       
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../PR/" class="md-tabs__link">
+          
+  
+    
+  
+  Paper Reading
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -1271,6 +1291,154 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../PR/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Paper Reading
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Paper Reading
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../PR/Robotics/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Robotics
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Robotics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../PR/Robotics/RoboCasa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RoboCasa
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1769,7 +1937,7 @@ S &amp;\rightarrow a
 \caption{LR(0) Parsing DFA}
 \begin{algorithmic}
 \Function{LR0DFA}{}
-    \State Initialize $T$ to $\{$\Call{Closure}{$\{S' \rightarrow \cdot S\$$}$\}$
+    \State Initialize $T$ to $\{$\Call{Closure}{$\{S' \rightarrow \cdot S\$\}$}$\}$
     \State Initialize $E$ to empty set (set of edges)
     \Repeat
         \For{each state $I$ in $T$}
@@ -1919,7 +2087,7 @@ R &amp;\rightarrow L
 <p class="admonition-title">一些提示</p>
 <ul>
 <li>对于 Closure，处理 <span class="arithmatex">\(\epsilon\)</span>-transations（添加 <span class="arithmatex">\(X \rightarrow \cdot \gamma\)</span>）时，需要记录 <span class="arithmatex">\(w \in \text{First}(\beta z)\)</span>，把 <span class="arithmatex">\(A \rightarrow \alpha \cdot X \beta, z\)</span> 的信息“传递”到 <span class="arithmatex">\(X \rightarrow \cdot \gamma, w\)</span> 中</li>
-<li>起始状态是 LR(1) 项 <span class="arithmatex">\(S′ \rightarrow • S \$, ?\)</span> 的闭包，其中 <span class="arithmatex">\(?\)</span> 是什么无关紧要，因为 <span class="arithmatex">\(\$\)</span> 不会被移进</li>
+<li>起始状态是 LR(1) 项 <span class="arithmatex">\(S' \rightarrow • S \$, ?\)</span> 的闭包，其中 <span class="arithmatex">\(?\)</span> 是什么无关紧要，因为 <span class="arithmatex">\(\$\)</span> 不会被移进</li>
 <li>在 Reduce 中，action <span class="arithmatex">\((I, z, A \rightarrow \alpha)\)</span> 表示在状态 <span class="arithmatex">\(I\)</span> 中，遇到了一个向前看符号 (lookahead symbol) <span class="arithmatex">\(z\)</span>，可以按 <span class="arithmatex">\(A \rightarrow \alpha\)</span> 规则规约<ul>
 <li>这样的话，LR(1) 的向前看符号要比 SLR(1) 更加精确（因为一些在 <span class="arithmatex">\(\text{Follow}(A)\)</span> 中的符号可能不会触发规约）</li>
 <li>如果要根据 <span class="arithmatex">\(A \rightarrow \alpha \cdot, z\)</span> 规约，下一个输入符号必须是 <span class="arithmatex">\(z\)</span></li>
@@ -2141,7 +2309,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年6月24日 13:12:23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年7月1日 10:38:03</span>
     
         <br />
         创建日期:
