@@ -16,9 +16,11 @@
         <link rel="prev" href="../RoboCasa/">
       
       
+        <link rel="next" href="../HumanPlus/">
+      
       
       <link rel="icon" href="../../../assets/img/favicon-32x32.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
     
     
       
@@ -1083,6 +1085,8 @@
       
         
       
+        
+      
     
     
       
@@ -1426,6 +1430,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HumanPlus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HumanPlus
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -2032,14 +2057,14 @@
 </tbody>
 </table>
 <h4 id="_11">未学习的物体、背景和环境<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
-<p>RT-2 和 RT-2-X 的性能大致相当（<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a>行 (1) 和 (2)，最后一列）。这并不意外，因为 RT-2 的 VLM 主干已经在这些维度上很好地泛化了</p>
+<p>RT-2 和 RT-2-X 的性能大致相当（<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a> 行 (1) 和 (2)，最后一列）。这并不意外，因为 RT-2 的 VLM 主干已经在这些维度上很好地泛化了</p>
 <h4 id="_12">新型技能评估<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
 <p>为了研究机器人之间的知识转移，作者使用 Google Robot 进行了实验，评估 RT-2 数据集中不存在，但出现在另一个机器人（WidowX）的 Bridge 数据集中的对象和技能（新型技能，emergent skills，如下图所示）</p>
 <p><img alt="out-of-distribution 技能" src="../../../assets/img/docs/PR/Robotics/Open-X-Embodiment/image-3.png" /></p>
-<p>结果显示在<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a> Emergent Skills Evaluation 栏中。比较<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a>第 (1) 行和第 (2) 行，可以发现 RT-2-X 的性能优于 RT-2 大约三倍，这表明将其他不同类别的机器人的数据纳入训练中，也可以改善可以执行的任务范围（即使是已经拥有大量可用数据的机器人）。这表明与其他平台的数据进行联合训练可以为 RT-2-X 赋予该平台原始数据集中不存在的额外技能</p>
-<p>继续从 RT-2-X 训练中删除 Bridge 数据集进行消融（见<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a>行 (3)），可见 Emergent Skills 的性能显著降低，这表明从 WidowX 数据的传输可能确实是 RT-2-X 与 Google 机器人组合可以执行的额外技能的原因</p>
+<p>结果显示在 <a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a> Emergent Skills Evaluation 栏中。比较 <a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a> 第 (1) 行和第 (2) 行，可以发现 RT-2-X 的性能优于 RT-2 大约三倍，这表明将其他不同类别的机器人的数据纳入训练中，也可以改善可以执行的任务范围（即使是已经拥有大量可用数据的机器人）。这表明与其他平台的数据进行联合训练可以为 RT-2-X 赋予该平台原始数据集中不存在的额外技能</p>
+<p>继续从 RT-2-X 训练中删除 Bridge 数据集进行消融（见 <a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a> 行 (3)），可见 Emergent Skills 的性能显著降低，这表明从 WidowX 数据的传输可能确实是 RT-2-X 与 Google 机器人组合可以执行的额外技能的原因</p>
 <h3 id="_13">模型设计决策的影响<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>进行消融来衡量不同设计决策对我们性能最佳的 RT-2-X 模型泛化能力的影响。可以注意到<a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a>中</p>
+<p>进行消融来衡量不同设计决策对我们性能最佳的 RT-2-X 模型泛化能力的影响。可以注意到 <a href="#impact-of-design-decisions-on-generalization-and-emergent skills">上表</a> 中</p>
 <ul>
 <li>包含图像的简短历史记录可以显着提高泛化性能（行 (4) 与行 (5)）</li>
 <li>Web-based pre-training 对于实现大型模型的高性能至关重要（行 (4) 与行 (6)）</li>
@@ -2076,7 +2101,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <!-- mkdocs-git-revision-date-localized-plugin -->
     
     最后更新:
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年7月1日 21:45:15</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">2024年7月4日 22:10:23</span>
     
         <br />
         创建日期:
@@ -2219,7 +2244,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-fil
     <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.tracking", "navigation.tabs", "navigation.indexes", "navigation.top"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
       
