@@ -202,7 +202,7 @@ RT-1-X 仅根据该混合数据进行训练；RT-2-X 以大约 1:1 的比例分�
 
 #### 未学习的物体、背景和环境
 
-RT-2 和 RT-2-X 的性能大致相当（[上表](#impact-of-design-decisions-on-generalization-and-emergent skills)行 (1) 和 (2)，最后一列）。这并不意外，因为 RT-2 的 VLM 主干已经在这些维度上很好地泛化了
+RT-2 和 RT-2-X 的性能大致相当（[上表](#impact-of-design-decisions-on-generalization-and-emergent skills) 行 (1) 和 (2)，最后一列）。这并不意外，因为 RT-2 的 VLM 主干已经在这些维度上很好地泛化了
 
 #### 新型技能评估
 
@@ -210,13 +210,13 @@ RT-2 和 RT-2-X 的性能大致相当（[上表](#impact-of-design-decisions-on-
 
 ![out-of-distribution 技能](../../assets/img/docs/PR/Robotics/Open-X-Embodiment/image-3.png)
 
-结果显示在[上表](#impact-of-design-decisions-on-generalization-and-emergent skills) Emergent Skills Evaluation 栏中。比较[上表](#impact-of-design-decisions-on-generalization-and-emergent skills)第 (1) 行和第 (2) 行，可以发现 RT-2-X 的性能优于 RT-2 大约三倍，这表明将其他不同类别的机器人的数据纳入训练中，也可以改善可以执行的任务范围（即使是已经拥有大量可用数据的机器人）。这表明与其他平台的数据进行联合训练可以为 RT-2-X 赋予该平台原始数据集中不存在的额外技能
+结果显示在 [上表](#impact-of-design-decisions-on-generalization-and-emergent skills) Emergent Skills Evaluation 栏中。比较 [上表](#impact-of-design-decisions-on-generalization-and-emergent skills) 第 (1) 行和第 (2) 行，可以发现 RT-2-X 的性能优于 RT-2 大约三倍，这表明将其他不同类别的机器人的数据纳入训练中，也可以改善可以执行的任务范围（即使是已经拥有大量可用数据的机器人）。这表明与其他平台的数据进行联合训练可以为 RT-2-X 赋予该平台原始数据集中不存在的额外技能
 
-继续从 RT-2-X 训练中删除 Bridge 数据集进行消融（见[上表](#impact-of-design-decisions-on-generalization-and-emergent skills)行 (3)），可见 Emergent Skills 的性能显著降低，这表明从 WidowX 数据的传输可能确实是 RT-2-X 与 Google 机器人组合可以执行的额外技能的原因
+继续从 RT-2-X 训练中删除 Bridge 数据集进行消融（见 [上表](#impact-of-design-decisions-on-generalization-and-emergent skills) 行 (3)），可见 Emergent Skills 的性能显著降低，这表明从 WidowX 数据的传输可能确实是 RT-2-X 与 Google 机器人组合可以执行的额外技能的原因
 
 ### 模型设计决策的影响
 
-进行消融来衡量不同设计决策对我们性能最佳的 RT-2-X 模型泛化能力的影响。可以注意到[上表](#impact-of-design-decisions-on-generalization-and-emergent skills)中
+进行消融来衡量不同设计决策对我们性能最佳的 RT-2-X 模型泛化能力的影响。可以注意到 [上表](#impact-of-design-decisions-on-generalization-and-emergent skills) 中
 
 - 包含图像的简短历史记录可以显着提高泛化性能（行 (4) 与行 (5)）
 - Web-based pre-training 对于实现大型模型的高性能至关重要（行 (4) 与行 (6)）

@@ -9,7 +9,7 @@ totalwd: true
 !!! note "文章简介"
     RoboCasa: Large-Scale Simulation of Everyday Tasks for Generalist Robots
 
-    AI 的最新进展很大程度上是由规模化推动的，但是在 Robotics 中，由于不存在现实生活中大量的标注数据，难以进行规模化。因此本文提出以厨房环境为中心的逼真且多样化的场景以生成的机器人数据进行大规模模仿学习。
+    AI 的最新进展很大程度上是由规模化推动的，但是在 Robotics 中，由于不存在现实生活中大量的标注数据，难以进行规模化。因此本文提出以厨房环境为中心的逼真且多样化的场景以生成的机器人数据进行大规模模仿学习
 
 ## 简介
 

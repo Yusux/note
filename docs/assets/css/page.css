@@ -65,6 +65,10 @@
     --md-code-bg-color: #121212;
 }
 
+[data-md-color-scheme="slate"] .md-typeset figure img {
+    background-color: rgba(225, 225, 225);
+}
+
 .md-copyright {
     font-size: .55rem;
 }

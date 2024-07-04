@@ -6,4 +6,6 @@ totalwd: true
 
 # Robotics
 
-也许更具体的说法是**具身智能**
+- [RoboCasa](RoboCasa.md)
+- [Open X-Embodiment](Open-X-Embodiment.md)
+- [HumanPlus](HumanPlus.md)
