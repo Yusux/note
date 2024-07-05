@@ -140,3 +140,7 @@ nav:
       - RoboCasa: PR/Robotics/RoboCasa.md
       - Open X-Embodiment: PR/Robotics/Open-X-Embodiment.md
       - HumanPlus: PR/Robotics/HumanPlus.md
+    - CV:
+      - PR/CV/index.md
+      - MASt3R: PR/CV/MASt3R.md
+      - CAT3D: PR/CV/CAT3D.md
