@@ -144,3 +144,6 @@ nav:
       - PR/CV/index.md
       - MASt3R: PR/CV/MASt3R.md
       - CAT3D: PR/CV/CAT3D.md
+    - LLM:
+      - PR/LLM/index.md
+      - MCTSr: PR/LLM/MCTSr.md
