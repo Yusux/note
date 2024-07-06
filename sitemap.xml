@@ -131,6 +131,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://note.yusux.xyz/PR/LLM/</loc>
+         <lastmod>2024-07-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://note.yusux.xyz/PR/LLM/MCTSr/</loc>
+         <lastmod>2024-07-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://note.yusux.xyz/PR/Robotics/</loc>
          <lastmod>2024-07-06</lastmod>
          <changefreq>daily</changefreq>
