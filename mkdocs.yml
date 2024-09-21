@@ -1,5 +1,5 @@
-site_name: Yusux 的笔记本
-site_url: https://note.yusux.xyz
+site_name: Rorin 的笔记本
+site_url: https://note.rorin.cc
 site_description: 杂事杂录
 repo_name: Yusux/note
 repo_url: https://github.com/Yusux/note
@@ -73,7 +73,7 @@ extra:
     - icon: octicons/mark-github-16
       link: https://github.com/Yusux
     - icon: octicons/home-16
-      link: https://yusux.xyz
+      link: https://rorin.cc
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
