@@ -9,7 +9,7 @@ copyright: Copyright &copy; 2024 Yusux
 theme: 
   name: material
   language: 'zh'
-  favicon: assets/img/favicon-32x32.png
+  favicon: https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/img/favicon-32x32.png
   icon: 
     logo: material/notebook-outline
   custom_dir: docs/overrides
@@ -78,17 +78,17 @@ extra:
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
-  - assets/js/katex.js
+  - https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/js/katex.js
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.min.css
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css
   - https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css
-  - assets/css/card.css
-  - assets/css/moegirl.css
-  - assets/css/page.css
-  - assets/css/counter.css
-  - assets/css/tasklist.css
+  - https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/card.css
+  - https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/moegirl.css
+  - https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/page.css
+  - https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/counter.css
+  - https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/tasklist.css
 
 plugins:
   - search
