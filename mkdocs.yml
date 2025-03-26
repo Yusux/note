@@ -4,7 +4,7 @@ site_description: 杂事杂录
 repo_name: Yusux/note
 repo_url: https://github.com/Yusux/note
 edit_uri: tree/master/docs
-copyright: Copyright &copy; 2024 Yusux
+copyright: Copyright &copy; 2024-2025 Rorin
 
 theme: 
   name: material
@@ -107,43 +107,43 @@ plugins:
         cachefile: true
 
 nav:
-  - Home:
+  - 根:
     - index.md
     - friends.md
-  - Computer Science:
-    - CS/index.md
+  - 计算机科学:
+    - cs/index.md
     - 编译原理:
-      - CS/Compilers/index.md
-      - 概述: CS/Compilers/ch1.md
-      - 词法分析: CS/Compilers/ch2.md
+      - cs/compilers/index.md
+      - 概述: cs/compilers/ch1.md
+      - 词法分析: cs/compilers/ch2.md
       - 语法分析:
-        - CS/Compilers/ch3/index.md
-        - CFG 及语法分析概述: CS/Compilers/ch3/ch3-1.md
-        - 自顶向下分析: CS/Compilers/ch3/ch3-2.md
-        - 自底向上分析: CS/Compilers/ch3/ch3-3.md
-        - 语法分析器与小结: CS/Compilers/ch3/ch3-4.md
-      - 抽象语法: CS/Compilers/ch4.md
-      - 语义分析: CS/Compilers/ch5.md
-      - 活动记录: CS/Compilers/ch6.md
-      - 中间代码生成: CS/Compilers/ch7.md
-      - 基本块和 Traces: CS/Compilers/ch8.md
-      - 指令选择: CS/Compilers/ch9.md
-      - 活跃变量分析: CS/Compilers/ch10.md
-      - 寄存器分配: CS/Compilers/ch11.md
-      - 垃圾回收: CS/Compilers/ch13.md
-      - 面向对象语言: CS/Compilers/ch14.md
-      - 循环优化: CS/Compilers/ch18.md
-  - Paper Reading:
-    - PR/index.md
-    - Robotics:
-      - PR/Robotics/index.md
-      - RoboCasa: PR/Robotics/RoboCasa.md
-      - Open X-Embodiment: PR/Robotics/Open-X-Embodiment.md
-      - HumanPlus: PR/Robotics/HumanPlus.md
-    - CV:
-      - PR/CV/index.md
-      - MASt3R: PR/CV/MASt3R.md
-      - CAT3D: PR/CV/CAT3D.md
-    - LLM:
-      - PR/LLM/index.md
-      - MCTSr: PR/LLM/MCTSr.md
+        - cs/compilers/ch3/index.md
+        - CFG 及语法分析概述: cs/compilers/ch3/ch3-1.md
+        - 自顶向下分析: cs/compilers/ch3/ch3-2.md
+        - 自底向上分析: cs/compilers/ch3/ch3-3.md
+        - 语法分析器与小结: cs/compilers/ch3/ch3-4.md
+      - 抽象语法: cs/compilers/ch4.md
+      - 语义分析: cs/compilers/ch5.md
+      - 活动记录: cs/compilers/ch6.md
+      - 中间代码生成: cs/compilers/ch7.md
+      - 基本块和 Traces: cs/compilers/ch8.md
+      - 指令选择: cs/compilers/ch9.md
+      - 活跃变量分析: cs/compilers/ch10.md
+      - 寄存器分配: cs/compilers/ch11.md
+      - 垃圾回收: cs/compilers/ch13.md
+      - 面向对象语言: cs/compilers/ch14.md
+      - 循环优化: cs/compilers/ch18.md
+  - 随记:
+    - note/index.md
+    - 具身智能:
+      - note/robotics/index.md
+      - RoboCasa: note/robotics/RoboCasa.md
+      - Open X-Embodiment: note/robotics/Open-X-Embodiment.md
+      - HumanPlus: note/robotics/HumanPlus.md
+    - 计算机视觉:
+      - note/cv/index.md
+      - MASt3R: note/cv/MASt3R.md
+      - CAT3D: note/cv/CAT3D.md
+    - 大语言模型:
+      - note/llm/index.md
+      - MCTSr: note/llm/MCTSr.md
