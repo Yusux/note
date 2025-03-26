@@ -10,7 +10,13 @@
       
       
       
+        <link rel="canonical" href="https://note.rorin.cc/cs/compilers/ch8/">
       
+      
+        <link rel="prev" href="../ch7/">
+      
+      
+        <link rel="next" href="../ch9/">
       
       
       <link rel="icon" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/img/favicon-32x32.png">
@@ -18,19 +24,22 @@
     
     
       
-        <title>Rorin 的笔记本</title>
+        <title>基本块和 Traces - Rorin 的笔记本</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.4af4bdda.min.css">
+
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4af4bdda.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
 
     
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@2.4.1/build/pseudocode.min.css">
+
     
       
     
@@ -38,7 +47,7 @@
       
     
     
-      <link rel="stylesheet" href="/css/svg.css">
+      <link rel="stylesheet" href="../../../css/svg.css">
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.min.css">
     
@@ -56,7 +65,7 @@
     
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/tasklist.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -81,6 +90,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#traces" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +105,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="/." title="Rorin 的笔记本" class="md-header__button md-logo" aria-label="Rorin 的笔记本" data-md-component="logo">
+    <a href="../../.." title="Rorin 的笔记本" class="md-header__button md-logo" aria-label="Rorin 的笔记本" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 4v6l-2-2-2 2V4H9v16h10V4zM3 7V5h2V4a2 2 0 0 1 2-2h12c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm2-2v2h2V5zm0 14h2v-2H5zm0-6h2v-2H5z"/></svg>
@@ -111,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              基本块和 Traces
             
           </span>
         </div>
@@ -230,7 +244,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/." class="md-tabs__link">
+        <a href="../../.." class="md-tabs__link">
           
   
     
@@ -246,11 +260,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/cs/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
     
@@ -270,7 +286,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/note/" class="md-tabs__link">
+        <a href="../../../note/" class="md-tabs__link">
           
   
     
@@ -305,7 +321,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Rorin 的笔记本" class="md-nav__button md-logo" aria-label="Rorin 的笔记本" data-md-component="logo">
+    <a href="../../.." title="Rorin 的笔记本" class="md-nav__button md-logo" aria-label="Rorin 的笔记本" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 4v6l-2-2-2 2V4H9v16h10V4zM3 7V5h2V4a2 2 0 0 1 2-2h12c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm2-2v2h2V5zm0 14h2v-2H5zm0-6h2v-2H5z"/></svg>
@@ -358,7 +374,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/." class="md-nav__link ">
+            <a href="../../.." class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -392,7 +408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/friends/" class="md-nav__link">
+      <a href="../../../friends/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -418,6 +434,8 @@
       
   
   
+    
+  
   
   
     
@@ -432,19 +450,22 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/cs/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -456,13 +477,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             计算机科学
@@ -475,6 +496,8 @@
                 
   
   
+    
+  
   
   
     
@@ -518,16 +541,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/cs/compilers/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -545,7 +568,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             编译原理
@@ -561,7 +584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch1/" class="md-nav__link">
+      <a href="../ch1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -583,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch2/" class="md-nav__link">
+      <a href="../ch2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -634,7 +657,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/cs/compilers/ch3/" class="md-nav__link ">
+            <a href="../ch3/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -668,7 +691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch3/ch3-1/" class="md-nav__link">
+      <a href="../ch3/ch3-1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -690,7 +713,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch3/ch3-2/" class="md-nav__link">
+      <a href="../ch3/ch3-2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -712,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch3/ch3-3/" class="md-nav__link">
+      <a href="../ch3/ch3-3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -734,7 +757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch3/ch3-4/" class="md-nav__link">
+      <a href="../ch3/ch3-4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -764,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch4/" class="md-nav__link">
+      <a href="../ch4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -786,7 +809,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch5/" class="md-nav__link">
+      <a href="../ch5/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -808,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch6/" class="md-nav__link">
+      <a href="../ch6/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -830,7 +853,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch7/" class="md-nav__link">
+      <a href="../ch7/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -849,10 +872,31 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/cs/compilers/ch8/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    基本块和 Traces
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -862,6 +906,128 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      规范形式
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      规范树（线性化）的过程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="规范树（线性化）的过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eseqeseq" class="md-nav__link">
+    <span class="md-ellipsis">
+      消除 ESEQ（ESEQ 的线性化规则）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call" class="md-nav__link">
+    <span class="md-ellipsis">
+      将 CALL 移至顶层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      消除 SEQ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      处理条件分支
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="处理条件分支">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Blocks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traces_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      考虑跳转
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traces_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      最优 Traces
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -874,7 +1040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch9/" class="md-nav__link">
+      <a href="../ch9/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -896,7 +1062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch10/" class="md-nav__link">
+      <a href="../ch10/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -918,7 +1084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch11/" class="md-nav__link">
+      <a href="../ch11/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -940,7 +1106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch13/" class="md-nav__link">
+      <a href="../ch13/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -962,7 +1128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch14/" class="md-nav__link">
+      <a href="../ch14/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -984,7 +1150,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cs/compilers/ch18/" class="md-nav__link">
+      <a href="../ch18/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1048,7 +1214,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/note/" class="md-nav__link ">
+            <a href="../../../note/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1109,7 +1275,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/note/robotics/" class="md-nav__link ">
+            <a href="../../../note/robotics/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1143,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/note/robotics/RoboCasa/" class="md-nav__link">
+      <a href="../../../note/robotics/RoboCasa/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1165,7 +1331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/note/robotics/Open-X-Embodiment/" class="md-nav__link">
+      <a href="../../../note/robotics/Open-X-Embodiment/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1187,7 +1353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/note/robotics/HumanPlus/" class="md-nav__link">
+      <a href="../../../note/robotics/HumanPlus/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1242,7 +1408,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/note/cv/" class="md-nav__link ">
+            <a href="../../../note/cv/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1276,7 +1442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/note/cv/MASt3R.md" class="md-nav__link">
+      <a href="../../../note/cv/MASt3R.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1298,7 +1464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/note/cv/CAT3D.md" class="md-nav__link">
+      <a href="../../../note/cv/CAT3D.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1351,7 +1517,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/note/llm/" class="md-nav__link ">
+            <a href="../../../note/llm/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1385,7 +1551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/note/llm/MCTSr/" class="md-nav__link">
+      <a href="../../../note/llm/MCTSr/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1432,6 +1598,118 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      规范形式
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      规范树（线性化）的过程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="规范树（线性化）的过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eseqeseq" class="md-nav__link">
+    <span class="md-ellipsis">
+      消除 ESEQ（ESEQ 的线性化规则）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call" class="md-nav__link">
+    <span class="md-ellipsis">
+      将 CALL 移至顶层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      消除 SEQ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      处理条件分支
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="处理条件分支">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Blocks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traces_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      考虑跳转
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traces_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      最优 Traces
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1443,8 +1721,405 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="traces">基本块和 Traces<a class="headerlink" href="#traces" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 2522 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 8 分钟</p>
+</div>
+<h2 id="_1">规范形式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>语义分析阶段生成的树必须翻译成汇编语言或机器语言。Tree 语言的运算符经过精心选择，以匹配大多数机器的功能，但是</p>
+<ul>
+<li>Tree 语言的某些方面与机器语言并不完全对应</li>
+<li>Tree 语言的某些方面会干扰编译时优化分析</li>
+</ul>
+<p>例如</p>
+<ul>
+<li><code>CJUMP</code> 会在两个分支之间选择一个跳转<ul>
+<li>真正的汇编指令里有 conditional jump，在条件成立会跳转，条件不成立的情况下就执行自己的后一条指令</li>
+<li>而在 IR tree 里无论成立还是不成立，都需要跳转</li>
+</ul>
+</li>
+<li>表达式内的 <code>ESEQ</code> 结点不方便<ul>
+<li>评估子树的不同顺序会产生不同的结果（因为执行 <code>s</code> 时的副作用）</li>
+<li>但是能够以任意顺序计算表达式的子表达式是很有用的</li>
+</ul>
+</li>
+<li>表达式中的 <code>CALL</code> 结点也依赖于顺序（有副作用）<ul>
+<li>当尝试将参数放入一组固定的形式参数寄存器时</li>
+<li>例如，<code>CALL(f, [e1, CALL(g, [e2, ...])])</code></li>
+</ul>
+</li>
+<li>中间代码具有通用树形形式<ul>
+<li>易于从 AST 生成</li>
+<li>但很难直接转换为汇编（汇编代码是一系列语句）</li>
+</ul>
+</li>
+</ul>
+<p>因此，需要将 IR 转换为规范形式以消除以上的问题</p>
+<p>这就引入了规范形式的概念：</p>
+<ul>
+<li>所有 <code>SEQ</code> 结点都沿着右链</li>
+<li>所有语句都带到树的顶层</li>
+<li>可以直接生成程序集</li>
+</ul>
+<p><img alt="规范形式" src="../../../assets/img/docs/cs/compilers/ch8/image.png" /></p>
+<p>一个函数只是一个包含所有内容的大 <code>SEQ</code> 语句，从而可以更加方便地转换为汇编代码</p>
+<p>为了实现转换为规范形式的目标，可以分三个阶段改造 IR 树：</p>
+<ul>
+<li>将一棵树重写为不带 <code>SEQ</code> 或 <code>ESEQ</code> 结点的一系列规范树（canonical trees）</li>
+<li>该列表被分组为一组基本块（basic blocks），其中不包含内部跳转或标签</li>
+<li>基本块被排序为一组 traces，其中每个 <code>CJUMP</code> 后面紧跟着其错误分支的标签</li>
+</ul>
+<h2 id="_2">规范树（线性化）的过程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>规范树（Canonical Trees）具有如下的性质：</p>
+<ul>
+<li>无 <code>SEQ</code> 或 <code>ESEQ</code></li>
+<li>每个 <code>CALL</code> 的父级是 <code>EXP(...)</code> 或 <code>MOVE(TEMP t, ...)</code></li>
+</ul>
+<p>因此：</p>
+<ul>
+<li>每棵规范树只包含一个语句结点，即根结点，其他结点均为表达结点</li>
+<li><code>CALL</code> 结点的父结点必须是一颗规范树的根结点，且必须是 <code>EXP(...)</code> 或 <code>MOVE(TEMP t, ...)</code></li>
+<li>一棵规范树中只能有一个 <code>CALL</code> 结点，因为 <code>EXP(...)</code> 和 <code>MOVE(TEMP t, ...)</code> 只能包含一个 <code>CALL</code></li>
+</ul>
+<h3 id="eseqeseq">消除 ESEQ（ESEQ 的线性化规则）<a class="headerlink" href="#eseqeseq" title="Permanent link">&para;</a></h3>
+<div class="admonition question">
+<p class="admonition-title">如何消除 ESEQ 结点</p>
+<p>将它们在树中提升得越来越高，直到它们成为 <code>SEQ</code> 结点</p>
+</div>
+<p>具体的规则包括：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">原始</th>
+<th style="text-align: center;">转换后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">ESEQ(s1, ESEQ(s2, e))</td>
+<td style="text-align: center;">ESEQ(SEQ(s1,s2), e)</td>
+</tr>
+<tr>
+<td style="text-align: center;">BINOP(op, ESEQ(S, e1), e2)</td>
+<td style="text-align: center;">ESEQ(s, BINOP(op, e1, e2))</td>
+</tr>
+<tr>
+<td style="text-align: center;">MEM(ESEQ(s,e1))</td>
+<td style="text-align: center;">ESEQ(s, MEM(e1))</td>
+</tr>
+<tr>
+<td style="text-align: center;">JUMP(ESEQ(s, e1))</td>
+<td style="text-align: center;">SEQ(s, JUMP(e1))</td>
+</tr>
+<tr>
+<td style="text-align: center;">CJUMP(op, ESEQ(s, e1), e2, l1, l2)</td>
+<td style="text-align: center;">SEQ(s, CJUMP(op, e1, e2, l1, l2))</td>
+</tr>
+</tbody>
+</table>
+<p>接着考虑副作用对线性化规则的影响，考虑 <code>BINOP(op, e1, ESEQ(s, e2))</code>，因为 <code>s</code> 可能有影响 <code>e1</code> 值的副作用，所以不能直接互换 <code>s</code> 和 <code>e1</code> 的顺序，可以使用临时存储 <code>e1</code> 的值</p>
+<div class="admonition note">
+<p class="admonition-title">交换性</p>
+<p>交换性（Commutativity）：如果 <code>s</code> 不影响 <code>e</code> 的值，则语句 <code>s</code> 和表达式 <code>e</code> 可以交换</p>
+<p>若不可交换，则可能需要引入临时变量来保存 <code>e</code> 的值，从而得到规范树</p>
+</div>
+<p><img alt="交换性对转换的影响" src="../../../assets/img/docs/cs/compilers/ch8/image-1.png" /></p>
+<p>由此，我们可以得到在不同交换性下的转换规则：</p>
+<ul>
+<li>
+<p>如果 <code>s</code> <code>e1</code> 是可交换的</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">原始</th>
+<th style="text-align: center;">转换后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">BINOP(op, e1, ESEQ(s, e2))</td>
+<td style="text-align: center;">ESEQ(s, BINOP(op, e1, e2))</td>
+</tr>
+<tr>
+<td style="text-align: center;">CJUMP(op, e1, ESEQ(s, e2), l1, l2)</td>
+<td style="text-align: center;">SEQ(s, CJUMP(op, e1, e2, l1, l2))</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>如果 <code>s</code> <code>e1</code> 是不可交换的</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">原始</th>
+<th style="text-align: center;">转换后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">BINOP(op, e1, ESEQ(s, e2))</td>
+<td style="text-align: center;">ESEQ(MOVE(TEMP t, e1),<br>ESEQ(s, BINOP(op, TEMP t, e2)))</td>
+</tr>
+<tr>
+<td style="text-align: center;">CJUMP(op, e1, ESEQ(s, e2), l1, l2)</td>
+<td style="text-align: center;">SEQ(MOVE(TEMP t, e1),<br>SEQ(s, CJUMP(op, TEMP t, e2, l1, l2)))</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>但是我们很难静态地确定语句 <code>s</code> 与表达式 <code>e</code> 是否可以交换，因此需要做一个保守的近似（conservative approximation）。这种近似可以如下：</p>
+<ul>
+<li>常量可与任何语句交换</li>
+<li>空语句可与任何表达式交换</li>
+<li>假设任何其他情况都不具备交换性</li>
+</ul>
+<details class="lab">
+<summary>一些扩展内容</summary>
+<p><code>BINOP</code> 和 <code>MOVE</code> 的规则依赖于交换较低位置的语句 <code>s</code> 和表达式 <code>e</code> 的顺序，当 <code>s</code> 无法改变 <code>e</code> 中使用的值时，可以安全地完成此操作</p>
+<p>语句 <code>s</code> 和表达式 <code>e</code> 不能互换的两个条件</p>
+<ul>
+<li>该语句可以更改表达式使用的临时变量的值</li>
+<li>该语句可以更改表达式使用的内存位置的值</li>
+</ul>
+<p>为了检查这两点</p>
+<ul>
+<li>临时变量：很容易确定语句是否更新表达式使用的临时变量，因为临时变量具有唯一的名称</li>
+<li>内存：这要困难得多，因为两个内存位置可能是别名（aliases）关系</li>
+</ul>
+<p>因此更精确（但仍然保守）的近似可以使用一些<strong>别名分析</strong>技术</p>
+</details>
+<h3 id="call">将 CALL 移至顶层<a class="headerlink" href="#call" title="Permanent link">&para;</a></h3>
+<p>在现代处理器中，函数调用的返回值一般保存到专用的寄存器中，那么考虑 <code>BINOP(PLUS, CALL(...), CALL(...))</code>，第二次调用的返回值会覆盖第一次调用的返回值</p>
+<p>因此，我们可以立即将每个返回值分配到一个新的临时寄存器中，并把 CALL 移至顶层</p>
+<p><code>CALL(fun, args)</code> -&gt; <code>ESEQ(MOVE(TEMP t, CALL(fun, args)), TEMP t)</code></p>
+<h3 id="seq">消除 SEQ<a class="headerlink" href="#seq" title="Permanent link">&para;</a></h3>
+<p>应用上述规则后，我们可以得到 <code>SEQ(SEQ(SEQ(..., sx), sy), sz)</code> 的形式，只需要重复利用如下规则</p>
+<p><code>SEQ(SEQ(a, b), c) = SEQ(a, seq(b, c))</code></p>
+<p>即可获得如下形式的表达式</p>
+<p><code>SEQ(s1, SEQ(s2, ..., SEQ(sn-1, sn)...))</code></p>
+<p>进而将其看作一个简单的语句列表</p>
+<p><code>s1, s2, ..., sn, ...</code></p>
+<p>其中每个 <code>si</code> 均不包含 <code>SEQ</code>/<code>ESEQ</code> 结点</p>
+<h2 id="_3">处理条件分支<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><code>CJUMP</code> 的问题：在大多数机器上没有双向分支的对应项</p>
+<p>目标：重新排列树，使得 <code>CJUMP(cond, l_t, l_f)</code> 被 <code>LABEL(l_f)</code> 紧跟着</p>
+<p><img alt="处理条件分支目的" src="../../../assets/img/docs/cs/compilers/ch8/image-2.png" /></p>
+<p>解决方案：</p>
+<ul>
+<li>将规范树列表形成基本块（basic block）</li>
+<li>将基本块排序为 traces</li>
+</ul>
+<h3 id="basic-blocks">Basic Blocks<a class="headerlink" href="#basic-blocks" title="Permanent link">&para;</a></h3>
+<p>基本块（basic block）是始终在开头输入并在结尾退出的语句序列，即：</p>
+<ul>
+<li>第一个语句是一个 <code>LABEL</code></li>
+<li>最后一条语句是 <code>JUMP</code> 或 <code>CJUMP</code></li>
+<li>该块中没有其他 <code>LABEL</code>、<code>JUMP</code> 或 <code>CJUMP</code></li>
+</ul>
+<p>构建算法为：</p>
+<ul>
+<li>从头到尾扫描</li>
+<li>当找到标签（包括跳转的目的地址）时，结束前一个块并开始一个新块并</li>
+<li>每当找到 <code>CJUMP</code>/<code>JUMP</code> 时，当前块就会结束并开始下一个块</li>
+<li>如果留下了一个没有 <code>CJUMP</code>/<code>JUMP</code> 结尾的块，则附加一个到下一个块的跳转</li>
+<li>如果一个块在开始时没有标签，添加一个标签</li>
+</ul>
+<details class="example">
+<summary>Basic Blocks</summary>
+<p><img alt="Basic Blocks Example" src="../../../assets/img/docs/cs/compilers/ch8/image-3.png" /></p>
+</details>
+<p>此外，引入控制流图（Control Flow Graph，CFG）：结点是基本块，边是它们之间的跳转关系。在某些情况下，CFG 的结点是一条语句（如活跃变量分析和寄存器分配部分）</p>
+<details class="example">
+<summary>Control Flow Graph</summary>
+<p><img alt="CFG Example" src="../../../assets/img/docs/cs/compilers/ch8/image-4.png" /></p>
+</details>
+<h3 id="traces_1">Traces<a class="headerlink" href="#traces_1" title="Permanent link">&para;</a></h3>
+<p>基本块可以按任意顺序排列，执行程序的结果将是相同的。基于这个属性，我们可以优化跳转的性质和次数：</p>
+<ul>
+<li>选择块的顺序，使得每个 <code>CJUMP</code> 都被它的错误分支跟着</li>
+<li>安排许多无条件 <code>JUMP</code> 后紧跟着其目标标签<ul>
+<li>这样可以允许删除无条件跳转，使得编译后的程序运行得更快一些</li>
+</ul>
+</li>
+<li>*其他方面：可能还可以优化指令缓存等</li>
+</ul>
+<details class="example">
+<summary>Basic Block Reordering</summary>
+<p><img alt="Basic Block Reordering" src="../../../assets/img/docs/cs/compilers/ch8/image-5.png" /></p>
+<p>99% 和 1% 代表执行频率。可以看到，Code Layout 1 减少了指令预取的中断，提高了 I-cache 的命中率</p>
+</details>
+<p>找到基本块的良好排序的常用技术是构造 trace</p>
+<p>Trace: 执行过程中可以连续执行的语句序列（或者说一系列基本块）</p>
+<p>A covering set of traces: 每条 trace 都是无循环的，且每个块必须恰好位于一个 trace 中</p>
+<p>生成 covering set of traces 的基本算法是对 CFG 的深度优先遍历：</p>
+<ul>
+<li>从某个 basic block 开始，往后继结点遍历，标记每个被访问的 basic block 并将其附加到当前 trace 中</li>
+<li>当到达某个 basic block，其后继结点均已标记，这个 trace 就算完了</li>
+<li>选择一个未标记的 basic block 作为下一个 trace 的起点，不断迭代，直到所有的 basic blocks 都被标记</li>
+</ul>
+<pre id="Generating-a-Covering-Set-of-Traces" class="pseudocode">
+\begin{algorithm}
+\caption{Generating a Covering Set of Traces}
+\begin{algorithmic}
+\State Put all the blocks of the program into a list $Q$
+\While{$Q$ is not empty}
+    \State start a new (empty) trace, call it $T$
+    \State remove the head element $b$ from $Q$
+    \While{$b$ is not marked}
+        \State mark $b$; append $b$ to the end of the current trace $T$;
+        \State examine the successors of $b$
+        \If{there is any unmarked successor $c$}
+            \State $b \gets c$
+        \EndIf
+    \EndWhile
+    \State end the current trace $T$
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<details class="example">
+<summary>Generating a Covering Set of Traces</summary>
+<p><img alt="Generating a Covering Set of Traces" src="../../../assets/img/docs/cs/compilers/ch8/image-6.png" /></p>
+<p>Covering set of traces:</p>
+<ul>
+<li>{a, b, c, d}</li>
+<li>{d, f, h}</li>
+<li>{g}</li>
+</ul>
+</details>
+<h3 id="_4">考虑跳转<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>我们更喜欢 <code>CJUMP</code> 后跟其错误标签，因为这可以转换为机器代码中的条件跳转，因此：</p>
+<ul>
+<li>对于任何 <code>CJUMP</code> 后跟其真实标签分支的情况<ul>
+<li>交换真假标签并反转条件</li>
+</ul>
+</li>
+<li>对于任何 <code>CJUMP</code> 后跟其错误标签分支的情况<ul>
+<li>这是我们想要的情况，不需要做任何事情</li>
+</ul>
+</li>
+<li>对于任何后面没有标签的 <code>CJUMP(cond, a, b, lt, lf)</code><ul>
+<li>替换为
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>CJUMP(cond, a, b, lt, lfʹ)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>LABEL lfʹ
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>JUMP(NAME lf )
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<p>对于无条件跳转 <code>JUMP</code>，若一个 <code>JUMP</code> 被其目标标签紧跟着，则可以删除这个 <code>JUMP</code></p>
+<h3 id="traces_2">最优 Traces<a class="headerlink" href="#traces_2" title="Permanent link">&para;</a></h3>
+<p>“最优”需要标准，例如，任何频繁执行的指令序列（例如循环体）应该具有自己的 trace：</p>
+<ul>
+<li>这有助于减少无条件跳转的数量</li>
+<li>这有助于其他类型的优化<ul>
+<li>寄存器分配</li>
+<li>指令调度</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<details class="example">
+<summary>Optimal Traces</summary>
+<p><img alt="Optimal Traces" src="../../../assets/img/docs/cs/compilers/ch8/image-7.png" /></p>
+<p>(a): While循环的每个迭代有一个 <code>CJUMP</code> 和一个 <code>JUMP</code><br />
+(b): 使用了不同 traces, 但每个迭代仍有一个 <code>CJUMP</code> 和一个 <code>JUMP</code><br />
+(c): 每个迭代都没有 <code>JUMP</code></p>
+</details>
+
+
+
+<!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
+
+<hr />
+<div class="md-source-file">
+<small>
+
+    <!-- mkdocs-git-revision-date-localized-plugin -->
+    
+    最后更新:
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月26日 17:22:55">2025年3月26日 17:22:55</span>
+    
+        <br />
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2024年6月22日 00:07:07">2024年6月22日 00:07:07</span>
+    
+
+    <!-- mkdocs-git-revision-date-plugin -->
+    
+</small>
+</div>
+
+
+
+
+
+
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+        data-repo="Yusux/note"
+        data-repo-id="R_kgDOLbz6zw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLbz6z84Cdu5X"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+                
               </article>
             </div>
           
@@ -1514,10 +2189,11 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/", "features": ["content.code.annotate", "content.code.copy", "navigation.tracking", "navigation.tabs", "navigation.indexes", "navigation.top"], "search": "/assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.tracking", "navigation.tabs", "navigation.indexes", "navigation.top"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.c8b220af.min.js"></script>
+
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
       
@@ -1526,5 +2202,8 @@
         <script src="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/js/katex.js"></script>
       
     
+<script src="https://cdn.jsdelivr.net/npm/pseudocode@2.4.1/build/pseudocode.min.js"></script>
+<script>pseudocode.renderClass("pseudocode");</script>
+
   </body>
 </html>

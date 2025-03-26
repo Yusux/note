@@ -2,130 +2,134 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://note.rorin.cc/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
          <loc>https://note.rorin.cc/friends/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch1/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch1/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch10/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch10/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch11/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch11/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch13/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch13/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch14/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch14/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch18/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch18/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch2/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch2/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch4/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch4/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch5/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch5/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch6/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch6/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch7/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch7/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch8/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch8/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch9/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch9/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch3/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch3/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch3/ch3-1/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch3/ch3-1/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch3/ch3-2/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch3/ch3-2/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch3/ch3-3/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch3/ch3-3/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/CS/Compilers/ch3/ch3-4/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/cs/compilers/ch3/ch3-4/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/CV/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/cv/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/CV/CAT3D/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/cv/generation/VAE/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/CV/MASt3R/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/cv/reconstruction/CAT3D/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/LLM/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/cv/reconstruction/MASt3R/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/LLM/MCTSr/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/llm/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/Robotics/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/llm/MCTSr/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/Robotics/HumanPlus/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/robotics/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/Robotics/Open-X-Embodiment/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/robotics/HumanPlus/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
     <url>
-         <loc>https://note.rorin.cc/PR/Robotics/RoboCasa/</loc>
-         <lastmod>2024-09-21</lastmod>
+         <loc>https://note.rorin.cc/note/robotics/Open-X-Embodiment/</loc>
+         <lastmod>2025-03-26</lastmod>
+    </url>
+    <url>
+         <loc>https://note.rorin.cc/note/robotics/RoboCasa/</loc>
+         <lastmod>2025-03-26</lastmod>
     </url>
 </urlset>

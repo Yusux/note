@@ -1,0 +1,2627 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="杂事杂录">
+      
+      
+      
+        <link rel="canonical" href="https://note.rorin.cc/note/robotics/RoboCasa/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../Open-X-Embodiment/">
+      
+      
+      <link rel="icon" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/img/favicon-32x32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>RoboCasa - Rorin 的笔记本</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/svg.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.min.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/card.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/moegirl.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/page.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/counter.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/tasklist.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#robocasa" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Rorin 的笔记本" class="md-header__button md-logo" aria-label="Rorin 的笔记本" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 4v6l-2-2-2 2V4H9v16h10V4zM3 7V5h2V4a2 2 0 0 1 2-2h12c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm2-2v2h2V5zm0 14h2v-2H5zm0-6h2v-2H5z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rorin 的笔记本
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RoboCasa
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Yusux/note" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Yusux/note
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+    
+  
+  根
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../cs/" class="md-tabs__link">
+          
+  
+    
+  
+  计算机科学
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  随记
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Rorin 的笔记本" class="md-nav__button md-logo" aria-label="Rorin 的笔记本" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 4v6l-2-2-2 2V4H9v16h10V4zM3 7V5h2V4a2 2 0 0 1 2-2h12c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm2-2v2h2V5zm0 14h2v-2H5zm0-6h2v-2H5z"/></svg>
+
+    </a>
+    Rorin 的笔记本
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Yusux/note" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Yusux/note
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    根
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            根
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../friends/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    朋友们
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../cs/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    计算机科学
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机科学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../cs/compilers/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    编译原理
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            编译原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    概述
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    词法分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../cs/compilers/ch3/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    语法分析
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            语法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch3/ch3-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CFG 及语法分析概述
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch3/ch3-2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    自顶向下分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch3/ch3-3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    自底向上分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch3/ch3-4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    语法分析器与小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    抽象语法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    语义分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    活动记录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    中间代码生成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基本块和 Traces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    指令选择
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch10/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    活跃变量分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    寄存器分配
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch13/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    垃圾回收
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    面向对象语言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/compilers/ch18/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    循环优化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    随记
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            随记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    具身智能
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            具身智能
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    RoboCasa
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    RoboCasa
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关工作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相关工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      流行仿真框架
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robotics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Robotics 数据集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      从大型离线数据集中学习
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robocasa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoboCasa 模拟
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RoboCasa 模拟">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心模拟平台
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      厨房场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      资产库
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robocasa_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoboCasa 活动数据集
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RoboCasa 活动数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      原子任务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用大型语言模型创建复合任务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robocasa_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoboCasa 数据集
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RoboCasa 数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      通过人类远程操作收集一组基本演示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automated-trajectory-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      利用 automated trajectory generation 来综合演示
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      原子任务的模仿学习
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      复合任务的模仿学习
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      转移到现实世界环境
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      未解决的问题和未来工作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="未解决的问题和未来工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      作者提出
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      个人感受
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Open-X-Embodiment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Open X-Embodiment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HumanPlus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HumanPlus
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cv/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    计算机视觉
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            计算机视觉
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cv/MASt3R.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MASt3R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cv/CAT3D.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CAT3D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../llm/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    大语言模型
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            大语言模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../llm/MCTSr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MCTSr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关工作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相关工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      流行仿真框架
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robotics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Robotics 数据集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      从大型离线数据集中学习
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robocasa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoboCasa 模拟
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RoboCasa 模拟">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      核心模拟平台
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      厨房场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      资产库
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robocasa_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoboCasa 活动数据集
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RoboCasa 活动数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      原子任务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用大型语言模型创建复合任务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robocasa_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoboCasa 数据集
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RoboCasa 数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      通过人类远程操作收集一组基本演示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automated-trajectory-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      利用 automated trajectory generation 来综合演示
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      原子任务的模仿学习
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      复合任务的模仿学习
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      转移到现实世界环境
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      未解决的问题和未来工作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="未解决的问题和未来工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      作者提出
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      个人感受
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="robocasa">RoboCasa<a class="headerlink" href="#robocasa" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 3752 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 13 分钟</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">文章简介</p>
+<p>RoboCasa: Large-Scale Simulation of Everyday Tasks for Generalist Robots</p>
+<p>AI 的最新进展很大程度上是由规模化推动的，但是在 Robotics 中，由于不存在现实生活中大量的标注数据，难以进行规模化。因此本文提出以厨房环境为中心的逼真且多样化的场景以生成的机器人数据进行大规模模仿学习</p>
+</div>
+<h2 id="_1">简介<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Robotics 的一个关键问题是如何获取体现现实世界的巨大多样性和复杂性的机器人训练数据，如</p>
+<ul>
+<li>RT-1: Robotics transformer for real-world control at scale</li>
+<li>Bridge data: Boosting generalization of robotic skills with cross-domain datasets</li>
+<li>Open X-Embodiment: Robotic learning datasets and RT-X models</li>
+<li>Droid: A large-scale in-the-wild robot manipulation dataset</li>
+</ul>
+<p>虽然这些数据集可以在狭窄领域提高机器人的泛化能力，但是就通用而言，机器人学习规​​模化的可行路径是什么？这是本文研究的动机</p>
+<p>而从方案而言，由于在现实世界中收集越来越大的数据集需要不切实际的大量资本和劳动力，因此可以使用模拟作为生成大量用于模型训练的合成数据的替代方案</p>
+<ul>
+<li>一旦创建了功能丰富的高保真模拟器，我们就可以以低成本生成大量机器人数据</li>
+<li>生成式人工智能的快速发展促进了真实模拟的创建</li>
+<li>这可以加速 robot learning 的进程，让新 idea 可以快速实现原型并可复用</li>
+</ul>
+<p>而要实现高质量模拟，模拟器必须满足三个核心标准</p>
+<ul>
+<li>必须保证物理、渲染和底层模型的真实性，以便能够转移到现实世界</li>
+<li>必须满足其提供的场景、资产和任务的多样性</li>
+<li>必须伴随大型机器人数据集，以捕获其所提供的场景和行为的多样性</li>
+</ul>
+<p>综上，本文提出以家庭环境为中心的、在 Robosuite: A modular simulation framework and benchmark for robot learning 之上、基于 MuJoCo 的大型模拟框架 RoboCasa，以训练 generalist robots。支持单臂移动平台、人形机器人和带手臂的四足机器人等实体。其中包含 100 项系统评估任务（前 25 项是具有基本机器人技能的原子任务，例如拾取和放置、打开和关闭门以及扭转旋钮，另外 75 项是涉及一系列机器人技能的复合任务），使用从 LLMs 获取活动列表的方法来生成任务。另外，也通过扩展 MimicGen 来为原子任务生成 100K 个额外的 trajectories</p>
+<h2 id="_2">相关工作<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">流行仿真框架<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Feature</th>
+<th style="text-align: center;">RoboCasa</th>
+<th style="text-align: center;">AI2-THOR</th>
+<th style="text-align: center;">Habitat 2.0</th>
+<th style="text-align: center;">iGibson 2.0</th>
+<th style="text-align: center;">RLBench</th>
+<th style="text-align: center;">Behavior-1K</th>
+<th style="text-align: center;">robomimic</th>
+<th style="text-align: center;">ManiSkill 2</th>
+<th style="text-align: center;">OPTIMUS</th>
+<th style="text-align: center;">LIBERO</th>
+<th style="text-align: center;">MimicGen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Mobile Manipulation</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: center;">Room-Scale Scenes</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr>
+<td style="text-align: center;">Realistic Object Physics</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: center;">AI-generated Tasks</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr>
+<td style="text-align: center;">AI-generated Assets</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr>
+<td style="text-align: center;">Photorealism</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr>
+<td style="text-align: center;">Cross-Embodiment</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: center;">Num Tasks</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr>
+<td style="text-align: center;">Num Scenes</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">Num Object Categories</td>
+<td style="text-align: center;">153</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">46</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">1265</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">Num Objects</td>
+<td style="text-align: center;">2509</td>
+<td style="text-align: center;">3578</td>
+<td style="text-align: center;">169</td>
+<td style="text-align: center;">1217</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">5215</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">2144</td>
+<td style="text-align: center;">72</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">40</td>
+</tr>
+<tr>
+<td style="text-align: center;">Human Data</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: center;">Machine-Generated Data</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: center;">Num Trajectories</td>
+<td style="text-align: center;">100K+</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">6K</td>
+<td style="text-align: center;">30K</td>
+<td style="text-align: center;">245K</td>
+<td style="text-align: center;">5K</td>
+<td style="text-align: center;">50K</td>
+</tr>
+</tbody>
+</table>
+<h3 id="robotics">Robotics 数据集<a class="headerlink" href="#robotics" title="Permanent link">&para;</a></h3>
+<p>论文发表前，有几项机器人方面大规模数据收集工作</p>
+<ul>
+<li>自监督学习，通过试错来收集抓取和推动等任务的数据<ul>
+<li>由于试错过程，可能需要花费大量时间才能生成高质量数据</li>
+</ul>
+</li>
+<li>通过人类远程操作，控制机器人引导其完成不同的任务来收集数据</li>
+<li>在模拟中利用 algorithmic trajectory generators<ul>
+<li>通常利用特权信息和手工设计的启发式方法，需要大量人工参与</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">从大型离线数据集中学习<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Behavioral Cloning<ul>
+<li>训练策略来模仿数据集中的操作</li>
+</ul>
+</li>
+<li>Offline Reinforcement Learning<ul>
+<li>尝试使用奖励函数来优先选择某些数据集操作而不是其他操作</li>
+</ul>
+</li>
+</ul>
+<h2 id="robocasa_1">RoboCasa 模拟<a class="headerlink" href="#robocasa_1" title="Permanent link">&para;</a></h2>
+<h3 id="_5">核心模拟平台<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>因为 RoboSuite 注重物理真实性、高速和模块化设计，方便扩展到大型场景。此外，为了支持房间规模的环境，作者扩展了 RoboSuite 以适应各类形态</p>
+<p>另外，也使用 NVIDIA Omniverse 进行高质量渲染以捕捉逼真的图像</p>
+<h3 id="_6">厨房场景<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>在 RoboCasa 当前版本中，专注于以厨房活动为中心的家务任务，包含各类布局设计、可交互器具与纹理（MidJourney 生成）</p>
+<p><img alt="厨房布局设计" src="../../../assets/img/docs/note/robotics/RoboCasa/image.png" /></p>
+<p><img alt="可交互设备" src="../../../assets/img/docs/note/robotics/RoboCasa/image-1.png" /></p>
+<h3 id="_7">资产库<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>作者使用从 Objaverse 数据集和 Luma.ai（文本转 3D）获取到包括橱柜、抽屉和各种厨房用具（水果和蔬菜、乳制品、家禽、饮料、容器、工具等）的资产，进行存储并在使用时转换为 MuJoCo MJCF 模型格式</p>
+<p><img alt="资产" src="../../../assets/img/docs/note/robotics/RoboCasa/image-2.png" /></p>
+<h2 id="robocasa_2">RoboCasa 活动数据集<a class="headerlink" href="#robocasa_2" title="Permanent link">&para;</a></h2>
+<h3 id="_8">原子任务<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>执行复杂任务的机器人必须掌握如下基本技能，包括</p>
+<ul>
+<li>拾取和放置</li>
+<li>打开和关闭门</li>
+<li>打开和关闭抽屉</li>
+<li>扭转旋钮</li>
+<li>转动杠杆</li>
+<li>按下按钮</li>
+<li>插入</li>
+<li>导航</li>
+</ul>
+<p>为此，作者提出 25 项任务，每项任务都涉及这八项技能中的一项，称为原子任务</p>
+<h3 id="_9">使用大型语言模型创建复合任务<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>复合任务涉及按一定顺序使用技能来解决语义上有意义的活动，例如烹饪和清洁。作者使用大语言模型来定义任务：先提示 ChatGPT (GPT-4) 列出常见的高级厨房活动，再提示 GPT-4 和 Gemini 1.5 为每个活动标签提出代表性任务，最后过滤或修改它们的一些输出，最终从中获得了 75 个任务并对其进行了代码实现</p>
+<p><img alt="LLM 生成任务" src="../../../assets/img/docs/note/robotics/RoboCasa/image-3.png" /></p>
+<h3 id="robocasa_3">RoboCasa 数据集<a class="headerlink" href="#robocasa_3" title="Permanent link">&para;</a></h3>
+<h4 id="_10">通过人类远程操作收集一组基本演示<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p>四名操作员组成的团队使用 3D SpaceMouse 为每个原子任务收集 50 个高质量演示，每个任务演示都是在随机厨房场景中收集的</p>
+<h4 id="automated-trajectory-generation">利用 automated trajectory generation 来综合演示<a class="headerlink" href="#automated-trajectory-generation" title="Permanent link">&para;</a></h4>
+<p>使用 MimicGen 来让人类演示的种子集适应新的设置，自动合成丰富的数据集，具体过程为：将每个人类演示分解为一系列以对象为中心的操作片段，然后对于一个新的场景，根据相关对象的当前姿态变换每个以对象为中心的片段，将这些片段缝合在一起，并使机器人遵循新的轨迹（trajectory）来收集新的任务演示</p>
+<p>MimicGen 数据生成有可能失败，且其只保留可以让任务成功的生成轨迹。作者在多个模拟过程中并行化 MimicGen 数据生成，以加快数据生成过程</p>
+<h2 id="_11">实验<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>作者在实验中探索以下问题</p>
+<ul>
+<li>与人类演示相比，MimicGen 机器生成的轨迹在学习多任务策略方面的效果如何</li>
+<li>随着训练数据集大小的增加，模仿学习策略的泛化性能将如何变化</li>
+<li>大规模模拟数据集能否促进知识向模拟中下游任务的转移，并促进面向现实世界任务的策略学习（policy learning）</li>
+</ul>
+<h3 id="_12">原子任务的模仿学习<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>作者对原子任务进行了系统的研究，以探究在人类数据与机器生成的数据上进行训练时，模仿学习策略的性能如何比较，以及这些数据的规模如何在性能中发挥作用。为此，作者比较以下四种多任务数据设置（训练设置略）</p>
+<ul>
+<li>Human-50：涵盖所有 25 个原子任务的 1250 个人类演示的数据集，每个任务有 50 个人类演示</li>
+<li>generated-3000：MimicGen 在 24 个原子任务中合成的 72,000 个演示的数据集<ul>
+<li><em>因为 MinicGen 无法生成移动操作轨迹，删除导航原子任务</em></li>
+<li>我们将 50 个人类演示作为每个任务的输入，并使用它们自主生成 3,000 条轨迹</li>
+</ul>
+</li>
+<li>generated-300：完整生成数据集的随机 1/10 子集，其中每个任务生成 300 个演示</li>
+<li>generated-100：完整生成数据集的随机 1/30 子集，其中每个任务生成 100 个演示</li>
+</ul>
+<p>训练结束后，对于每项任务通过五个固定评估场景的 50 次试验来评估模型性能，其中每个场景都有不同的平面图和风格。为了测试泛化能力，仅在未见过的对象实例上评估策略。此外，五个场景中的两个包含训练数据中从未遇到过的未见过的风格</p>
+<p><img alt="原子任务的模仿学习" src="../../../assets/img/docs/note/robotics/RoboCasa/image-4.png" /></p>
+<p>可以总结的结论</p>
+<ul>
+<li>随着生成数据数量的增加，模型性能稳步提高</li>
+<li>有些技能非常容易学习（如打开和关闭门和抽屉），而其他技能则相当具有挑战性（如拾取和放置）<ul>
+<li>假设 1：具有高度多样性的任务学习起来更具挑战性<ul>
+<li>One example is the pick and place tasks involving dozens of different object categories with a wide range of affordances. In comparison, opening and closing doors involves six different instances of doors and is thus significantly easier to learn.</li>
+</ul>
+</li>
+<li>假设 2：涉及高水平灵活性的任务（如插入）很难学习</li>
+</ul>
+</li>
+</ul>
+<h3 id="_13">复合任务的模仿学习<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Single-task Policy</p>
+<p>作者提及这些复合任务更加复杂，所以使用 single-task policy，一次处理一个任务</p>
+</div>
+<p>涉及的复合任务包括</p>
+<ul>
+<li>ArrangeVegetables：机器人必须将水槽中的两种蔬菜放到柜台上的切菜板上</li>
+<li>MicrowaveThawing：机器人必须将柜台上的冷冻食品放入微波炉中并打开微波炉</li>
+<li>RestockPantry：柜子里已经有许多罐子和其他物品，机器人必须找到柜子中现有的罐子（无论是在右侧还是左侧），并将新罐子放在它们旁边</li>
+<li>PreSoakPan：机器人必须拿起一个平底锅和一块海绵放入水槽中，然后打开水龙头准备清洗平底锅</li>
+<li>PrepareCoffee：机器人必须从柜子里取出一个杯子，将其放在咖啡机下方，然后按下咖啡机按钮，将其倒入杯子中</li>
+</ul>
+<p>对于每种复合任务，作者收集了 50 次人类演示，对比如下两种策略</p>
+<ul>
+<li>Scratch (Baseline)：通过这 50 个演示从零开始学习</li>
+<li>Fine-tuning：在原子任务使用完整的 MimicGen 生成的数据集上学到的预训练策略的基础上，使用这 50 个演示进行微调</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Activity</th>
+<th style="text-align: center;">Scratch</th>
+<th style="text-align: center;">Fine-tuning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">ArrangeVegetables</td>
+<td style="text-align: center;">2.0%</td>
+<td style="text-align: center;"><strong>12.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">MicrowaveThawing</td>
+<td style="text-align: center;">0%</td>
+<td style="text-align: center;"><strong>2.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">RestockPantry</td>
+<td style="text-align: center;">0%</td>
+<td style="text-align: center;"><strong>6.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">PreSoakPan</td>
+<td style="text-align: center;">0%</td>
+<td style="text-align: center;"><strong>4.0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">PrepareCoffee</td>
+<td style="text-align: center;">0%</td>
+<td style="text-align: center;">0%</td>
+</tr>
+</tbody>
+</table>
+<p>可以总结的结论</p>
+<ul>
+<li>Fine-tuning 策略在所有复合任务上都表现出更好的性能，且在更多的任务上具有非零成功率的性能<ul>
+<li>一些常见的失败原因包括难以进行细粒度的操作以及难以有效地过渡到任务的下一阶段</li>
+</ul>
+</li>
+<li>实际观察到经过微调的模型在质量上表现更好，尤其是具有更稳健的拾取和放置策略<ul>
+<li>作者将此归因于原子行为的大型预训练数据集，这使得模型能够更好地理解如何执行这些任务</li>
+</ul>
+</li>
+</ul>
+<h3 id="_14">转移到现实世界环境<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="admonition question">
+<p class="admonition-title">没读懂的地方</p>
+<p>While both the real world and simulated Franka robot are controlled via <strong>workspace end effector control</strong>, our simulated robot uses <strong>Operational Space Control</strong> while the DROID-based real robot does not.</p>
+</div>
+<p>作者使用在 DROID 硬件基础设施上运行的 Franka Emika Panda 机器人在现实厨房环境中进行实验，其中和模拟的机器人有如下区别</p>
+<ul>
+<li>模拟机器人使用操作空间控制（Operational Space Control），而基于 DROID 的真实机器人则不使用</li>
+<li>模拟机器人控制器以 20 Hz 频率运行，而真正的机器人控制器以 15 Hz 运行</li>
+</ul>
+<p>此外，相机校准、照明条件以及机器人底座相对于场景的放置也存在差异</p>
+<p>实验涉及的任务包括</p>
+<ul>
+<li>Counter to sink：从柜台拾取物体并将其放置到水槽</li>
+<li>Sink to counter：从水槽拾取物体并将其放置到柜台</li>
+<li>Counter to cabinet：从柜台拾取物体并将其放置到储藏柜</li>
+</ul>
+<p>对于每种任务，作者收集了 50 次人类演示，每个演示都涉及五个不同类别的对象，对比如下两种策略</p>
+<ul>
+<li>Real only：仅针对目标任务进行真实世界演示的训练</li>
+<li>Real + Sim：针对目标任务的真实世界演示以及所有单阶段任务的所有模拟 MimicGen 演示进行联合训练</li>
+</ul>
+<p>对于每种任务，通过 5 个已知的对象类别和 3 个未知（<strong>相对于现实世界的演示</strong>来说是未见的）的对象类别进行测试</p>
+<table><thead><tr><th>Setting</th><th>Task</th><th>Real only</th><th>Real + Sim</th></tr></thead><tbody><tr><td rowspan="4">Seen Obj</td><td>Counter to sink</td><td>12.7 ± 2.5</td><td><b>22.0 ± 2.8</b></td></tr><tr><td>Sink to counter</td><td>20.0 ± 5.9</td><td><b>29.3 ± 4.1</b></td></tr><tr><td>Counter to cabinet</td><td>8.0 ± 1.6</td><td><b>22.0 ± 5.8</b></td></tr><tr><td>Task average</td><td>13.6</td><td><b>24.4</b></td></tr><tr><td rowspan="4">Unseen Obj</td><td>Counter to sink</td><td>3.3 ± 4.7</td><td><b>8.9 ± 7.9</b></td></tr><tr><td>Sink to counter</td><td>1.1 ± 1.6</td><td><b>7.8 ± 4.2</b></td></tr><tr><td>Counter to cabinet</td><td>3.3 ± 4.7</td><td><b>11.1 ± 11.0</b></td></tr><tr><td>Task average</td><td>2.6</td><td><b>9.3</b></td></tr></tbody></table>
+
+<p>可以总结的结论</p>
+<ul>
+<li>使用模拟数据进行协同训练的平均成功率为 24.4%，而仅使用真实数据的平均成功率为 13.6%，相对提高了 79%</li>
+<li>虽然在看不见的物体上性能受到影响，但我们仍然看到 Real + Sim 方式下数据的显着改进<ul>
+<li><em>作者将此归因于模拟器的丰富多样性以及视觉和物理真实性</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="_15">未解决的问题和未来工作<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="_16">作者提出<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>复合任务进行微调会产生相对较低的性能<ul>
+<li>将研究更强大的策略架构和学习算法，并提高机器生成数据集的质量</li>
+<li>虽然生成的轨迹在技术上被认为是成功的，但许多轨迹表现出不良效果，例如急速运动和碰撞</li>
+<li>许多这些行为可以通过检查模拟状态来自动检测，并且表现出此类行为的轨迹可以被丢弃</li>
+</ul>
+</li>
+<li>使用 LLM 创建任务的过程仍然需要人工指导来编写这些任务的实现<ul>
+<li>使用 LLM 提出数千个新场景和任务，并编写代码以最少的人工来实现这些场景和任务</li>
+<li>随着 LLM 变得更加高效，这将成为可能</li>
+</ul>
+</li>
+<li>仅限于厨房，希望在未来的版本中将范围扩展到厨房环境和任务之外</li>
+<li>数据集包含关键的粗略操作行为，但不包含高度灵巧的技能、可变形操作任务或需要双手操作的任务</li>
+<li>结合本文和其他模拟器以及互联网视频和真实机器人数据集等不同来源的数据来探索训练</li>
+</ul>
+<h3 id="_17">个人感受<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>感觉就提出一个框架，基于提出的基础任务和套用 LLM 产生的复合任务结合别人的成果跑了模拟，测了测成果，就发出来了</li>
+<li>很多地方框架还不完善<ul>
+<li>虽然提出 25 个原子任务，但是基于 MimicGen 生成时 Navigation 任务因为不支持而被删除了</li>
+</ul>
+</li>
+<li>实验对比有些地方不太眼睛<ul>
+<li>在 <a href="#_12">迁移到现实世界环境</a> 中，Real + Sim 对于<strong>现实演示中未知类别</strong>的成果率更高，也没有可能是在“基于单阶段任务的所有模拟 MimicGen 演示”里学习到了那个类别的操作</li>
+<li>如果这样那是不是可以额外设置实验去做这个对比</li>
+</ul>
+</li>
+</ul>
+
+
+
+<!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
+
+<hr />
+<div class="md-source-file">
+<small>
+
+    <!-- mkdocs-git-revision-date-localized-plugin -->
+    
+    最后更新:
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月26日 17:22:55">2025年3月26日 17:22:55</span>
+    
+        <br />
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2024年7月1日 10:38:03">2024年7月1日 10:38:03</span>
+    
+
+    <!-- mkdocs-git-revision-date-plugin -->
+    
+</small>
+</div>
+
+
+
+
+
+
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+        data-repo="Yusux/note"
+        data-repo-id="R_kgDOLbz6zw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLbz6z84Cdu5X"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2025 Rorin
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Yusux" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://rorin.cc" target="_blank" rel="noopener" title="rorin.cc" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.906.664a1.75 1.75 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.tracking", "navigation.tabs", "navigation.indexes", "navigation.top"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/js/katex.js"></script>
+      
+    
+  </body>
+</html>

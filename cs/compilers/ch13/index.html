@@ -1,0 +1,2968 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="杂事杂录">
+      
+      
+      
+        <link rel="canonical" href="https://note.rorin.cc/cs/compilers/ch13/">
+      
+      
+        <link rel="prev" href="../ch11/">
+      
+      
+        <link rel="next" href="../ch14/">
+      
+      
+      <link rel="icon" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/img/favicon-32x32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>垃圾回收 - Rorin 的笔记本</title>
+      
+    
+    
+
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@2.4.1/build/pseudocode.min.css">
+
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/svg.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.min.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/card.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/moegirl.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/page.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/counter.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/css/tasklist.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Rorin 的笔记本" class="md-header__button md-logo" aria-label="Rorin 的笔记本" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 4v6l-2-2-2 2V4H9v16h10V4zM3 7V5h2V4a2 2 0 0 1 2-2h12c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm2-2v2h2V5zm0 14h2v-2H5zm0-6h2v-2H5z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rorin 的笔记本
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              垃圾回收
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Yusux/note" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Yusux/note
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+    
+  
+  根
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  计算机科学
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../note/" class="md-tabs__link">
+          
+  
+    
+  
+  随记
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Rorin 的笔记本" class="md-nav__button md-logo" aria-label="Rorin 的笔记本" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 4v6l-2-2-2 2V4H9v16h10V4zM3 7V5h2V4a2 2 0 0 1 2-2h12c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm2-2v2h2V5zm0 14h2v-2H5zm0-6h2v-2H5z"/></svg>
+
+    </a>
+    Rorin 的笔记本
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Yusux/note" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Yusux/note
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    根
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            根
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../friends/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    朋友们
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    计算机科学
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机科学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    编译原理
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            编译原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    概述
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    词法分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../ch3/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    语法分析
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            语法分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch3/ch3-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CFG 及语法分析概述
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch3/ch3-2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    自顶向下分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch3/ch3-3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    自底向上分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch3/ch3-4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    语法分析器与小结
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    抽象语法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    语义分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    活动记录
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    中间代码生成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    基本块和 Traces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    指令选择
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    活跃变量分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    寄存器分配
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    垃圾回收
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    垃圾回收
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      简介
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#runtime-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      内存的主要区域
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是垃圾回收
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      如何垃圾回收
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础数据结构
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mark-and-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mark-and-Sweep
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mark-and-Sweep">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      成本
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit Stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-reversa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pointer Reversa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Counting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copying-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copying Collection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Copying Collection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      大体算法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-pointer-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      过程细化 - Pointer Forwarding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cheneys-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cheney's Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cheney&#39;s Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      局限性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      混合算法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-to-the-compiler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface to the Compiler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface to the Compiler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fast-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fast Allocation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#describing-data-layouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Describing Data Layouts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#describing-roots-pointer-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Describing Roots (Pointer Map)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derived-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Derived Pointers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    面向对象语言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    循环优化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../note/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    随记
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            随记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../note/robotics/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    具身智能
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            具身智能
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../note/robotics/RoboCasa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RoboCasa
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../note/robotics/Open-X-Embodiment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Open X-Embodiment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../note/robotics/HumanPlus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HumanPlus
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../note/cv/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    计算机视觉
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            计算机视觉
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../note/cv/MASt3R.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MASt3R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../note/cv/CAT3D.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CAT3D
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../note/llm/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    大语言模型
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            大语言模型
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../note/llm/MCTSr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MCTSr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      简介
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#runtime-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      内存的主要区域
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是垃圾回收
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      如何垃圾回收
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础数据结构
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mark-and-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mark-and-Sweep
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mark-and-Sweep">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      成本
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit Stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-reversa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pointer Reversa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-counting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Counting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference Counting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copying-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copying Collection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Copying Collection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      大体算法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-pointer-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      过程细化 - Pointer Forwarding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cheneys-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cheney's Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cheney&#39;s Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      局限性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      混合算法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-to-the-compiler" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface to the Compiler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface to the Compiler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fast-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fast Allocation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#describing-data-layouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Describing Data Layouts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#describing-roots-pointer-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Describing Roots (Pointer Map)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derived-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Derived Pointers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">垃圾回收<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div style="margin-top: -30px; font-size: 0.75em; opacity: 0.7;">
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8zm6.78 1a.7.7 0 0 0-.48.2l-1.22 1.21 2.5 2.5L20.8 5.7c.26-.26.26-.7 0-.95L19.25 3.2c-.13-.13-.3-.2-.47-.2m-2.41 2.12L9 12.5V15h2.5l7.37-7.38z"/></svg></span> 约 4222 个字 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.5 0 10 4.5 10 10s-4.5 10-10 10C6.47 22 2 17.5 2 12S6.5 2 12 2m.5 11H11V7h1.5v4.26l3.7-2.13.75 1.3z"/></svg></span> 预计阅读时间 14 分钟</p>
+</div>
+<h2 id="_2">简介<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="runtime-system">Runtime System<a class="headerlink" href="#runtime-system" title="Permanent link">&para;</a></h3>
+<p>运行时系统（Runtime System）：语言隐式假定且程序中未描述的内容</p>
+<ul>
+<li>POSIX 信号的处理<ul>
+<li>POSIX = Portable Operating System Interface</li>
+</ul>
+</li>
+<li>自动核心管理（例如，工作窃取（work stealing））</li>
+<li>虚拟机执行（即时编译（just-in-time compilation））</li>
+<li>类加载</li>
+<li>自动内存管理（例如，垃圾处理（garbage collection））</li>
+<li>...</li>
+</ul>
+<p>也被称为 language runtime 或 runtime</p>
+<h3 id="_3">内存的主要区域<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>静态区域（Static area）<ul>
+<li>在编译时分配</li>
+</ul>
+</li>
+<li>运行时栈（Run-time stack）<ul>
+<li>活动记录</li>
+<li>用于管理函数调用和返回</li>
+</ul>
+</li>
+<li><strong>堆（Heap）</strong><ul>
+<li>动态分配的对象和数据结构</li>
+<li>如 C 中的 malloc，Java 中的 new</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">什么是垃圾回收<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>垃圾（Garbage）：已分配但不再使用的堆存储</p>
+<p><img alt="垃圾示例" src="../../../assets/img/docs/cs/compilers/ch13/image.png" /></p>
+<p>垃圾回收（Garbage collection）：自动释放程序不再使用的存储空间</p>
+<ul>
+<li>是运行时系统的一部分</li>
+<li>LISP 中的首次应用（McCarthy 1960）</li>
+</ul>
+<p>垃圾回收有两个阶段</p>
+<ul>
+<li>垃圾检测（Garbage detection）：查找哪些对象还活着，哪些对象死了</li>
+<li>垃圾回收（Garbage reclamation）：释放死对象</li>
+</ul>
+<p>完美的垃圾回收应具有如下属性</p>
+<ul>
+<li>安全（Safe）：只回收垃圾</li>
+<li>完整（Complete）：几乎所有垃圾都被收集</li>
+<li>时间和速度开销（Low overhead）低</li>
+<li>暂停时间（pause time，程序等待垃圾回收的时间）短</li>
+<li>并行（Parallel）：能够利用额外的核心</li>
+<li>简单（Simple）</li>
+<li>易于使用收集的可用空间</li>
+<li>...</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">这些都是困难且常常相互冲突的要求！</p>
+</div>
+<h3 id="_5">如何垃圾回收<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition question">
+<p class="admonition-title">存储单元 M 什么时候不再使用</p>
+<p>令 P 为任何不使用 M 的程序，构建新程序 <code>Execute P; Use M;</code>，则</p>
+<p>M 使用 <span class="arithmatex">\(\Leftrightarrow\)</span> P 终止</p>
+<p>这就变成了一个停机问题，即“最后使用/不再使用”是无法确定的</p>
+</div>
+<p>一般来说，一个对象是否是垃圾是无法判定的，所以需要依赖保守的近似，这样 GC 才是安全的（只回收垃圾）。想法是使用可达性信息作为“近似值”</p>
+<p>垃圾回收的技术有</p>
+<ul>
+<li>引用计数（Reference counting）<ul>
+<li>直接跟踪活动单元</li>
+<li>每当分配堆块时就会进行 GC</li>
+<li>不检测所有垃圾</li>
+</ul>
+</li>
+<li>追踪（Tracing）<ul>
+<li>当内存申请失败时，GC 接管并识别存活的对象（live cells）</li>
+<li>Mark-sweep</li>
+<li>Copy collection</li>
+</ul>
+</li>
+<li>现代技术：generational GC 等</li>
+</ul>
+<h3 id="_6">基础数据结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>有向图</p>
+<ul>
+<li>结点：程序变量和堆分配记录</li>
+<li>边：指针<ul>
+<li>p 指向记录 y（令 y 为记录的名称/标识符），一般意味着 p 的值是 y 的地址</li>
+<li>在虎书中，p 可以指代<strong>指针</strong>或其<strong>指向的记录</strong>，要根据上下文来判断</li>
+</ul>
+</li>
+</ul>
+<p><img alt="有向图" src="../../../assets/img/docs/cs/compilers/ch13/image-1.png" /></p>
+<h2 id="mark-and-sweep">Mark-and-Sweep<a class="headerlink" href="#mark-and-sweep" title="Permanent link">&para;</a></h2>
+<h3 id="_7">算法<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>Mark-and-Sweep 算法的基本思想是</p>
+<ul>
+<li>Mark<ul>
+<li>从根结点（程序变量）开始搜索图表</li>
+<li>标记所有搜索到的结点</li>
+</ul>
+</li>
+<li>Sweep<ul>
+<li>通过线性扫描扫描整个堆，将未标记的结点放入空闲列表（freelist）</li>
+<li>取消标记已标记的结点</li>
+</ul>
+</li>
+</ul>
+<p>其中空闲列表（freelist）是</p>
+<ul>
+<li>内存管理器必须知道堆的哪些部分是空闲的和已分配的</li>
+<li>空闲块存储在空闲列表（堆块的链表）中</li>
+<li>被多种 GC 算法使用（例如标记和清除）</li>
+</ul>
+<p><img alt="freelist" src="../../../assets/img/docs/cs/compilers/ch13/image-2.png" /></p>
+<p><i id="Mark-and-Sweep-Mark"></i></p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{Mark-and-Sweep Mark}
+\begin{algorithmic}
+\For{each root $v$}
+    \State DFS($v$)
+\EndFor
+\Function{DFS}{$x$}
+    \If{$x$ is a pointer into the heap}
+        \If{record $x$ (the record pointed to) is not marked}
+            \State mark $x$
+            \For{each field $f_i$ of record $x$}
+                \State DFS($x.f_i$)
+            \EndFor
+        \EndIf
+    \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<p><i id="Mark-and-Sweep-Sweep"></i></p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{Mark-and-Sweep Sweep}
+\begin{algorithmic}
+\State $p \gets$ first address in heap
+\While{$p < $ last address in heap}
+    \If{record $p$ is marked}
+        \State unmark $p$
+    \Else
+        \State let $f_1$ be the first field in $p$
+        \State $p.f_1 \gets$ freelist
+        \State freelist $\gets p$
+        \State $p \gets p +$ (size of record $p$)
+    \EndIf
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<p>垃圾回收后，程序恢复执行，每当它想要堆分配新记录时，它都会从空闲列表中获取一条记录，并当 <strong>freelist 为空</strong>时<strong>再次进行垃圾回收</strong></p>
+<details class="example">
+<summary>Mark-and-Sweep</summary>
+<p><img alt="Mark-and-Sweep-1" src="../../../assets/img/docs/cs/compilers/ch13/image-3.png" /></p>
+<p><img alt="Mark-and-Sweep-2" src="../../../assets/img/docs/cs/compilers/ch13/image-4.png" /></p>
+</details>
+<h4 id="_8">成本<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<p>假设</p>
+<ul>
+<li><span class="arithmatex">\(H\)</span>：堆大小</li>
+<li><span class="arithmatex">\(R\)</span>：可达数据大小</li>
+</ul>
+<p>那么 GC 的时间</p>
+<ul>
+<li>标记：与可达数据量成正比</li>
+<li>扫描：与堆大小成正比</li>
+<li>总时间：<span class="arithmatex">\(c_1R + c_2H\)</span></li>
+</ul>
+<p>GC 用 <span class="arithmatex">\(H - R\)</span> words 补充空闲列表，那么均摊开销（Amortized cost）为 <span class="arithmatex">\(\frac{c_1R + c_2H}{H - R}\)</span>，如果 <span class="arithmatex">\(R\)</span> 很接近 <span class="arithmatex">\(H\)</span>，那么均摊开销会很大</p>
+<h3 id="_9">优化<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h4 id="explicit-stack">Explicit Stack<a class="headerlink" href="#explicit-stack" title="Permanent link">&para;</a></h4>
+<p>因为 DFS 算法是递归的</p>
+<ul>
+<li>极端情况：N stack frames for an N-elem linked list</li>
+<li>活动记录栈的长度会很长，可能会比整个堆还大</li>
+<li>很容易导致栈溢出</li>
+</ul>
+<p>解决方法是使用显式栈（Explicit stack）而不使用递归</p>
+<p><i id="Mark-and-Sweep-Mark-Explicit-Stack"></i></p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{Mark-and-Sweep Mark with Explicit Stack}
+\begin{algorithmic}
+\Function{DFS}{$x$}
+    \If{$x$ is a pointer into the heap and record $x$ is not marked}
+        \State mark $x$
+        \State $t \gets 1$
+        \State stack[$t$] $\gets x$
+        \While{$t > 0$}
+            \State $x \gets$ stack[$t$]; $t \gets t - 1$
+            \For{each field $f_i$ of record $x$}
+                \If{$x.f_i$ is a pointer into the heap and record $x.f_i$ is not marked}
+                    \State mark $x.f_i$
+                    \State $t \gets t + 1$; stack[$t$] $\gets x.f_i$
+                \EndIf
+            \EndFor
+        \EndWhile
+    \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<p>算法中</p>
+<ul>
+<li>t 是栈顶指针</li>
+<li>stack 是显式栈（worklist）</li>
+</ul>
+<p>这样可以用 H words 的空间代替 H 个活动记录，节省空间</p>
+<h4 id="pointer-reversa">Pointer Reversa<a class="headerlink" href="#pointer-reversa" title="Permanent link">&para;</a></h4>
+<p>虽然 <a href="#Mark-and-Sweep-Mark-Explicit-Stack">Explicit Stack</a> 优化了空间，但辅助栈内存与正在收集的堆成正比，还是可能会导致栈溢出。因此，可以使用 <strong>Deutsch-Schorr-Waite (DSW)</strong> 指针反转</p>
+<ul>
+<li>不要使用显式栈进行 DFS</li>
+<li>重用图组件来协助回溯</li>
+</ul>
+<p>其基本思想是将 DFS 栈存储在图本身，即当搜索过程中遇到新记录时</p>
+<ul>
+<li>标记该记录</li>
+<li>更改记录中的指针以指向 DFS 父记录</li>
+<li>当我们无法再深入时，沿着反向链接返回，并恢复原指针</li>
+</ul>
+<p>观察 <a href="#Mark-and-Sweep-Mark">Mark-and-Sweep Mark</a> 中的 DFS 函数，我们可以指导将字段 x.fi 的内容压入栈后，算法将不再使用 x.fi。因此 x.fi 可用于存储栈的一个元素，当栈出栈时，恢复 x.fi 的原始值</p>
+<p><i id="Mark-and-Sweep-Mark-Pointer-Reversal"></i></p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{Mark-and-Sweep Mark with Pointer Reversal}
+\begin{algorithmic}
+\Function{DFS}{$x$}
+    \If{$x$ is a pointer into the heap and record $x$ is not marked}
+        \State $t \gets$ nil
+        \State mark $x$; done[$x$] $\gets 0$
+        \While{true}
+            \State $i \gets$ done[$x$]
+            \If{$i < \#$ of fields in record $x$}
+                \State $y \gets x.f_i$
+                \If{$y$ is a pointer into the heap and record $y$ is not marked}
+                    \State $x.f_i \gets t$; $t \gets x$; $x \gets y$
+                    \State mark $x$; done[$x$] $\gets 0$
+                \Else
+                    \State done[$x$] $\gets i + 1$
+                \EndIf
+            \Else
+                \State $y \gets x$; $x \gets t$
+                \If{$x = $ nil} \Return
+                \EndIf
+                \State $i \gets$ done[$x$]
+                \State $t \gets x.f_i$; $x.f_i \gets y$
+                \State done[$x$] $\gets i + 1$
+            \EndIf
+        \EndWhile
+    \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<p><img alt="指针反转过程示例" src="../../../assets/img/docs/cs/compilers/ch13/image-5.png" /></p>
+<h3 id="_10">总结<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>Mark-and-Sweep 算法的优缺点</p>
+<ul>
+<li>优点<ul>
+<li>垃圾（数目）少则效率高</li>
+<li>能够收集循环引用</li>
+<li>GC 期间不会移动对象/记录</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>垃圾（数目）多时效率低</li>
+<li>正常执行流必须暂停</li>
+<li>导致堆碎片（fragmentation）<ul>
+<li>缓存未命中、页面抖动、更复杂的分配等问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<details class="note">
+<summary>关于碎片</summary>
+<ul>
+<li>外部碎片（External fragmentation）<ul>
+<li>程序想要分配大小为 n 的记录，并且有许多小于 n 的空闲记录，但没有一个大小合适<br />
+<img alt="External fragmentation" src="../../../assets/img/docs/cs/compilers/ch13/image-6.png" /></li>
+</ul>
+</li>
+<li>内部碎片（Internal fragmentation）<ul>
+<li>程序使用了太大的记录而没有对其进行分割，因此未使用的内存位于记录内部而不是外部<br />
+<img alt="Internal fragmentation" src="../../../assets/img/docs/cs/compilers/ch13/image-7.png" /></li>
+</ul>
+</li>
+</ul>
+</details>
+<h2 id="reference-counting">Reference Counting<a class="headerlink" href="#reference-counting" title="Permanent link">&para;</a></h2>
+<h3 id="_11">算法<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>引用计数（Reference Counting）：与其等待内存耗尽，不如尝试在没有指针指向该对象（无法再访问该对象）时收集该对象</p>
+<ul>
+<li>跟踪每个对象的指针数量（引用计数）<ul>
+<li>每个赋值操作都会操纵引用计数</li>
+</ul>
+</li>
+<li>每当有新引用时数据结构建立后，增加引用计数<ul>
+<li>每当 p 存储到 x.fi 中时（即 x.fi = p）</li>
+<li>p 的引用计数增加，并且 x.fi 先前指向的引用计数减少</li>
+</ul>
+</li>
+<li>当引用计数为 0 时，该对象是不可达的垃圾，进行回收<ul>
+<li>r 被放入空闲列表中</li>
+<li>r 指向的所有其他记录的引用计数都会递减</li>
+</ul>
+</li>
+</ul>
+<details class="example">
+<summary>Reference Counting</summary>
+<p><img alt="RC-1" src="../../../assets/img/docs/cs/compilers/ch13/image-8.png" /></p>
+<p><img alt="RC-2" src="../../../assets/img/docs/cs/compilers/ch13/image-9.png" /></p>
+<p><img alt="RC-3" src="../../../assets/img/docs/cs/compilers/ch13/image-10.png" /></p>
+</details>
+<h3 id="_12">总结<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>引用计数的优缺点</p>
+<ul>
+<li>优点<ul>
+<li>开销是增量的<ul>
+<li>单元管理（Cell management）与程序执行交错，因此没有“停止并收集（stop-and-collection）”的现象</li>
+</ul>
+</li>
+<li>相对容易实现</li>
+<li>可以与手动内存管理共存</li>
+<li>空间局部性良好<ul>
+<li>虚拟内存页面的访问模式不比程序差，因此不会出现过多的分页</li>
+</ul>
+</li>
+<li>可以立即重新使用释放的空间<ul>
+<li>如果 RC == 0，则放回空闲列表</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>垃圾间存在引用循环时，不能被回收<ul>
+<li>引用循环是一组循环相互引用的对象</li>
+<li>引用计数跟踪<strong>引用</strong>的数量，而不是<strong>可到达引用</strong>的数量<br />
+<img alt="Reference Counting Cycles" src="../../../assets/img/docs/cs/compilers/ch13/image-11.png" /></li>
+</ul>
+</li>
+<li>增加引用计数的代价非常昂贵，效率相对较低<ul>
+<li>为了实现 x.fi &lt;- p，程序必须执行
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>z &lt;- x.fi
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>c &lt;- z.count
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>c &lt;- c - 1
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>z.count &lt;- c
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>if c = 0 call putOnFreeList(z)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>x.fi &lt;- p
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>c &lt;- p.count
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>c &lt;- c + 1
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>p.count &lt;- c
+</code></pre></div></li>
+<li>尽管数据流分析可以消除一些增减，但这个问题仍然存在</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="copying-collection">Copying Collection<a class="headerlink" href="#copying-collection" title="Permanent link">&para;</a></h2>
+<h3 id="_13">大体算法<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>复制收集（Copying Collection）：基本思想是使用 2 个堆</p>
+<ul>
+<li>from-space：程序使用的空间</li>
+<li>to-space：在 GC 之前未使用的空间</li>
+</ul>
+<p>垃圾回收的过程为</p>
+<ul>
+<li>当 from-space 耗尽时，遍历 from-space，将所有<strong>可达结点</strong>复制到 to-space<ul>
+<li>这样就抛开了垃圾</li>
+<li>在 to-space 中分配新记录很容易（开始时 next 在 to-space 开头）：p = next, next = next + n</li>
+<li>所有可达结点都在to-space的开头附近，因此不存在碎片问题</li>
+</ul>
+</li>
+<li>当下一次到达 limit 时，调换两个空间的角色，重新进行垃圾回收</li>
+</ul>
+<p><img alt="Naive Copying Collection" src="../../../assets/img/docs/cs/compilers/ch13/image-12.png" /></p>
+<h3 id="-pointer-forwarding">过程细化 - Pointer Forwarding<a class="headerlink" href="#-pointer-forwarding" title="Permanent link">&para;</a></h3>
+<p>在复制过程中，我们还需要解决指针指向问题（因为复制之后指针还是指向 from-space 的旧的记录）</p>
+<p>因此，当我们复制记录时，我们在 from-space 中旧副本中存储指向 to-space 新副本的转发指针，当我们稍后使用转发指针到达记录时，我们知道它已经被复制，并可以从中得到新的地址</p>
+<p><img alt="Pointer Forwarding" src="../../../assets/img/docs/cs/compilers/ch13/image-13.png" /></p>
+<p><i id="Copying-Collection-Forward"></i></p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{Copying-Collection Forward}
+\begin{algorithmic}
+\Function{Forward}{$p$}
+    \If{$p$ points to from-space}
+        \If{$p.f_1$ points to to-space}
+            \Return $p.f_1$
+        \Else
+            \For{each field $f_i$ of $p$}
+                \State next.$f_i \gets p.f_i$
+            \EndFor
+            \State $p.f_1 \gets$ next
+            \State next $\gets$ next + size of record $p$
+            \Return $p.f_1$
+        \EndIf
+    \Else
+        \Return $p$
+    \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<h3 id="cheneys-algorithm">Cheney's Algorithm<a class="headerlink" href="#cheneys-algorithm" title="Permanent link">&para;</a></h3>
+<p>将 to-space 划分为三个连续区域</p>
+<ul>
+<li>已复制（Copied）：记录已复制，但我们尚未查看记录里的指针</li>
+<li>复制和扫描（Copied and scanned）：记录被复制并且我们 Forward 了记录中的所有指针</li>
+<li>空闲（Empty）：未使用的空间</li>
+</ul>
+<p><img alt="to-space 的三个区域" src="../../../assets/img/docs/cs/compilers/ch13/image-14.png" /></p>
+<p>由此可以引出 Cheney's Algorithm (Breadth-first copying garbage collection)：使用广度优先搜索遍历可达数据，从 from-space 复制到 to-space</p>
+<ul>
+<li>BFS 队列：scan 和 next 之间的区域</li>
+<li>当 scan 赶上 next 时，算法完成</li>
+</ul>
+<p><i id="Cheney-Algorithm"></i></p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{Cheney's Algorithm}
+\begin{algorithmic}
+\State scan $\gets$ next (beginning of to-space)
+\For{each root $r$}
+    \State $r \gets$ Forward($r$)
+\EndFor
+\While{scan < next}
+    \For{each field $f_i$ of record at scan}
+        \State scan.$f_i \gets$ Forward(scan.$f_i$)
+    \EndFor
+    \State scan $\gets$ scan + size of record at scan
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<details class="example">
+<summary>Cheney's Algorithm</summary>
+<p><img alt="Cheney's Algorithm" src="../../../assets/img/docs/cs/compilers/ch13/image-15.png" /></p>
+</details>
+<h4 id="_14">局限性<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<p>在具有虚拟内存或内存高速缓存的计算机系统中，良好的引用局部性非常重要，因为在程序获取地址 a 后，内存子系统预计很快会获取 a 附近的地址，因此对附近的地址进行缓存，但是通过广度优先复制的指针数据结构的引用局部性较差：如果地址 a 处的记录指向地址b处的另一条记录，则 a 和 b 很可能相距很远</p>
+<p>与之相反，深度优先复制提供了更好的局部性，但深度优先复制需要指针反转，这不方便且缓慢</p>
+<h3 id="_15">混合算法<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>混合的、部分深度优先和部分广度优先的算法可以提供可接受的局部性，基本思想是使用广度优先复制，但每当复制一个对象时，看看是否可以在它附近复制一些子对象</p>
+<p><i id="Copying-Collection-Forward-Hybrid"></i></p>
+<pre class="pseudocode">
+\begin{algorithm}
+\caption{Copying-Collection Forward Hybrid}
+\begin{algorithmic}
+\Function{Forward}{$p$}
+    \If{$p$ points to from-space}
+        \If{$p.f_1$ points to to-space}
+            \Return $p.f_1$
+        \Else
+            \State Chase($p$); \Return $p.f_1$
+        \EndIf
+    \Else
+        \Return $p$
+    \EndIf
+\EndFunction
+\Function{Chase}{$p$}
+    \Repeat
+        \State $q \gets$ next
+        \State next $\gets$ next + size of record $p$
+        \State $r \gets$ nil
+        \For{each field $f_i$ of record $p$}
+            \State $q.f_i \gets p.f_i$
+            \If{$q.f_i$ points to from-space and $q.f_i.f_1$ does not point to to-space}
+                \State $r \gets q.f_i$
+            \EndIf
+        \EndFor
+        \State $p.f_1 \gets q$
+        \State $p \gets r$
+    \Until{$p = $ nil}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+</pre>
+
+<h3 id="_16">总结<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>复制收集的优缺点</p>
+<ul>
+<li>优点<ul>
+<li>简单<ul>
+<li>不需要栈或指针反转</li>
+</ul>
+</li>
+<li>运行时间与 # 个活动对象成正比</li>
+<li>空闲空间是连续的<ul>
+<li>自动压缩以消除碎片</li>
+</ul>
+</li>
+<li>成为许多后来算法的基础</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>一半的内存被浪费了</li>
+<li>局部性较差（至少对于 Cheney's Alg.）</li>
+<li>需要精确的类型信息（指针或非指针）</li>
+</ul>
+</li>
+</ul>
+<h2 id="interface-to-the-compiler">Interface to the Compiler<a class="headerlink" href="#interface-to-the-compiler" title="Permanent link">&para;</a></h2>
+<p>虽然垃圾收集器是“运行时”的一部分，但垃圾收集语言的编译器需要通过以下方式与垃圾收集器交互：</p>
+<ul>
+<li>生成分配记录的代码</li>
+<li>描述每个垃圾收集周期的根位置</li>
+<li>描述堆上数据记录的布局</li>
+<li>生成指令以实现读或写屏障（对于某些版本的增量收集）</li>
+<li>...</li>
+</ul>
+<p>特别适用于：</p>
+<ul>
+<li>函数式语言（updating is discouraged）</li>
+<li>内存密集型应用程序（access once for each）</li>
+</ul>
+<p>Empirical measurements: one in seven instructions is a store! We have at most 1/7 word of allocation per instruction</p>
+<h3 id="fast-allocation">Fast Allocation<a class="headerlink" href="#fast-allocation" title="Permanent link">&para;</a></h3>
+<p>创建堆记录需要相当大的成本，所以应使用复制集合（因为它很快）</p>
+<ul>
+<li>分配空间是连续的空闲区域</li>
+<li>下一个空闲位置是 next 并且</li>
+<li>区域的末尾是有限的</li>
+</ul>
+<p>不优化时，分配大小为 N 的记录的步骤如下</p>
+<ol>
+<li>调用分配函数</li>
+<li>检查 next + N &lt; limit 是否满足，如果不满足，调用 GC</li>
+<li>将 next 移动到 result</li>
+<li>清除 M[next, next + N - 1] 的内容</li>
+<li>next &lt;- next + N</li>
+<li>返从分配函数返回</li>
+</ol>
+<p>A. 将 result 移动到一些计算上有用的位置（computationally useful place）<br />
+B. 将有用的值存储到记录中</p>
+<p>其中 A 和 B 不是分配开销</p>
+<p>我们可以使用如下的优化</p>
+<ul>
+<li>应通过内联扩展分配函数来消除步骤 1 和 6</li>
+<li>将步骤 3 与步骤 A 结合起来，通常可以消除步骤 3</li>
+<li>步骤 4 可以通过步骤 B 的储存来消除</li>
+<li>第 2 步和第 5 步无法消除，但它们可以在多个分配之间共享</li>
+</ul>
+<p>那么就变成了</p>
+<p>2. 检查 next + N &lt; limit 是否满足，如果不满足，调用 GC<br />
+A. 将 result 移动到一些计算上有用的位置（computationally useful place）<br />
+5. next &lt;- next + N<br />
+B. 将有用的值存储到记录中</p>
+<p>通过将 next 和 limit 保存在寄存器中，步骤 2 和 5 总共可以用三个指令完成。通过这种技术组合，分配记录以及最终对其进行垃圾收集的成本可以降低到大约四个指令</p>
+<h3 id="describing-data-layouts">Describing Data Layouts<a class="headerlink" href="#describing-data-layouts" title="Permanent link">&para;</a></h3>
+<p>收集器需要处理不同类型的记录</p>
+<ul>
+<li>例如 <a href="#Cheney-Algorithm">Cheney's Algorithm</a> 中对 scan 增加时，需要知道记录的大小</li>
+<li>例如 <a href="#Copying-Collection-Forward">Copying-Collection Forward</a> 中，需要知道传入对象是不是指针（只需要对指针进行 Forward）</li>
+</ul>
+<p>因此对于静态类型语言，例如 Tiger 或 Pascal，或者对于面向对象语言，例如 Java，可以让每个对象的第一个 word 指向特殊的类型或类描述符（type- or class-descriptor）记录</p>
+<p>类型或类描述符（type- or class-descriptor）</p>
+<ul>
+<li>包含对象的总大小</li>
+<li>包含每个指针字段的位置</li>
+<li>由编译器在语义分析阶段生成</li>
+</ul>
+<p><img alt="类型或类描述符" src="../../../assets/img/docs/cs/compilers/ch13/image-16.png" /></p>
+<h3 id="describing-roots-pointer-map">Describing Roots (Pointer Map)<a class="headerlink" href="#describing-roots-pointer-map" title="Permanent link">&para;</a></h3>
+<p>GC 从根（root）开始追踪，但是根的位置是不确定的</p>
+<p>一个简单的实现是基于猜测的解决方案（近似 GC）：，扫描栈/寄存器，查找所有看起来像指针的内容，但是某些整数也可能被视为指针</p>
+<p>为了实现精确 GC，Tiger 的解决方案是构建指针映射</p>
+<ul>
+<li>所有映射均由编译器生成</li>
+<li>编译器在编译期间知道哪个 temp 是指针</li>
+</ul>
+<p>其中，指针映射包括</p>
+<ul>
+<li>栈上的指针</li>
+<li>callee-save 寄存器中的指针</li>
+</ul>
+<p>GC 线程将使用这些指针进行遍历</p>
+<p>在哪里插入指针映射取决于 GC 何时触发</p>
+<ul>
+<li>分配时：插入到 alloc_record 之前</li>
+<li>对于递归调用：为所有函数调用插入</li>
+</ul>
+<p><img alt="插入指针映射" src="../../../assets/img/docs/cs/compilers/ch13/image-17.png" /></p>
+<p>为了找到所有根，收集器从栈顶部开始向下扫描</p>
+<ul>
+<li>每个返回地址都是描述下一帧的指针映射条目的键</li>
+<li>在每个帧中，收集器 mark（或 forward，如果是 copying collection 的话）来自该框架中的指针</li>
+</ul>
+<p>此外，callee-save 寄存器需要特殊处理</p>
+<ul>
+<li>假设函数 f 调用 g，g 又调用 h</li>
+<li>g 的指针映射必须描述其哪些 callee-save 寄存器包含调用 h 时的指针以及哪些是从 f 继承的。</li>
+</ul>
+<h3 id="derived-pointers">Derived Pointers<a class="headerlink" href="#derived-pointers" title="Permanent link">&para;</a></h3>
+<p>有时，编译后的程序有一个指针指向堆记录的中间，或者指向记录之前或之后</p>
+<p>例如，对于 a[i-2000]（或者表示为 M[a-2000+i]）</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>t1 &lt;- a - 2000
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>t2 &lt;- t1 + i
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>t3 &lt;- M[t2]
+</code></pre></div>
+<p>如果 a[i-2000] 出现在循环内部，编译器可能会选择将 t1 &lt;- a – 2000 提升到循环外部，以避免在每次迭代中重新计算。此时，如果循环还包含分配，并且在 t1 处于活动状态时发生垃圾收集，那么由于 t1 不指向对象的开头或更糟糕地指向不相关的对象，可能导致 a 被错误地回收或其他错误</p>
+<p>为了让 GC 能够认识到 t1 是从基指针（base pointer）a 派生（derived）出来的，指针映射必须识别每个派生指针并记录其基指针，并且当收集器将 a 重定位到地址 a' 时，它必须调整 t1 指向地址为 t1 + a' - a</p>
+<p>也就是说，只要 t1 处于活动状态，a 就必须保持活动状态，且二者保持对应关系，例如</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>let
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    var a := int array[100] of 0
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>in
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    for i := 1930 to 1990
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        do f(a[i-2000])
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>end
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>r1 &lt;- 100
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>r2 &lt;- 0
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>call alloc
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>a &lt;- r1
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>t1 &lt;- a – 2000
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>i &lt;- 1930
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>L1 : r1 &lt;- M[t1 + i]
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>call f
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>L2 : if i ≤ 1990 goto L1
+</code></pre></div>
+<p>临时 a 在赋值给 t1 后看起来不再活跃，但是与返回地址 L2 关联的指针映射将无法充分解释 t1，因此，派生指针隐式地使其基指针保持活动状态</p>
+<h2 id="_17">总结<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<p>垃圾收集器是任何现代语言实现中复杂而迷人的一部分，不同的收集算法各有利弊</p>
+<ul>
+<li>显式 MM、引用计数、复制、标记扫描</li>
+<li>所有方法，包括显式 MM 都有成本</li>
+<li>优化使分配更快，GC 时间、空间和延迟要求可接受</li>
+<li>阅读 Appel 第 13 章并能够分析、比较和对比不同的 GC 机制</li>
+</ul>
+<p>另外 Allocation 有</p>
+<ul>
+<li>Linear allocation<br />
+<img alt="Linear allocation" src="../../../assets/img/docs/cs/compilers/ch13/image-18.png" /></li>
+<li>Freelist allocation<br />
+<img alt="Freelist allocation" src="../../../assets/img/docs/cs/compilers/ch13/image-19.png" /></li>
+</ul>
+
+
+
+<!-- taken from 
+https://github.com/squidfunk/mkdocs-material/blob/master/src/partials/source-file.html -->
+
+<hr />
+<div class="md-source-file">
+<small>
+
+    <!-- mkdocs-git-revision-date-localized-plugin -->
+    
+    最后更新:
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2025年3月26日 17:22:55">2025年3月26日 17:22:55</span>
+    
+        <br />
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="2024年6月23日 13:13:17">2024年6月23日 13:13:17</span>
+    
+
+    <!-- mkdocs-git-revision-date-plugin -->
+    
+</small>
+</div>
+
+
+
+
+
+
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+        data-repo="Yusux/note"
+        data-repo-id="R_kgDOLbz6zw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLbz6z84Cdu5X"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2025 Rorin
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Yusux" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://rorin.cc" target="_blank" rel="noopener" title="rorin.cc" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.906.664a1.75 1.75 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.tracking", "navigation.tabs", "navigation.indexes", "navigation.top"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/Yusux/note/docs/assets/js/katex.js"></script>
+      
+    
+<script src="https://cdn.jsdelivr.net/npm/pseudocode@2.4.1/build/pseudocode.min.js"></script>
+<script>pseudocode.renderClass("pseudocode");</script>
+
+  </body>
+</html>
